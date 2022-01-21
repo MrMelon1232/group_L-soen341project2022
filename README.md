@@ -6,9 +6,19 @@
 
 # Team Developers:
 
-Krishnna Shanmugam (40099936) ~ krishnnas
-Julien Phan (40133814) ~ MrMelon1232
-Joshua Onazi (40083099) ~Jonazi
+
+|     Name     |  Student ID |  Username |
+| ---  | ---|  --- |
+|   Krishnna Shanmugam   |  40099936  |  krishnnas     |
+|   Julien Phan          |  40133814  |  MrMelon1232   |
+|   Natheshan Rasaiah    |  40080680  |  NateTheL8     |
+|   Zeineb Ben Mami      |  40024877  |  zeinebbenmami |
+|   Mohammed Oharb       |  40157277  |  MohammedJava  |
+|   Joshua Onazi         |  40083099  | Jonazi         |
+| enter name   |enter student id  | enter User name  |
+
+
+
 
 # Tools and Techniques
 
