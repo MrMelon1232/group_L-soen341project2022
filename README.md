@@ -23,7 +23,7 @@ This project consists of building an online shopping website where users have th
 |   Zeineb Ben Mami      |  40024877  |  zeinebbenmami |
 |   Mohammed Oharb       |  40157277  |  MohammedJava  |
 |   Joshua Onazi         |  40083099  | Jonazi         |
-| enter name   |enter student id  | enter User name  |
+| Shaneth Dehipitiya   |40154926  | Shaneth549  |
 
 
 
