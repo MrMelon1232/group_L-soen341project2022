@@ -8,6 +8,7 @@
 
 Krishnna Shanmugam (40099936) ~ krishnnas
 Julien Phan (40133814) ~ MrMelon1232
+Zeineb Ben Mami (40024877) ~ zeinebbenmami
 
 # Tools and Techniques
 
