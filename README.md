@@ -1,8 +1,16 @@
 # SOEN341_GROUP_L_2022
 
-# Objective
+# Objective:
 
-# Description
+The objective of this project is to create an online shopping website (Amazon website).
+
+# Description:
+
+This project consists of building an online shopping website where users have the opportunity to search for products and place them into a shopping cart. Items in the cart will then be able to be purchased. A user will be able to create an account, login, and view their profile which will display their shopping cart.
+
+# Core Features:
+
+# Additional Features:
 
 # Team Developers:
 
@@ -20,7 +28,7 @@
 
 
 
-# Tools and Techniques
+# Tools and Techniques:
 
 
 
