@@ -8,6 +8,7 @@
 
 Krishnna Shanmugam (40099936) ~ krishnnas
 Julien Phan (40133814) ~ MrMelon1232
+Joshua Onazi (40083099) ~Jonazi
 
 # Tools and Techniques
 
