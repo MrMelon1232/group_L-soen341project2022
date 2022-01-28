@@ -15,16 +15,16 @@ This project consists of building an online shopping website where users have th
 # Team Developers:
 
 
-|     Name     |  Student ID |  Username |
-| ---  | ---|  --- |
-|   Krishnna Shanmugam   |  40099936  |  krishnnas     |
-|   Julien Phan          |  40133814  |  MrMelon1232   |
-|   Natheshan Rasaiah    |  40080680  |  NateTheL8     |
-|   Zeineb Ben Mami      |  40024877  |  zeinebbenmami |
-|   Mohammed Oharb       |  40157277  |  MohammedJava  |
-|   Joshua Onazi         |  40083099  | Jonazi         |
-| Shaneth Dehipitiya   |40154926  | Shaneth549  |
-| Abdullah Shaban        | 40109911   | abdullahishaban|
+|     Name     |  Student ID |  Username |  Strengths |
+| ---  | ---|  --- |  --- |
+|   Krishnna Shanmugam   |  40099936  |  krishnnas     |      |
+|   Julien Phan          |  40133814  |  MrMelon1232   | C/HTML   |
+|   Natheshan Rasaiah    |  40080680  |  NateTheL8     |      |
+|   Zeineb Ben Mami      |  40024877  |  zeinebbenmami |      |
+|   Mohammed Oharb       |  40157277  |  MohammedJava  |      |
+|   Joshua Onazi         |  40083099  | Jonazi         |      |
+| Shaneth Dehipitiya   |40154926  | Shaneth549  |     |
+| Abdullah Shaban        | 40109911   | abdullahishaban|      |
 
 
 
