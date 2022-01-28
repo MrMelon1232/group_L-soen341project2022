@@ -33,7 +33,7 @@ This project consists of building an online shopping website where users can be 
 |   Mohammed Oharb       |  40157277  |  MohammedJava  | Java/JavaScript/React/.NET|
 |   Joshua Onazi         |  40083099  | Jonazi         | Java/C++                  |
 | Shaneth Dehipitiya   |40154926  | Shaneth549  | Java/C/C++    |
-| Abdullah Shaban        | 40109911   | abdullahishaban|      |
+| Abdullah Shaban        | 40109911   | abdullahishaban|   Java/C++   |
 
 
 
