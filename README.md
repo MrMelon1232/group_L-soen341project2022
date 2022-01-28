@@ -30,5 +30,6 @@ This project consists of building an online shopping website where users have th
 
 # Tools and Techniques:
 
-
+UI: React
+Framework: .Net
 
