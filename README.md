@@ -27,18 +27,18 @@ This project consists of building an online shopping website where users can be 
 |     Name     |  Student ID |  Username |  Strengths |
 | ---  | ---|  --- |  --- |
 |   Krishnna Shanmugam   |  40099936  |  krishnnas     | Java/HTML/CSS/Python/Flask     |
-|   Julien Phan          |  40133814  |  MrMelon1232   | C/HTML   |
-|   Natheshan Rasaiah    |  40080680  |  NateTheL8     |      |
-|   Zeineb Ben Mami      |  40024877  |  zeinebbenmami | Java/Scrum     |
-|   Mohammed Oharb       |  40157277  |  MohammedJava  |      |
-|   Joshua Onazi         |  40083099  | Jonazi         |      |
-| Shaneth Dehipitiya   |40154926  | Shaneth549  |     |
+|   Julien Phan          |  40133814  |  MrMelon1232   | C/HTML                    |
+|   Natheshan Rasaiah    |  40080680  |  NateTheL8     |                           |
+|   Zeineb Ben Mami      |  40024877  |  zeinebbenmami | Java/Scrum                |
+|   Mohammed Oharb       |  40157277  |  MohammedJava  | Java/JavaScript/React/.NET|
+|   Joshua Onazi         |  40083099  | Jonazi         | Java/C++                  |
+| Shaneth Dehipitiya   |40154926  | Shaneth549  | Java/C/C++    |
 | Abdullah Shaban        | 40109911   | abdullahishaban|      |
 
 
 
 # Tools and Techniques:
 
-*UI: React
-*Framework: .Net
-
+User Interface: React (with React Hooks and Jest), Material-UI/Bootstrap
+Back-End/API  : ASP.NET, NUnit
+Design (UI/UX): Adobe Photoshop, Adobe XD, Figma
