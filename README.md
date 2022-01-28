@@ -1,4 +1,4 @@
-# SOEN341_GROUP_L_2022
+# E-Commerce Website
 
 # Objective:
 
