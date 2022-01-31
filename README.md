@@ -1,8 +1,8 @@
-# SOEN341_GROUP_L_2022
+# E-Commerce Website
 
 # Objective:
 
-The objective of this project is to create an online shopping application (Amazon/Facebook Marketplace), where users have the choice to search and buy items and selling items. 
+The objective of this project is to create an online shopping application (Amazon/Facebook Marketplace), where users have the choice to search, buy and sell items. 
 
 # Description:
 
@@ -28,17 +28,17 @@ This project consists of building an online shopping website where users can be 
 | ---  | ---|  --- |  --- |
 |   Krishnna Shanmugam   |  40099936  |  krishnnas     | Java/HTML/CSS/Python/Flask     |
 |   Julien Phan          |  40133814  |  MrMelon1232   | C/HTML                    |
-|   Natheshan Rasaiah    |  40080680  |  NateTheL8     |                           |
+|   Natheshan Rasaiah    |  40080680  |  NateTheL8     | C++/Java/HTML             |
 |   Zeineb Ben Mami      |  40024877  |  zeinebbenmami | Java/Scrum                |
 |   Mohammed Oharb       |  40157277  |  MohammedJava  | Java/JavaScript/React/.NET|
 |   Joshua Onazi         |  40083099  | Jonazi         | Java/C++                  |
 | Shaneth Dehipitiya   |40154926  | Shaneth549  | Java/C/C++    |
-| Abdullah Shaban        | 40109911   | abdullahishaban|      |
+| Abdullah Shaban        | 40109911   | abdullahishaban|   Java/C++   |
 
 
 
 # Tools and Techniques:
 
-User Interface: React (with React Hooks and Jest), Material-UI/Bootstrap
-Back-End/API  : ASP.NET, NUnit
-Design (UI/UX): Adobe Photoshop, Adobe XD, Figma
+User Interface: React (with React Hooks and Jest), Material-UI/Bootstrap.  
+Back-End/API  : ASP.NET, NUnit.  
+Design (UI/UX): Adobe Photoshop, Adobe XD, Figma.  
