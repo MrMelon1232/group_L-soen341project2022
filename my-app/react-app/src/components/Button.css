@@ -7,11 +7,15 @@
   border-radius: 4px;
   outline: none;
   border: none;
+  cursor: pointer;
 }
 
 .btn:hover {
   padding: 8px 20px;
   transition: all 0.2s ease-out;
+  background: plum;
+  color: black;
+  transition: 250ms;
 }
 
 .btn--primary {
