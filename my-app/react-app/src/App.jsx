@@ -1,10 +1,11 @@
 import React from 'react'
+import Navbar from './components/Navbar/Navbar'
+import './App.css'
 
 function App() {
   return (
-    <div>
-      <h1>Hello from the app component</h1>
-      <p>Hello</p>
+    <div className="App">
+      <Navbar />
     </div>
   )
 }
