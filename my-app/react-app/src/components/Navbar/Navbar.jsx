@@ -15,7 +15,7 @@ class Navbar extends Component {
     return (
       <nav className="NavbarItems">
         <h1 className="navbar-logo">
-          React<i className="fab fa-react"></i>
+          AmaBay<i className="fab fa-react"></i>
         </h1>
         <div className="menu-icon" onClick={this.handleClick}>
           <i
