@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
+
 import './Button.css'
 
 const STYLES = ['btn--primary', 'btn--outline']
@@ -6,13 +7,7 @@ const STYLES = ['btn--primary', 'btn--outline']
 const SIZES = ['btn--medium', 'btn--large']
 
 //Multiple button declaraction ease
-export const Button = ({
-  children,
-  type,
-  onClick,
-  buttonStyle,
-  buttonSize,
-}) => {
+function Button({ children, type, onClick, buttonStyle, buttonSize }) {
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
     : STYLES[0]
@@ -20,7 +15,7 @@ export const Button = ({
 
   return (
     <button
-      className={'btn ${checkButtonStyle} ${checkButtonSize}'}
+      className="btn ${checkButtonStyle} ${checkButtonSize}"
       onClick={onClick}
       type={type}
     >
@@ -28,3 +23,5 @@ export const Button = ({
     </button>
   )
 }
+
+export default Button

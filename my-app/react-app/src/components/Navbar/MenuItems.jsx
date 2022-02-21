@@ -1,4 +1,4 @@
-export const MenuItems = [
+const MenuItems = [
   {
     title: 'Home',
     url: '',
@@ -25,3 +25,5 @@ export const MenuItems = [
     cName: 'nav-links',
   },
 ]
+
+export default MenuItems
