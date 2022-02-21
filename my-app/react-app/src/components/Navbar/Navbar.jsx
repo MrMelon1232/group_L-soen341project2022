@@ -1,5 +1,5 @@
 import AccountCircle from '@mui/icons-material/AccountCircle'
-import { IconButton, Menu, MenuItem } from '@mui/material'
+import { IconButton, Menu, MenuItem, Grid, Hidden } from '@mui/material'
 import Button from '@mui/material/Button'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -41,18 +41,25 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
-      <Button>Sign Up</Button>
-      <Button>Log In</Button>
-      <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleMenu}
-        color="inherit"
-      >
-        <AccountCircle color="primary" />
-      </IconButton>
+
+      <Grid item container direction="row" columnSpacing={2} xs="auto">
+        <Hidden mdDown>
+          <Button>Sign Up</Button>
+          <Button>Log In</Button>
+        </Hidden>
+
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleMenu}
+          color="inherit"
+        >
+          <AccountCircle color="primary" />
+        </IconButton>
+      </Grid>
+
       <Menu
         id="menu-appbar"
         anchorEl={anchorEl}
@@ -70,7 +77,7 @@ export default function Navbar() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>Admin Login</MenuItem>
-        <MenuItem onClick={handleClose}>Become a member of the team</MenuItem>
+        <MenuItem onClick={handleClose}>Account Settings</MenuItem>
       </Menu>
     </nav>
   )
