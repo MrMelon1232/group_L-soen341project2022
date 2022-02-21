@@ -1,14 +1,12 @@
 {
+  "singleQuote": true,
+  "semi": false,
+  "endOfLine": "auto",
+  "[javascriptreact]": {
+    "editor.formatOnSave": true,
     "singleQuote": true,
     "semi": false,
-    "endOfLine":"auto",
-    "[javascriptreact]": {
-        "editor.formatOnSave": true,
-        "singleQuote": true,
-        "semi": false,
-        "endOfLine":"auto"
-    },
-    "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true
+    "endOfLine": "auto"
+  },
+  "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"]
 }
