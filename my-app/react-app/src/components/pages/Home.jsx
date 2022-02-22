@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { renderMatches } from 'react-router-dom'
+import HomeSection from '../HomeSection'
 
 function Home() {
   return (
     <div>
-      <h1> home </h1>
+      <HomeSection />
     </div>
   )
 }
