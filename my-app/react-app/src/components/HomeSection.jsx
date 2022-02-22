@@ -11,7 +11,10 @@ function HomeSection() {
       <h1>
         Ama<mark className="Bay">Bay</mark>
       </h1>
-      <p>Buying and selling has never been easier</p>
+      <p>
+        <mark className="buying">Buying</mark> and
+        <mark className="selling"> selling</mark> has never been easier
+      </p>
       <div className="home-btns">
         <Stack spacing={2} direction="row">
           <Button variant="contained" size="large" href="">
