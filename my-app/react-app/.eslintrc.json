@@ -7,12 +7,6 @@
     "prettier",
     "react-hooks"
   ],
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -30,8 +24,6 @@
     "no-unused-vars": "warn",
     "react/destructuring-assignment": "warn",
     "react/no-unused-prop-types": "warn",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
@@ -55,18 +47,5 @@
         "unnamedComponents": "arrow-function"
       }
     ]
-  },
-  "overrides": [
-    {
-      "files": ["*-test.js", "*.spec.js"],
-      "rules": {
-        "react/function-component-definition": [
-          2,
-          {
-            "namedComponents": "function-declaration"
-          }
-        ]
-      }
-    }
-  ]
+  }
 }

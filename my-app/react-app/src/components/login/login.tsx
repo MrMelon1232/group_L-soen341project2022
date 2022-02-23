@@ -21,20 +21,19 @@ interface IProps {
 const Login: React.FC<IProps> = (props) => {
   const [email, setEmail] = React.useState<string>('')
 
-  const hasError = React.useMemo(
-    () => EmailValidator.validate(email),
-    [props, props.children, props.email]
-  )
-  React.useEffect(() => {
-    console.log('hello')
-  }, [])
+  const hasError = React.useMemo(() => {
+    console.log(email)
+    return (
+      !EmailValidator.validate(email) && email !== undefined && email !== ''
+    )
+  }, [email])
 
   return (
     <Grid>
       <Paper
         style={{ padding: 20, height: '73vh', width: 330, margin: '0 auto' }}
       >
-        <Grid>
+        <Grid align="center">
           <Avatar>
             <LockOutlinedIcon />
           </Avatar>
@@ -46,7 +45,7 @@ const Login: React.FC<IProps> = (props) => {
           fullWidth
           required
           variant="standard"
-          onChange={(e) => setEmail(e.target.value)}
+          onBlur={(e) => setEmail(e.target.value)}
           error={hasError}
           value={props.email}
         />
