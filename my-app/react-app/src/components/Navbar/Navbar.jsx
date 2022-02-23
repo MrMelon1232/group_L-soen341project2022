@@ -25,8 +25,8 @@ export default function Navbar() {
   return (
     <nav className="NavbarItems">
       <h1 className="navbar-logo">
-        AmaBay
-        <i className="fab fa-react" />
+        <i className="fab fa-atlassian" />
+        maBay
       </h1>
       <div role="button" className="menu-icon" onClick={handleClick}>
         <i className={clicked ? 'fas fa-times' : 'fas fa-bars'} />

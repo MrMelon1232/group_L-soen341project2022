@@ -7,10 +7,12 @@ import './HomeSection.css'
 function HomeSection() {
   return (
     <div className="home-container">
-      <video src="/videos/video-1.mp4" autoPlay loop muted />
-      <h1>
+      <h1 className="ama">
         Ama<mark className="Bay">Bay</mark>
       </h1>
+      <div className="video">
+        <video src="/videos/video-1.mp4" autoPlay loop muted />
+      </div>
       <p>
         <mark className="buying">Buying</mark> and
         <mark className="selling"> selling</mark> has never been easier

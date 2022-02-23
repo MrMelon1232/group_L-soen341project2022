@@ -7,29 +7,37 @@ video {
 }
 
 .home-container {
-  /* background: url('images/img-home.jpg') center center/cover no-repeat; */
   height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.1);
   object-fit: contain;
 }
 
-.home-container > h1 {
-  color: #fff;
+.ama {
+  color: white;
   font-size: 100px;
   justify-content: baseline center;
   margin-top: -10px;
 }
 
+.video {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+}
+
 .home-container > p {
-  margin-top: 2px;
+  margin-top: 150px;
   color: white;
-  justify-content: center;
+  justify-content: last baseline;
   position: absolute;
-  top: 600px;
   font-size: 32px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
@@ -47,6 +55,7 @@ mark.buying {
   color: black;
   font-size: 32px;
   justify-content: baseline center;
+  top: 600px;
   margin-top: -10px;
   background: none;
 }
@@ -55,40 +64,12 @@ mark.selling {
   color: black;
   font-size: 32px;
   justify-content: baseline center;
+  top: 600px;
   margin-top: -10px;
   background: none;
 }
 
-@media screen and (max-width: 960px) {
-  .home-container > h1 {
-    color: #fff;
-    font-size: 100px;
-    justify-content: baseline center;
-    margin-top: -20px;
-  }
-}
-
-@media source and (max-width: 768px) {
-  .home-container > h1 {
-    font-size: 100px;
-    justify-content: baseline center;
-    margin-top: -10px;
-  }
-
-  .home-container > p {
-    font-size: 32px;
-  }
-}
-
-@media source and (max-width: 500px) {
-  .home-container > h1 {
-    font-size: 100px;
-    justify-content: baseline center;
-    margin-top: -10px;
-  }
-
-  .home-container > p {
-    font-size: 32px;
-    justify-content: center;
-  }
+.home-btns {
+  position: absolute;
+  justify-content: center;
 }
