@@ -3,6 +3,7 @@ import { IconButton, Menu, MenuItem, Grid, Hidden } from '@mui/material'
 import Button from '@mui/material/Button'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import SignInOutContainer from '../../containers'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
@@ -44,7 +45,7 @@ export default function Navbar() {
 
       <Grid item container direction="row" columnSpacing={2} xs="auto">
         <Hidden mdDown>
-          <Button>Sign Up</Button>
+          <Button onClick={handleForm}>Sign Up</Button>
           <Button>Log In</Button>
         </Hidden>
 
