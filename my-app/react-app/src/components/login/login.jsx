@@ -20,7 +20,6 @@ const Login = () => {
     margin: '0 auto',
   }
 
-  var validator = require('email-validator')
   const btnsyle = { margin: '8px 0' }
 
   return (

@@ -3,12 +3,15 @@ import React, { Component } from 'react'
 import Login from '../components/login/login'
 import Signup from '../components/login/signup'
 
-export default function SignInOutContainer() {
+interface IProps {
+  newValue: boolean
+}
+
+const SignInOutContainer: React.FC<IProps> = (props) => {
   const [value, setValue] = React.useState(0)
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
-  const paperStyle = { width: 330, margin: '20px auto', allign: 'center' }
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -31,7 +34,7 @@ export default function SignInOutContainer() {
   }
 
   return (
-    <Paper elevation={20} style={paperStyle}>
+    <Paper elevation={20} style={{ width: 330, margin: '20px auto' }}>
       <Tabs
         value={value}
         indicatorColor="primary"
@@ -48,8 +51,10 @@ export default function SignInOutContainer() {
         <Login handleChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Signup />
+        <Signup email={''} password={''} />
       </TabPanel>
     </Paper>
   )
 }
+
+export default SignInOutContainer

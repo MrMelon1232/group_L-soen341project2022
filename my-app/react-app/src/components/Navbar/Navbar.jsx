@@ -1,6 +1,7 @@
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import { IconButton, Menu, MenuItem, Grid, Hidden } from '@mui/material'
 import Button from '@mui/material/Button'
+import { padding } from '@mui/system'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import SignInOutContainer from '../../containers'
@@ -21,6 +22,12 @@ export default function Navbar() {
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget)
+  }
+
+  const [showForm, setForm] = React.useState(false)
+
+  const handleForm = () => {
+    setForm(!showForm)
   }
 
   return (
@@ -45,8 +52,8 @@ export default function Navbar() {
 
       <Grid item container direction="row" columnSpacing={2} xs="auto">
         <Hidden mdDown>
-          <Button onClick={handleForm}>Sign Up</Button>
-          <Button>Log In</Button>
+          <Button onClick={handleForm}>Log In</Button>
+          {showForm && <SignInOutContainer />}
         </Hidden>
 
         <IconButton
