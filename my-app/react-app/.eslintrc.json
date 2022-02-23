@@ -4,8 +4,7 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "Airbnb",
-    "prettier",
-    "react-hooks"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -14,20 +13,9 @@
     },
     "ecmaVersion": "latest"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "prettier",
-    "react-hooks/recommended"
-  ],
+  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
   "rules": {
     "no-unused-vars": "warn",
-    "react/destructuring-assignment": "warn",
-    "react/no-unused-prop-types": "warn",
-    "react/jsx-filename-extension": [
-      2,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
     "@typescript-eslint/no-var-requires": "warn",
     "prettier/prettier": [
       "error",
@@ -40,12 +28,20 @@
     "spaced-comment": "off",
     "line-comment-position": "warn",
     "class-methods-use-this": "off",
+    "react/destructuring-assignment": "warn",
+    "react/no-unused-prop-types": "warn",
     "react/function-component-definition": [
       2,
       {
         "namedComponents": "arrow-function",
         "unnamedComponents": "arrow-function"
       }
-    ]
+    ],
+    "react/jsx-filename-extension": [
+      2,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
