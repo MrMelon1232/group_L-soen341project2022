@@ -13,7 +13,7 @@
     },
     "ecmaVersion": "latest"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
   "rules": {
     "no-unused-vars": "warn",
     "@typescript-eslint/no-var-requires": "warn",
@@ -27,6 +27,21 @@
     "no-process-exit": "off",
     "spaced-comment": "off",
     "line-comment-position": "warn",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "react/destructuring-assignment": "warn",
+    "react/no-unused-prop-types": "warn",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      2,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
