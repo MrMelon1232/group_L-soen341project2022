@@ -8,6 +8,7 @@ import SignInOutContainer from '../../containers'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
+// eslint-disable-next-line react/function-component-definition
 export default function Navbar() {
   const [clicked, setClicked] = React.useState(false)
 

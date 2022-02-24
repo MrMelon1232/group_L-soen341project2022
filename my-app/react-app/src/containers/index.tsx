@@ -1,6 +1,6 @@
 import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
 import React, { Component } from 'react'
-import Login from '../components/login/login'
+import Login from '../components/login/login.tsx'
 import Signup from '../components/login/signup'
 
 interface IProps {
