@@ -7,13 +7,13 @@ import Explore from './components/pages/Explore'
 import Home from './components/pages/Home'
 import OurBrand from './components/pages/OurBrand'
 import Products from './components/pages/Products'
-import profile from './components/pages/profile'
+import Profile from './components/pages/profile'
 
 // eslint-disable-next-line react/function-component-definition
 function App() {
   return (
     <div className="App">
-      <profile />
+      <Profile />
     </div>
     // <Router>
     //   <div className="App">
