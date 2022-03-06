@@ -33,7 +33,7 @@ const Login: React.FC<IProps> = (props) => {
       <Paper
         style={{ padding: 20, height: '73vh', width: 330, margin: '0 auto' }}
       >
-        <Grid alignItems="center">
+        <Grid direction="column" display="flex" alignItems="center">
           <Avatar>
             <LockOutlinedIcon />
           </Avatar>

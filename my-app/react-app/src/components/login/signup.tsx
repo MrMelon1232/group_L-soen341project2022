@@ -18,7 +18,7 @@ interface IProps {
   password: string
 }
 
-const Signup: React.FC<IProps> = (props: IProps) => {
+const Signup: React.FC<IProps> = (props) => {
   const { emailProp, password } = props
   const [email, setEmail] = React.useState<string>(emailProp)
   const hasError = React.useMemo(
@@ -30,7 +30,7 @@ const Signup: React.FC<IProps> = (props: IProps) => {
   return (
     <Grid>
       <Paper style={{ padding: 20, width: 330, margin: '0 auto' }}>
-        <Box justifyContent="center">
+        <Grid direction="column" display="flex" alignItems="center">
           <Avatar>
             <LockOutlinedIcon />
           </Avatar>
@@ -38,7 +38,7 @@ const Signup: React.FC<IProps> = (props: IProps) => {
           <Typography variant="caption" gutterBottom>
             Please fill this form to create an account !
           </Typography>
-        </Box>
+        </Grid>
         <form>
           <TextField
             fullWidth
