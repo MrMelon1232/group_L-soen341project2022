@@ -2,7 +2,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle'
 import { IconButton, Menu, MenuItem, Grid, Hidden, Box } from '@mui/material'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
-import { padding } from '@mui/system'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import SignInOutContainer from '../../containers'
@@ -26,10 +25,6 @@ export default function Navbar() {
   }
 
   const [showForm, setForm] = React.useState(false)
-
-  const handleForm = () => {
-    setForm(!showForm)
-  }
 
   const [open, setOpen] = React.useState(false)
 

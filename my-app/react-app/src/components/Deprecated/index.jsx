@@ -1,7 +1,7 @@
 import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
 import React, { Component } from 'react'
-import Login from '../components/login/login'
-import Signup from '../components/login/signup'
+import Login from '../login/login'
+import Signup from '../login/signup'
 
 export default function SignInOutContainer() {
   const [value, setValue] = React.useState(0)
@@ -10,7 +10,7 @@ export default function SignInOutContainer() {
   }
   const paperStyle = { width: 330, margin: '20px auto', allign: 'center' }
 
-  function TabPanel(props) {
+  const TabPanel = (props) => {
     const { children, value, index, ...other } = props
 
     return (

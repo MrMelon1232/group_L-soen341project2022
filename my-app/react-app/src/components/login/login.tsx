@@ -11,22 +11,22 @@ import {
   Link,
 } from '@mui/material'
 import * as EmailValidator from 'email-validator'
-import React, { Component } from 'react'
+import React from 'react'
 
 interface IProps {
-  email: string
+  emailProp: string
   password: string
 }
 
 const Login: React.FC<IProps> = (props) => {
-  const [email, setEmail] = React.useState<string>('')
+  const { emailProp, password } = props
+  const [email, setEmail] = React.useState<string>(emailProp)
 
-  const hasError = React.useMemo(() => {
-    console.log(email)
-    return (
-      !EmailValidator.validate(email) && email !== undefined && email !== ''
-    )
-  }, [email])
+  const hasError = React.useMemo(
+    () =>
+      !EmailValidator.validate(email) && email !== undefined && email !== '',
+    [email]
+  )
 
   return (
     <Grid>
@@ -47,7 +47,7 @@ const Login: React.FC<IProps> = (props) => {
           variant="standard"
           onBlur={(e) => setEmail(e.target.value)}
           error={hasError}
-          value={props.email}
+          value={email}
         />
         <TextField
           label="Password"

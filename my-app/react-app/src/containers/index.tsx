@@ -1,60 +1,74 @@
-import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+  Link,
+} from '@mui/material'
 import React, { Component } from 'react'
-import Login from '../components/login/login'
-import Signup from '../components/login/signup'
 
-interface IProps {
-  newValue: boolean
-}
-
-const SignInOutContainer: React.FC<IProps> = (props) => {
-  const [value, setValue] = React.useState(0)
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
+const Login = () => {
+  const paperstyle = {
+    padding: 20,
+    height: '73vh',
+    width: 330,
+    margin: '0 auto',
   }
 
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props
-
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel}-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    )
-  }
+  const btnsyle = { margin: '8px 0' }
 
   return (
-    <Paper elevation={20} style={{ width: 330, margin: '20px auto' }}>
-      <Tabs
-        value={value}
-        indicatorColor="primary"
-        textColor="primary"
-        onChange={handleChange}
-        aria-label="disabled tabs example"
-        variant="fullWidth"
-      >
-        <Tab label="Sign In" />
-
-        <Tab label="Sign Up" />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <Login handleChange={handleChange} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Signup email={''} password={''} />
-      </TabPanel>
-    </Paper>
+    <Grid>
+      <Paper style={paperstyle}>
+        <Grid align="center">
+          <Avatar>
+            <LockOutlinedIcon />
+          </Avatar>
+          <h2>Sign In</h2>
+        </Grid>
+        <TextField
+          label="Email"
+          placeholder="Enter Email"
+          fullWidth
+          required
+          variant="standard"
+        />
+        <TextField
+          label="Password"
+          placeholder="Enter Password"
+          type="password"
+          fullWidth
+          required
+          variant="standard"
+        />
+        <FormControlLabel
+          control={<Checkbox name="checkedB" color="primary" />}
+          label="Remember me"
+        />
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          style={btnsyle}
+          fullWidth
+        >
+          Sign In
+        </Button>
+        <Typography>
+          <Link href="#">Forgot Password?</Link>
+        </Typography>
+        <Typography>
+          Do you have an account?
+          <Link href="#"> Sign Up </Link>
+        </Typography>
+      </Paper>
+    </Grid>
   )
 }
 
-export default SignInOutContainer
+export default Login

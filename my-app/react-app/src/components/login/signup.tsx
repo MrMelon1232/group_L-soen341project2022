@@ -8,28 +8,29 @@ import {
   Typography,
   Paper,
   Checkbox,
+  Box,
 } from '@mui/material'
 import * as EmailValidator from 'email-validator'
-import React, { Component } from 'react'
+import React from 'react'
 
 interface IProps {
-  email: string
+  emailProp: string
   password: string
 }
 
-const Signup: React.FC<IProps> = (props) => {
-  const [email, setEmail] = React.useState<string>('')
-  const hasError = React.useMemo(() => {
-    console.log(email)
-    return (
-      !EmailValidator.validate(email) && email !== undefined && email !== ''
-    )
-  }, [email])
+const Signup: React.FC<IProps> = (props: IProps) => {
+  const { emailProp, password } = props
+  const [email, setEmail] = React.useState<string>(emailProp)
+  const hasError = React.useMemo(
+    () =>
+      !EmailValidator.validate(email) && email !== undefined && email !== '',
+    [email]
+  )
 
   return (
     <Grid>
       <Paper style={{ padding: 20, width: 330, margin: '0 auto' }}>
-        <Grid align="center">
+        <Box justifyContent="center">
           <Avatar>
             <LockOutlinedIcon />
           </Avatar>
@@ -37,7 +38,7 @@ const Signup: React.FC<IProps> = (props) => {
           <Typography variant="caption" gutterBottom>
             Please fill this form to create an account !
           </Typography>
-        </Grid>
+        </Box>
         <form>
           <TextField
             fullWidth
@@ -61,7 +62,7 @@ const Signup: React.FC<IProps> = (props) => {
             required
             onBlur={(e) => setEmail(e.target.value)}
             error={hasError}
-            value={props.email}
+            value={email}
           />
           <TextField
             fullWidth

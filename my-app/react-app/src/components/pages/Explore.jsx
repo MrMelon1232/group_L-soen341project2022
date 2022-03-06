@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
-import { renderMatches } from 'react-router-dom'
+import React from 'react'
 
-function Explore() {
-  return (
-    <div>
-      <h1>explore</h1>
-    </div>
-  )
-}
+const Explore = () => (
+  <div>
+    <h1>explore</h1>
+  </div>
+)
 
 export default Explore
