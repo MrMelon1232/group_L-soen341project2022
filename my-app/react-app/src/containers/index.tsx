@@ -1,7 +1,7 @@
 import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
 import React, { Component } from 'react'
-import Login from '../components/login/login.tsx'
-import Signup from '../components/login/signup.tsx'
+import Login from '../components/login/login'
+import Signup from '../components/login/signup'
 
 interface IProps {
   newValue: boolean
@@ -51,7 +51,7 @@ const SignInOutContainer: React.FC<IProps> = (props) => {
         <Login handleChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Signup email="" password="" />
+        <Signup emailProp="" password="" />
       </TabPanel>
     </Paper>
   )
