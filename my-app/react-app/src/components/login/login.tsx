@@ -14,20 +14,35 @@ import * as EmailValidator from 'email-validator'
 import React from 'react'
 
 interface IProps {
-  emailProp?: string
-  password?: string
-  handleChange?: void
+  handleEmailChange?: (email: string) => void
+  handlePasswordChange?: (password: string) => void
 }
 
 const Login: React.FC<IProps> = (props) => {
-  const { emailProp, password } = props
-  const [email, setEmail] = React.useState<string>(emailProp ?? '')
+  const [email, setEmail] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
+  const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
+  const [wrongPass, setWrongPass] = React.useState<boolean>(false)
 
-  const hasError = React.useMemo(
+  const validateEmail = React.useCallback(
     () =>
-      !EmailValidator.validate(email) && email !== undefined && email !== '',
+      setWrongEmail(
+        !EmailValidator.validate(email) && email !== undefined && email !== ''
+      ),
     [email]
   )
+
+  React.useEffect(() => {
+    if (props.handleEmailChange) {
+      props.handleEmailChange(email)
+    }
+  }, [email])
+
+  React.useEffect(() => {
+    if (props.handlePasswordChange) {
+      props.handlePasswordChange(password)
+    }
+  }, [password])
 
   return (
     <Grid>
@@ -46,9 +61,10 @@ const Login: React.FC<IProps> = (props) => {
           fullWidth
           required
           variant="standard"
-          onBlur={(e) => setEmail(e.target.value)}
-          error={hasError}
-          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={wrongEmail}
+          value={wrongEmail ? email : undefined}
+          onBlur={validateEmail}
         />
         <TextField
           label="Password"
