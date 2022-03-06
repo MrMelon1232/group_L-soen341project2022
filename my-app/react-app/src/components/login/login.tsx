@@ -14,13 +14,14 @@ import * as EmailValidator from 'email-validator'
 import React from 'react'
 
 interface IProps {
-  emailProp: string
-  password: string
+  emailProp?: string
+  password?: string
+  handleChange?: void
 }
 
 const Login: React.FC<IProps> = (props) => {
   const { emailProp, password } = props
-  const [email, setEmail] = React.useState<string>(emailProp)
+  const [email, setEmail] = React.useState<string>(emailProp ?? '')
 
   const hasError = React.useMemo(
     () =>

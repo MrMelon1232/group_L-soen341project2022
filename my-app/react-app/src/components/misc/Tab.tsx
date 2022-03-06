@@ -2,11 +2,14 @@ import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
 import React, { Component } from 'react'
 
 interface IProps {
-  newValue: boolean
+  value: number
+  children: any
+  tabValue: number
+  index: number
 }
 
 const TabPanel: React.FC<IProps> = (props) => {
-  const { children, tabValue, index, ...other } = props
+  const { value, children, tabValue, index, ...other } = props
 
   return (
     <div
