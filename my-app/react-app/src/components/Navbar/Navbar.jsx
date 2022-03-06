@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import SignInOutContainer from '../../containers'
+import SignInOutContainer from '../../containers/index.tsx'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
