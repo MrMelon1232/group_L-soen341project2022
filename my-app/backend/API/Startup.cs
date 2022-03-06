@@ -47,6 +47,8 @@ namespace API
             {
                 options.UseMySQL(Configuration.GetConnectionString("DBConnection")); // found in appsettings.json
             });
+
+            services.AddCors();
         
         }
 
@@ -63,6 +65,10 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors( opt =>
+            {
+                opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3000");
+            });
 
             app.UseAuthorization();
 
