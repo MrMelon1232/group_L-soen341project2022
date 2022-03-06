@@ -14,7 +14,7 @@ import React, { Component } from 'react'
 
 const Login = () => {
   const paperstyle = {
-    padding: 20,
+    padding: 15,
     height: '73vh',
     width: 330,
     margin: '0 auto',
