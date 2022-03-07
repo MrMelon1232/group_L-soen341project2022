@@ -1,7 +1,7 @@
 import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
 import React, { Component } from 'react'
-import Login from '../components/login/login'
-import Signup from '../components/login/signup'
+import Login from '../components/login/Components/login'
+import Signup from '../components/login/Components/signup'
 
 interface IProps {
   newValue: boolean

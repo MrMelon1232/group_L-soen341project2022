@@ -13,12 +13,7 @@ import {
 import * as EmailValidator from 'email-validator'
 import React from 'react'
 
-interface IProps {
-  handleEmailChange?: (email: string) => void
-  handlePasswordChange?: (password: string) => void
-}
-
-const Login: React.FC<IProps> = (props) => {
+const Login: React.FC = () => {
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
@@ -32,17 +27,11 @@ const Login: React.FC<IProps> = (props) => {
     [email]
   )
 
-  React.useEffect(() => {
-    if (props.handleEmailChange) {
-      props.handleEmailChange(email)
+  React.useCallback(() => {
+    if (!wrongEmail && !(password === null || password === undefined)) {
+      console.log({ email, password })
     }
-  }, [email])
-
-  React.useEffect(() => {
-    if (props.handlePasswordChange) {
-      props.handlePasswordChange(password)
-    }
-  }, [password])
+  }, [email, password, wrongEmail])
 
   return (
     <Grid>
