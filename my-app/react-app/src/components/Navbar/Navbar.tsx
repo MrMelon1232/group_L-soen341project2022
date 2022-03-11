@@ -1,15 +1,17 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import AccountCircle from '@mui/icons-material/AccountCircle'
-import { IconButton, Menu, MenuItem, Grid, Hidden, Box } from '@mui/material'
+import { IconButton, Menu, MenuItem, Grid, Hidden } from '@mui/material'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
-import { padding } from '@mui/system'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import SignInOutContainer from '../../containers'
+import SignInOutContainer from '../../containers/SignInOutContainer'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   const [clicked, setClicked] = React.useState(false)
 
   const handleClick = () => {
@@ -49,7 +51,7 @@ export default function Navbar() {
       <ul className={clicked ? 'nav-menu active' : 'nav-menu'}>
         {/*Might not work as intended*/}
         {MenuItems.map((item, index) => (
-          <li index={index}>
+          <li value={index}>
             <Link className={item.cName} to={item.url}>
               {item.title}
             </Link>
@@ -99,3 +101,5 @@ export default function Navbar() {
     </nav>
   )
 }
+
+export default Navbar

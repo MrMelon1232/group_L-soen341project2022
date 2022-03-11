@@ -1,5 +1,5 @@
 import { ImageList, ImageListItem, ImageListItemBar } from '@mui/material'
-import React, { Component } from 'react'
+import React from 'react'
 import imgbooks from '../../images/books.jpg'
 import imgcinema from '../../images/cinema.jpg'
 import imgclothes from '../../images/clothes.jpg'

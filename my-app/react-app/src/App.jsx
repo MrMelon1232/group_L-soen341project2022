@@ -8,21 +8,19 @@ import Home from './components/pages/Home'
 import OurBrand from './components/pages/OurBrand'
 import Products from './components/pages/Products'
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/ourbrand" element={<OurBrand />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
-    </Router>
-  )
-}
+const App = () => (
+  <Router>
+    <div className="App">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/ourbrand" element={<OurBrand />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </div>
+  </Router>
+)
 
 export default App

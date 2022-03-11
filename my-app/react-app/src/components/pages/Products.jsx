@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { renderMatches } from 'react-router-dom'
+import React from 'react'
 
 const Products = () => (
   <div>
