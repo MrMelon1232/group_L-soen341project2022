@@ -1,20 +1,18 @@
-import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
-import React, { Component } from 'react'
+import { Typography, Box } from '@mui/material'
+import React from 'react'
 
 interface IProps {
   value: number
-  children: any
-  tabValue: number
   index: number
 }
 
 const TabPanel: React.FC<IProps> = (props) => {
-  const { value, children, tabValue, index, ...other } = props
+  const { value, children, index, ...other } = props
 
   return (
     <div
       role="tabpanel"
-      hidden={tabValue !== index}
+      hidden={value !== index}
       id={`simple-tabpanel}-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       // eslint-disable-next-line react/jsx-props-no-spreading
@@ -28,3 +26,5 @@ const TabPanel: React.FC<IProps> = (props) => {
     </div>
   )
 }
+
+export default TabPanel

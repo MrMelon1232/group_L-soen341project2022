@@ -10,7 +10,7 @@ import {
   Typography,
   Link,
 } from '@mui/material'
-import * as EmailValidator from 'email-validator'
+import EmailValidator from 'email-validator'
 import React from 'react'
 
 const Login: React.FC = () => {

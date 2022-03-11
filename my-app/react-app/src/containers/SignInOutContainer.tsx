@@ -2,35 +2,16 @@ import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
 import React, { Component } from 'react'
 import Login from '../components/login/Components/login'
 import Signup from '../components/login/Components/signup'
+import TabPanel from '../components/misc/TabPanel'
 
 interface IProps {
-  newValue: boolean
+  newValue?: boolean
 }
 
 const SignInOutContainer: React.FC<IProps> = (props) => {
   const [value, setValue] = React.useState(0)
   const handleChange = (event, newValue) => {
     setValue(newValue)
-  }
-
-  const TabPanel = (props) => {
-    const { children, value, index, ...other } = props
-
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel}-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    )
   }
 
   return (
@@ -44,14 +25,17 @@ const SignInOutContainer: React.FC<IProps> = (props) => {
         variant="fullWidth"
       >
         <Tab label="Sign In" />
-
         <Tab label="Sign Up" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Login />
+        <Box>
+          <Login />
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Signup emailProp="" password="" />
+        <Box>
+          <Signup emailProp="" password="" />
+        </Box>
       </TabPanel>
     </Paper>
   )

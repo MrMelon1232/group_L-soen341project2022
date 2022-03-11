@@ -8,9 +8,8 @@ import {
   Typography,
   Paper,
   Checkbox,
-  Box,
 } from '@mui/material'
-import * as EmailValidator from 'email-validator'
+import EmailValidator from 'email-validator'
 import React from 'react'
 
 interface IProps {
