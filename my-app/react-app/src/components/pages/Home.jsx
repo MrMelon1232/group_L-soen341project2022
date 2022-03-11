@@ -1,4 +1,11 @@
-import { ImageList, ImageListItem, ImageListItemBar } from '@mui/material'
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  Link,
+  Typography,
+} from '@mui/material'
 import React from 'react'
 import imgbooks from '../../images/books.jpg'
 import imgcinema from '../../images/cinema.jpg'
@@ -20,7 +27,7 @@ const itemData = [
   },
   {
     img: imgcinema,
-    title: 'Music, Movies & TV Shows',
+    title: 'Cinema',
     link: '',
   },
   {
@@ -42,23 +49,29 @@ const itemData = [
 
 const Home = () => (
   <div>
-    <h1>Welcome to Amabay </h1>
+    <Typography textAlign="center" variant="h2">
+      Welcome to Amabay
+    </Typography>
     <ImageList
       sx={{ width: 'auto', height: 'auto' }}
       cols={3}
+      gap={5}
       rowHeight={450}
       style={{ width: '100' }}
+      variant="masonry"
     >
       {itemData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            src={`${item.img}?w=248&fit=crop&auto=format&`}
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            alt={item.title}
-            loading="lazy"
-          />
-          <ImageListItemBar title={item.title} />
-        </ImageListItem>
+        <Link href="#">
+          <ImageListItem key={item.img}>
+            <img
+              src={`${item.img}?w=248&fit=crop&auto=format&`}
+              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+            <ImageListItemBar title={item.title} />
+          </ImageListItem>
+        </Link>
       ))}
     </ImageList>
   </div>

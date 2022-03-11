@@ -1,7 +1,6 @@
+import { DataGrid } from '@mui/material'
 import React, { Component } from 'react'
-import {DataGrid} from '@mui/material'
 
+const Cart = () => <div>da</div>
 
-export default Cart() {
-    return(<div>da</div>)
-}
+export default Cart
