@@ -38,7 +38,7 @@
 }
 
 .nav-links:hover {
-  background-color: plum;
+  background-color: #e85d04;
   border-radius: 4px;
   transition: all 0.2s ease-out;
 }
@@ -83,7 +83,7 @@
   }
 
   .nav-links:hover {
-    background-color: plum;
+    background-color: #e85d04;
     border-radius: 0;
   }
 
