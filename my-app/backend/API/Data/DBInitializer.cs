@@ -6,7 +6,7 @@ using API.Models;
 
 namespace API.Data
 {
-    public class DBInitializer
+    public static class DBInitializer
     {
         public static void Initialize(ECommerceContext context)
         {
@@ -23,14 +23,16 @@ namespace API.Data
                     Description = "description...",
                     Price = 18.2,
                     Quantity = 5,
-                    Category = "A"
+                    Category = "A",
+                    ImgUrl = "someURL"
                 },
                 new Product{
                     Name = "name of the prod",
                     Description = "description...",
-                    Price = 18.2,
-                    Quantity = 5,
-                    Category = "A"
+                    Price = 12.5,
+                    Quantity = 3,
+                    Category = "B",
+                    ImgUrl = "someURL"
                 },
             };
 
