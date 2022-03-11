@@ -27,10 +27,6 @@ export default function Navbar() {
 
   const [showForm, setForm] = React.useState(false)
 
-  const handleForm = () => {
-    setForm(!showForm)
-  }
-
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
