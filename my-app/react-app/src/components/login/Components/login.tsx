@@ -27,7 +27,7 @@ const Login: React.FC = () => {
     [email]
   )
 
-  React.useCallback(() => {
+  const doSubmit = React.useCallback(() => {
     if (!wrongEmail && !(password === null || password === undefined)) {
       console.log({ email, password })
     }
@@ -62,12 +62,20 @@ const Login: React.FC = () => {
           fullWidth
           required
           variant="standard"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
         />
         <FormControlLabel
           control={<Checkbox name="checkedB" color="primary" />}
           label="Remember me"
         />
-        <Button type="submit" color="primary" variant="contained" fullWidth>
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          fullWidth
+          onClick={doSubmit}
+        >
           Sign In
         </Button>
         <Typography>

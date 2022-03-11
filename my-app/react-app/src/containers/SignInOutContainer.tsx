@@ -1,14 +1,10 @@
-import { Paper, Tabs, Typography, Box, Tab } from '@mui/material'
-import React, { Component } from 'react'
+import { Paper, Tabs, Box, Tab } from '@mui/material'
+import React from 'react'
 import Login from '../components/login/Components/login'
 import Signup from '../components/login/Components/signup'
 import TabPanel from '../components/misc/TabPanel'
 
-interface IProps {
-  newValue?: boolean
-}
-
-const SignInOutContainer: React.FC<IProps> = (props) => {
+const SignInOutContainer: React.FC = () => {
   const [value, setValue] = React.useState(0)
   const handleChange = (event, newValue) => {
     setValue(newValue)
