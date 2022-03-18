@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import AdminSignInOutContainer from '../../containers/AdminSignInOutcontainer'
 import SignInOutContainer from '../../containers/SignInOutContainer'
 import MenuItems from './MenuItems'
 import './Navbar.css'
@@ -24,6 +25,9 @@ const Navbar: React.FC = () => {
   }
 
   const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleMenuItem = (event) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -95,7 +99,10 @@ const Navbar: React.FC = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Admin Login</MenuItem>
+        <MenuItem onClick={handleClickOpen}>Admin Login</MenuItem>
+        <Dialog open={open} onClose={handleCloseDialog}>
+          <AdminSignInOutContainer />
+        </Dialog>
         <MenuItem onClick={handleClose}>Account Settings</MenuItem>
       </Menu>
     </nav>

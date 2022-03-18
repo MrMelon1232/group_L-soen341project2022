@@ -17,7 +17,7 @@ interface IProps {
   password: string
 }
 
-const Signup: React.FC<IProps> = (props) => {
+const AdminSignup: React.FC<IProps> = (props) => {
   const { emailProp, password } = props
   const [email, setEmail] = React.useState<string>(emailProp)
   const hasError = React.useMemo(
@@ -33,7 +33,7 @@ const Signup: React.FC<IProps> = (props) => {
           <Avatar>
             <LockOutlinedIcon />
           </Avatar>
-          <h2 style={{ margin: 0 }}> Sign Up </h2>
+          <h2 style={{ margin: 0 }}> Admin Sign Up </h2>
           <Typography variant="caption" gutterBottom>
             Please fill this form to create an account !
           </Typography>
@@ -91,4 +91,4 @@ const Signup: React.FC<IProps> = (props) => {
   )
 }
 
-export default Signup
+export default AdminSignup
