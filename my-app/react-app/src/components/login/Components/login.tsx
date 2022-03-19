@@ -12,12 +12,16 @@ import {
 } from '@mui/material'
 import EmailValidator from 'email-validator'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
   const [wrongPass, setWrongPass] = React.useState<boolean>(false)
+  const [redirect, setRedirect] = React.useState<boolean>(false)
+
+  const navigate = useNavigate()
 
   const validateEmail = React.useCallback(
     () =>
@@ -28,10 +32,18 @@ const Login: React.FC = () => {
   )
 
   const doSubmit = React.useCallback(() => {
+    const routeChange = () => {
+      const path = `user-page`
+      navigate(path)
+    }
+
     if (!wrongEmail && !(password === null || password === undefined)) {
+      if (email === 'admin@email.com' && password === '1234') {
+        routeChange()
+      }
       console.log({ email, password })
     }
-  }, [email, password, wrongEmail])
+  }, [email, navigate, password, wrongEmail])
 
   return (
     <Grid>

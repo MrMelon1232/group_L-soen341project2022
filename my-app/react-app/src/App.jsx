@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar'
 import Contact from './components/pages/Contact'
 import Explore from './components/pages/Explore'
 import Home from './components/pages/Home'
+import LoginPage from './components/pages/LoginPage'
 import OurBrand from './components/pages/OurBrand'
 import Products from './components/pages/Products'
 
@@ -18,6 +19,7 @@ const App = () => (
         <Route path="/ourbrand" element={<OurBrand />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/user-page" element={<LoginPage />} />
       </Routes>
     </div>
   </Router>

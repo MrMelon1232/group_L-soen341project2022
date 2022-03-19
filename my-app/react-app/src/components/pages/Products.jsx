@@ -1,9 +1,9 @@
+import cors from 'cors'
 import React from 'react'
 
 const Products = () => {
   const [products, setProducts] = React.useState()
 
-  /*
   React.useEffect(() => {
     fetch('http://localhost:5000/api/products')
       .then((response) => response.json())
@@ -11,7 +11,6 @@ const Products = () => {
   }, [])
 
   console.log(products)
-  */
 
   return (
     <div>
