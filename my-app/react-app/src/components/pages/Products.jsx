@@ -1,4 +1,3 @@
-import cors from 'cors'
 import React from 'react'
 
 const Products = () => {
