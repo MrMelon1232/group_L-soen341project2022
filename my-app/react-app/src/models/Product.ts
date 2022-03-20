@@ -5,5 +5,5 @@ export interface Product {
   description: string
   category: string
   quantity?: number
-  imageURL?: string
+  imgUrl?: string
 }

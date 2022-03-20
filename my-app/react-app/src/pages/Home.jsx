@@ -7,12 +7,12 @@ import {
   Typography,
 } from '@mui/material'
 import React from 'react'
-import imgbooks from '../../images/books.jpg'
-import imgcinema from '../../images/cinema.jpg'
-import imgclothes from '../../images/clothes.jpg'
-import imgelectronics from '../../images/electronics.jpg'
-import imgkids from '../../images/kids.jpg'
-import imgsports from '../../images/sports.jpg'
+import imgbooks from '../images/books.jpg'
+import imgcinema from '../images/cinema.jpg'
+import imgclothes from '../images/clothes.jpg'
+import imgelectronics from '../images/electronics.jpg'
+import imgkids from '../images/kids.jpg'
+import imgsports from '../images/sports.jpg'
 
 const itemData = [
   {
@@ -62,7 +62,7 @@ const Home = () => (
     >
       {itemData.map((item) => (
         <Link href="#">
-          <ImageListItem key={item.img}>
+          <ImageListItem tabIndex={item.img}>
             <img
               src={`${item.img}?w=248&fit=crop&auto=format&`}
               srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
