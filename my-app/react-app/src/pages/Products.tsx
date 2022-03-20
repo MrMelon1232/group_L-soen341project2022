@@ -15,7 +15,7 @@ const Products = () => {
     setProducts((prevState) => [
       ...prevState,
       {
-        id: prevState.length + 10,
+        id: prevState.length + 1,
         price: 15,
         name: 'a name',
         description: 'desc',
