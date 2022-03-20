@@ -8,6 +8,7 @@ import Explore from './pages/Explore'
 import Home from './pages/Home'
 import LoginPage from './pages/LoginPage'
 import OurBrand from './pages/OurBrand'
+import ProductDetails from './pages/ProductDetails'
 import Products from './pages/Products'
 
 const App = () => (
@@ -22,6 +23,7 @@ const App = () => (
         <Route path="/explore" element={<Explore />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/user-page" element={<LoginPage />} />
+        <Route path="/Products/:id" element={<ProductDetails />} />
       </Routes>
     </div>
   </Router>

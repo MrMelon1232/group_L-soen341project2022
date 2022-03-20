@@ -6,8 +6,10 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  Box,
 } from '@mui/material'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Product } from '../../models/Product'
 
 interface IProps {
@@ -25,17 +27,6 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
       return null
     }
   }
-
-  const cardStyle = (theme) => ({
-    Card: {
-      height: 200,
-      margin: 'auto',
-    },
-    Media: {
-      height: '100%',
-      width: '100%',
-    },
-  })
 
   return (
     <Card>
@@ -58,9 +49,16 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         <Typography>{product.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="medium">+</Button>
-        <Button size="medium">-</Button>
-        <Button variant="contained">Share</Button>
+        <Box sx={{ marginLeft: 'auto', marginRight: 'auto' }}>
+          <Button size="medium">+</Button>
+          <Button size="medium">-</Button>
+          <Button component={Link} to={`/Products/${product.id}`} size="medium">
+            View
+          </Button>
+          <Button variant="contained" size="small">
+            Share
+          </Button>
+        </Box>
       </CardActions>
     </Card>
   )
