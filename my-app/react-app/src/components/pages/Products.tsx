@@ -1,6 +1,6 @@
 import React from 'react'
 // eslint-disable-next-line import/extensions
-import { Product } from '../models/Product'
+import { Product } from '../../models/Product'
 
 const Products = () => {
   const [products, setProducts] = React.useState<Product[]>([])
