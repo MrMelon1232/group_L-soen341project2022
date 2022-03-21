@@ -72,9 +72,13 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         <Typography>{product.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="medium" onClick={addAmount}> + </Button>
+        <Button size="medium" onClick={addAmount}>
+          +
+        </Button>
         <span className="quantityCounter">{amount}</span>
-        <Button size="medium" onClick={subAmount}>-</Button>
+        <Button size="medium" onClick={subAmount}>
+          -
+        </Button>
         <Button variant="contained">Add to cart</Button>
       </CardActions>
     </Card>
