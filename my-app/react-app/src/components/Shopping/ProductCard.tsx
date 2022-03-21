@@ -1,3 +1,4 @@
+import { ProductionQuantityLimitsSharp } from '@mui/icons-material'
 import {
   Avatar,
   Button,
@@ -7,8 +8,9 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { Product } from '../../models/Product'
+import Products from '../../pages/Products'
 
 interface IProps {
   product: Product
@@ -37,6 +39,18 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
     },
   })
 
+  const [amount, setAmount] = useState(1)
+
+  const addAmount = () => {
+    setAmount((count) => count + 1)
+  }
+
+  const subAmount = () => {
+    if (amount > 1) {
+      setAmount((count) => count - 1)
+    }
+  }
+
   return (
     <Card>
       <CardMedia
@@ -58,9 +72,10 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         <Typography>{product.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="medium">+</Button>
-        <Button size="medium">-</Button>
-        <Button variant="contained">Share</Button>
+        <Button size="medium" onClick={addAmount}> + </Button>
+        <span className="quantityCounter">{amount}</span>
+        <Button size="medium" onClick={subAmount}>-</Button>
+        <Button variant="contained">Add to cart</Button>
       </CardActions>
     </Card>
   )
