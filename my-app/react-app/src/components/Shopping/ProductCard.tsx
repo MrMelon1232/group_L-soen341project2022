@@ -43,7 +43,7 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
   }
 
   return (
-    <Card>
+    <Card sx={{ minHeight: '400px' }}>
       <CardMedia
         component="img"
         image={tryRequire(product.imgUrl, 'Catalog/Laptops')}
@@ -57,7 +57,12 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         }}
       />
       <CardContent>
-        <Typography variant="h6" component="div">
+        <Typography
+          variant="h6"
+          component="div"
+          overflow="hidden"
+          sx={{ maxHeight: '60px' }}
+        >
           {product.name}
         </Typography>
         <Typography component="div">{`Price: ${product.price}`}</Typography>
