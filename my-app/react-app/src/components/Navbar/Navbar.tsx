@@ -12,6 +12,7 @@ import {
   AppBar,
   Typography,
   Box,
+  Badge,
 } from '@mui/material'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -83,9 +84,11 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
             ))}
           </ul>
           <Hidden mdDown>
-            <Box sx={{ textAlign: 'center', pt: 0.5 }}>
+            <Box sx={{ textAlign: 'center', mt: 0.5, mr: 1.5 }}>
               <IconButton onClick={props.setDrawerOpen}>
-                <AddShoppingCartIcon sx={{ color: 'white' }} />
+                <Badge badgeContent={4} color="error">
+                  <AddShoppingCartIcon sx={{ color: 'white' }} />
+                </Badge>
               </IconButton>
             </Box>
 
