@@ -7,8 +7,10 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  Box,
 } from '@mui/material'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Product } from '../../models/Product'
 import Products from '../../pages/Products'
 
@@ -27,17 +29,6 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
       return null
     }
   }
-
-  const cardStyle = (theme) => ({
-    Card: {
-      height: 200,
-      margin: 'auto',
-    },
-    Media: {
-      height: '100%',
-      width: '100%',
-    },
-  })
 
   const [amount, setAmount] = useState(1)
 
@@ -58,10 +49,11 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         image={tryRequire(product.imgUrl, 'Catalog/Laptops')}
         title={product.name}
         sx={{
-          height: '200px',
+          maxHeight: '200px',
           width: 'auto',
           marginLeft: 'auto',
           marginRight: 'auto',
+          height: '200px',
         }}
       />
       <CardContent>
@@ -72,14 +64,21 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         <Typography>{product.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="medium" onClick={addAmount}>
-          +
-        </Button>
-        <span className="quantityCounter">{amount}</span>
-        <Button size="medium" onClick={subAmount}>
-          -
-        </Button>
-        <Button variant="contained">Add to cart</Button>
+        <Box sx={{ marginLeft: 'auto', marginRight: 'auto' }}>
+          <Button size="medium" onClick={addAmount}>
+            +
+          </Button>
+          <span className="quantityCounter">{amount}</span>
+          <Button size="medium" onClick={subAmount}>
+            -
+          </Button>
+          <Button component={Link} to={`/Products/${product.id}`} size="medium">
+            View
+          </Button>
+          <Button variant="contained" size="small">
+            Share
+          </Button>
+        </Box>
       </CardActions>
     </Card>
   )
