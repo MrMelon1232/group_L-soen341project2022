@@ -1,18 +1,30 @@
 import { Button, Grid, Paper, TextField, Typography, Link } from '@mui/material'
+import EmailValidator from 'email-validator'
 import React, { Component } from 'react'
 
 const ForgotPassword = () => {
   const [password, setPassword] = React.useState('')
   const [passwordConfirm, setPasswordConfirm] = React.useState('')
+  const [email, setEmail] = React.useState('')
+  const [wrongEmail, setWrongEmail] = React.useState(false)
+
+  const validateEmail = React.useCallback(
+    () =>
+      setWrongEmail(
+        !EmailValidator.validate(email) && email !== undefined && email !== ''
+      ),
+    [email]
+  )
 
   const doSubmit = React.useCallback(() => {
     if (
-      password !== passwordConfirm &&
-      !(password === null || password === undefined)
+      password !== passwordConfirm ||
+      !(password === null || password === undefined) ||
+      !wrongEmail
     ) {
-      console.log('Password does not match')
+      console.log('Password does not match or wrong email')
     }
-  }, [passwordConfirm, password])
+  }, [passwordConfirm, password, wrongEmail, email])
 
   return (
     <Grid>
@@ -28,6 +40,10 @@ const ForgotPassword = () => {
           fullWidth
           required
           variant="standard"
+          onChange={(e) => setEmail(e.target.value)}
+          error={wrongEmail}
+          value={wrongEmail ? email : undefined}
+          onBlur={validateEmail}
         />
         <TextField
           label="Password"
