@@ -79,7 +79,7 @@ const Login: React.FC = () => {
           Sign In
         </Button>
         <Typography>
-          <Link href="/#">Forgot Password?</Link>
+          <Link href="/forgotPassword">Forgot Password?</Link>
         </Typography>
         <Typography>
           Do you have an account?

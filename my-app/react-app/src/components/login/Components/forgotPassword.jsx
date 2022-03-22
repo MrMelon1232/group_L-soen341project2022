@@ -1,14 +1,4 @@
-import {
-  Avatar,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-  Link,
-} from '@mui/material'
+import { Button, Grid, Paper, TextField, Typography, Link } from '@mui/material'
 import React, { Component } from 'react'
 
 const ForgotPassword = () => {
@@ -30,8 +20,15 @@ const ForgotPassword = () => {
         style={{ padding: 20, height: '73vh', width: 330, margin: '0 auto' }}
       >
         <Grid direction="column" display="flex" alignItems="center">
-          <h2>Sign In</h2>
+          <h2>Forgot Password</h2>
         </Grid>
+        <TextField
+          label="Email"
+          placeholder="Enter Email"
+          fullWidth
+          required
+          variant="standard"
+        />
         <TextField
           label="Password"
           placeholder="Enter Password"
@@ -59,15 +56,8 @@ const ForgotPassword = () => {
           fullWidth
           onClick={doSubmit}
         >
-          Sign In
+          Submit
         </Button>
-        <Typography>
-          <Link href="/#">Forgot Password?</Link>
-        </Typography>
-        <Typography>
-          Do you have an account?
-          <Link href="/#"> Sign Up </Link>
-        </Typography>
       </Paper>
     </Grid>
   )
