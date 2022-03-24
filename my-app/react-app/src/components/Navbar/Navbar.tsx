@@ -39,14 +39,25 @@ const Navbar: React.FC = () => {
 
   const [showForm, setForm] = React.useState(false)
 
-  const [open, setOpen] = React.useState(false)
+  const [openUser, setOpenUser] = React.useState(false)
+  const [openAdmin, setOpenAdmin] = React.useState(false)
 
-  const handleClickOpen = () => {
-    setOpen(true)
+  //Handler for user login/signup
+  const handleClickOpenUser = () => {
+    setOpenUser(true)
   }
 
-  const handleCloseDialog = () => {
-    setOpen(false)
+  const handleCloseDialogUser = () => {
+    setOpenUser(false)
+  }
+
+  //Handler for admin login
+  const handleClickOpenAdmin = () => {
+    setOpenAdmin(true)
+  }
+
+  const handleCloseDialogAdmin = () => {
+    setOpenAdmin(false)
   }
 
   return (
@@ -78,8 +89,8 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
           <Hidden mdDown>
-            <Button onClick={handleClickOpen}>Log In</Button>
-            <Dialog open={open} onClose={handleCloseDialog}>
+            <Button onClick={handleClickOpenUser}>Log In</Button>
+            <Dialog open={openUser} onClose={handleCloseDialogUser}>
               <SignInOutContainer />
             </Dialog>
           </Hidden>
@@ -112,9 +123,9 @@ const Navbar: React.FC = () => {
           >
             <Hidden mdDown>
               <MenuItem>
-                <Button onClick={handleClickOpen}>Admin Login</Button>
+                <Button onClick={handleClickOpenAdmin}>Admin Login</Button>
               </MenuItem>
-              <Dialog open={open} onClose={handleCloseDialog}>
+              <Dialog open={openAdmin} onClose={handleCloseDialogAdmin}>
                 <AdminSignInOutContainer />
               </Dialog>
             </Hidden>

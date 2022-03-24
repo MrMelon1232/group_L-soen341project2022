@@ -1,8 +1,6 @@
 import { Paper, Tabs, Box, Tab } from '@mui/material'
 import React from 'react'
 import AdminLogin from '../components/login/AdminLogin'
-//import Login from '../components/login/login'
-import Signup from '../components/login/signup'
 import TabPanel from '../misc/TabPanel'
 
 const AdminSignInOutContainer: React.FC = () => {
@@ -26,11 +24,6 @@ const AdminSignInOutContainer: React.FC = () => {
       <TabPanel value={value} index={0}>
         <Box>
           <AdminLogin />
-        </Box>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Box>
-          <Signup emailProp="" password="" />
         </Box>
       </TabPanel>
     </Paper>
