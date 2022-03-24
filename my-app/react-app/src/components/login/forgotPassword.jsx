@@ -31,6 +31,9 @@ const ForgotPassword = () => {
       setErrorEmail('This is not a valid email')
       valid = false
     } else setErrorEmail('')
+    if (valid === true) {
+      window.location.href = '/'
+    }
   }, [passwordConfirm, password, wrongEmail, email])
 
   return (
