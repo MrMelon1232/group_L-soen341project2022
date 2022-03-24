@@ -3,6 +3,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
+import AdminPage from './pages/AdminPage'
 import Contact from './pages/Contact'
 import Explore from './pages/Explore'
 import Home from './pages/Home'
@@ -23,6 +24,7 @@ const App = () => (
         <Route path="/explore" element={<Explore />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/user-page" element={<LoginPage />} />
+        <Route path="/admin-page" element={<AdminPage />} />
         <Route path="/Products/:id" element={<ProductDetails />} />
       </Routes>
     </div>

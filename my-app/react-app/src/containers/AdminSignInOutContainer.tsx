@@ -26,6 +26,7 @@ const AdminSignInOutContainer: React.FC = () => {
           <AdminLogin />
         </Box>
       </TabPanel>
+      <TabPanel value={value} index={1} />
     </Paper>
   )
 }
