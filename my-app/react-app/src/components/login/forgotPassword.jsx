@@ -7,6 +7,8 @@ const ForgotPassword = () => {
   const [passwordConfirm, setPasswordConfirm] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [wrongEmail, setWrongEmail] = React.useState(false)
+  const [errorPassword, setErrorPassword] = React.useState('')
+  const [errorEmail, setErrorEmail] = React.useState('')
 
   const validateEmail = React.useCallback(
     () =>
@@ -17,14 +19,13 @@ const ForgotPassword = () => {
   )
 
   const doSubmit = React.useCallback(() => {
-    if (
-      password !== passwordConfirm ||
-      !(password === null || password === undefined) ||
-      !wrongEmail
-    ) {
-      console.log('Password does not match or wrong email')
-    }
-  }, [passwordConfirm, password, wrongEmail, email])
+    if (password !== passwordConfirm) {
+      setErrorPassword('Password fields are not the same')
+    } else setErrorPassword('')
+    if (wrongEmail) {
+      setErrorEmail('This is not a valid email')
+    } else setErrorEmail('')
+  }, [passwordConfirm, password, wrongEmail])
 
   return (
     <Grid>
@@ -45,6 +46,7 @@ const ForgotPassword = () => {
           value={wrongEmail ? email : undefined}
           onBlur={validateEmail}
         />
+        <div style={{ fontSize: 12, color: 'red' }}>{errorEmail}</div>
         <TextField
           label="Password"
           placeholder="Enter Password"
@@ -65,6 +67,7 @@ const ForgotPassword = () => {
           onChange={(e) => setPasswordConfirm(e.target.value)}
           value={passwordConfirm}
         />
+        <div style={{ fontSize: 12, color: 'red' }}>{errorPassword}</div>
         <Button
           type="submit"
           color="primary"
