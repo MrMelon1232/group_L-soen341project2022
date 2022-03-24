@@ -11,7 +11,18 @@
     "ecmaFeatures": {
       "jsx": true
     },
+
     "ecmaVersion": "latest"
+  },
+  "env": {
+    "browser": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   },
   "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
   "rules": {
@@ -42,6 +53,19 @@
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/require-default-props": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never",
+        "mjs": "never",
+        "": "never"
+      }
+    ]
   }
 }

@@ -9,27 +9,27 @@ import {
   Paper,
   Checkbox,
 } from '@mui/material'
-import * as EmailValidator from 'email-validator'
-import React, { Component } from 'react'
+import EmailValidator from 'email-validator'
+import React from 'react'
 
 interface IProps {
-  email: string
+  emailProp: string
   password: string
 }
 
 const Signup: React.FC<IProps> = (props) => {
-  const [email, setEmail] = React.useState<string>('')
-  const hasError = React.useMemo(() => {
-    console.log(email)
-    return (
-      !EmailValidator.validate(email) && email !== undefined && email !== ''
-    )
-  }, [email])
+  const { emailProp, password } = props
+  const [email, setEmail] = React.useState<string>(emailProp)
+  const hasError = React.useMemo(
+    () =>
+      !EmailValidator.validate(email) && email !== undefined && email !== '',
+    [email]
+  )
 
   return (
     <Grid>
       <Paper style={{ padding: 20, width: 330, margin: '0 auto' }}>
-        <Grid align="center">
+        <Grid direction="column" display="flex" alignItems="center">
           <Avatar>
             <LockOutlinedIcon />
           </Avatar>
@@ -61,7 +61,7 @@ const Signup: React.FC<IProps> = (props) => {
             required
             onBlur={(e) => setEmail(e.target.value)}
             error={hasError}
-            value={props.email}
+            value={email}
           />
           <TextField
             fullWidth
