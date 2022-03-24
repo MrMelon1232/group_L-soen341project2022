@@ -1,4 +1,13 @@
-import { Button, Grid, Paper, TextField, Typography, Link } from '@mui/material'
+import {
+  Button,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+  Link,
+  Popover,
+} from '@mui/material'
+import Alert from '@mui/material/Alert'
 import EmailValidator from 'email-validator'
 import React, { Component } from 'react'
 
@@ -33,7 +42,13 @@ const ForgotPassword = () => {
     } else setErrorEmail('')
     if (valid === true) {
       window.location.href = '/'
+      return (
+        <Alert severity="success">
+          This is a success alert — check it out!
+        </Alert>
+      )
     }
+    return ''
   }, [passwordConfirm, password, wrongEmail, email])
 
   return (
