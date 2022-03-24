@@ -19,13 +19,19 @@ const ForgotPassword = () => {
   )
 
   const doSubmit = React.useCallback(() => {
-    if (password !== passwordConfirm) {
+    let valid = true
+    if (password === '' && passwordConfirm === '') {
+      setErrorPassword('Password fields are not filled')
+      valid = false
+    } else if (password !== passwordConfirm) {
       setErrorPassword('Password fields are not the same')
+      valid = false
     } else setErrorPassword('')
-    if (wrongEmail) {
+    if (wrongEmail || email === '') {
       setErrorEmail('This is not a valid email')
+      valid = false
     } else setErrorEmail('')
-  }, [passwordConfirm, password, wrongEmail])
+  }, [passwordConfirm, password, wrongEmail, email])
 
   return (
     <Grid>
