@@ -36,8 +36,6 @@ const Navbar: React.FC = () => {
     setAnchorEl(event.currentTarget)
   }
 
-  const [showForm, setForm] = React.useState(false)
-
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -48,12 +46,10 @@ const Navbar: React.FC = () => {
     setOpen(false)
   }
 
-  const [showLogout, setshowLogout] = React.useState(true)
+  const [showLogout, setshowLogout] = React.useState(false)
   const handleLogout = () => {
-    setshowLogout(true)
+    setshowLogout(false)
   }
-
-  const [show, setShow] = React.useState(true)
 
   return (
     <AppBar
@@ -84,9 +80,11 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
           <Hidden mdDown>
-            {show ? <Button onClick={handleClickOpen}>Log In</Button> : null}
+            {!showLogout ? (
+              <Button onClick={handleClickOpen}>Log In</Button>
+            ) : null}
             <Dialog open={open} onClose={handleCloseDialog}>
-              <SignInOutContainer loggedInProp={show} />
+              <SignInOutContainer stateChanger={setshowLogout} />
             </Dialog>
           </Hidden>
 
@@ -97,7 +95,11 @@ const Navbar: React.FC = () => {
           </Hidden>
 
           <Hidden mdDown>
-            {showLogout ? <Button href="/profile">Profile</Button> : null}
+            {showLogout ? (
+              <Button href="/profile" onClick={handleLogout}>
+                Profile
+              </Button>
+            ) : null}
           </Hidden>
 
           <IconButton

@@ -15,7 +15,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 interface IProps {
-  loggedInProp: boolean
+  stateChanger: (boolean) => void
 }
 
 const Login: React.FC<IProps> = (props) => {
@@ -24,12 +24,6 @@ const Login: React.FC<IProps> = (props) => {
   const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
   const [wrongPass, setWrongPass] = React.useState<boolean>(false)
   const [redirect, setRedirect] = React.useState<boolean>(false)
-  const { loggedInProp } = props
-  const [loggedIn, setLoggedIn] = React.useState<boolean>(loggedInProp)
-
-  const handleLoggedIn = () => {
-    setLoggedIn(true)
-  }
 
   const navigate = useNavigate()
 
@@ -49,7 +43,7 @@ const Login: React.FC<IProps> = (props) => {
 
     if (!wrongEmail && !(password === null || password === undefined)) {
       routeChange()
-      handleLoggedIn()
+      props.stateChanger(true)
       console.log({ email, password })
     }
   }, [email, navigate, password, wrongEmail])

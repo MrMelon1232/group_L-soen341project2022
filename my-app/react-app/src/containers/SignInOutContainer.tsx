@@ -5,7 +5,7 @@ import Signup from '../components/login/signup'
 import TabPanel from '../misc/TabPanel'
 
 interface IProps {
-  loggedInProp: boolean
+  stateChanger: (boolean) => void
 }
 
 const SignInOutContainer: React.FC<IProps> = (props) => {
@@ -13,8 +13,6 @@ const SignInOutContainer: React.FC<IProps> = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
-  const { loggedInProp } = props
-  const [loggedIn] = React.useState<boolean>(loggedInProp)
 
   return (
     <Paper elevation={20} style={{ width: 330, margin: '20px auto' }}>
@@ -31,7 +29,7 @@ const SignInOutContainer: React.FC<IProps> = (props) => {
       </Tabs>
       <TabPanel value={value} index={0}>
         <Box>
-          <Login loggedInProp={loggedInProp} />
+          <Login stateChanger={props.stateChanger} />
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
