@@ -9,6 +9,8 @@ import {
   TableRow,
 } from '@mui/material'
 import React from 'react'
+import agent from '../../ApiCall/agent'
+import { Cart } from '../../models/CartModel'
 import { Product } from '../../models/Product'
 import ProductCard from './ProductCard'
 
@@ -16,7 +18,17 @@ interface IProps {
   listOfProducts?: React.ReactNode
 }
 
-const Cart: React.FC<IProps> = (props) => {
+const CartComponent: React.FC<IProps> = (props) => {
+  const [listCart, setListCart] = React.useState<Cart | null>(null)
+  const [loading, setLoading] = React.useState<boolean>(true)
+
+  React.useEffect(() => {
+    agent.Cart.get()
+      .then((list) => setListCart(list))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }, [])
+
   const [products, setProducts] = React.useState<Product[]>([])
 
   React.useEffect(() => {
@@ -34,10 +46,22 @@ const Cart: React.FC<IProps> = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products?.map((item) => (
+          {listCart?.items?.map((item) => (
             <TableRow>
               <TableCell>
-                <ProductCard product={item} key={item.id} mini />
+                <ProductCard
+                  product={{
+                    id: item.productId,
+                    name: item.name,
+                    price: item.price,
+                    description: '',
+                    category: '',
+                    quantity: item.quantity,
+                    imgUrl: item.imgUrl,
+                  }}
+                  key={item.productId}
+                  mini
+                />
               </TableCell>
             </TableRow>
           ))}
@@ -47,4 +71,4 @@ const Cart: React.FC<IProps> = (props) => {
   )
 }
 
-export default Cart
+export default CartComponent

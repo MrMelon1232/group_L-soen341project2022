@@ -1,4 +1,5 @@
 import { ProductionQuantityLimitsSharp } from '@mui/icons-material'
+import { LoadingButton } from '@mui/lab'
 import {
   Button,
   Card,
@@ -10,6 +11,7 @@ import {
 } from '@mui/material'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import agent from '../../ApiCall/agent'
 import { Product } from '../../models/Product'
 import Products from '../../pages/Products'
 
@@ -31,6 +33,14 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
   }
 
   const [amount, setAmount] = useState(1)
+  const [loading, setLoading] = React.useState(false)
+
+  const addItem = (productId: number) => {
+    setLoading(true)
+    agent.Cart.addItem(productId)
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }
 
   const addAmount = () => {
     setAmount((count) => count + 1)
@@ -81,6 +91,13 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
           <Button size={mini ? 'small' : 'medium'} onClick={subAmount}>
             -
           </Button>
+          <LoadingButton
+            size={mini ? 'small' : 'medium'}
+            onClick={() => addItem(product.id)}
+            loading={loading}
+          >
+            Add
+          </LoadingButton>
           <Button component={Link} to={`/Products/${product.id}`} size="medium">
             View
           </Button>

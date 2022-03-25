@@ -15,7 +15,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
-import Cart from '../components/Shopping/Cart'
+import CartComponent from '../components/Shopping/CartComponent'
 
 interface IProps {
   openCart: boolean
@@ -52,7 +52,7 @@ const SwipeableEdgeDrawer: React.FC<IProps> = ({ openCart }: IProps) => {
         {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
       </IconButton>
       <Divider />
-      <Cart />
+      <CartComponent />
       <List>
         {['Login', 'Sign-up', 'Admin login'].map((text, index) => (
           <ListItem button key={text}>
