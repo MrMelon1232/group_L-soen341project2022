@@ -96,8 +96,8 @@ const Navbar: React.FC = () => {
 
           <Hidden mdDown>
             {showLogout ? (
-              <Button href="/profile" onClick={handleLogout}>
-                Profile
+              <Button>
+                <Link to="/profile"> Profile </Link>
               </Button>
             ) : null}
           </Hidden>
