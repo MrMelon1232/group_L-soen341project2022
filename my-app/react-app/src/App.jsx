@@ -3,6 +3,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
+import ForgotPassword from './components/login/forgotPassword'
 import Contact from './pages/Contact'
 import Explore from './pages/Explore'
 import Home from './pages/Home'
@@ -22,6 +23,7 @@ const App = () => (
         <Route path="/ourbrand" element={<OurBrand />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/user-page" element={<LoginPage />} />
         <Route path="/Products/:id" element={<ProductDetails />} />
       </Routes>
