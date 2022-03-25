@@ -43,7 +43,7 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
   }
 
   return (
-    <Card sx={{ minHeight: '400px' }}>
+    <Card sx={{ minHeight: mini ? '0px' : '400px' }}>
       <CardMedia
         component="img"
         image={tryRequire(product.imgUrl, 'Catalog/Laptops')}
@@ -77,6 +77,7 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
           <Button size={mini ? 'small' : 'medium'} onClick={addAmount}>
             +
           </Button>
+          {amount}
           <Button size={mini ? 'small' : 'medium'} onClick={subAmount}>
             -
           </Button>
