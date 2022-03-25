@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage'
 import OurBrand from './pages/OurBrand'
 import ProductDetails from './pages/ProductDetails'
 import Products from './pages/Products'
+import Profile from './pages/profile'
 
 const App = () => (
   <Router>
@@ -26,6 +27,7 @@ const App = () => (
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/user-page" element={<LoginPage />} />
         <Route path="/Products/:id" element={<ProductDetails />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   </Router>

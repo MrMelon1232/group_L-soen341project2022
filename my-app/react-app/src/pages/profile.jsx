@@ -10,7 +10,7 @@ import {
 import React, { Component } from 'react'
 
 // eslint-disable-next-line react/function-component-definition
-export default function Profile() {
+const Profile = () => {
   const [account, setAccount] = React.useState(true)
 
   const handleAccount = () => {
@@ -165,3 +165,5 @@ export default function Profile() {
     </div>
   )
 }
+
+export default Profile

@@ -48,6 +48,11 @@ const Navbar: React.FC = () => {
     setOpen(false)
   }
 
+  const [showLogout, setshowLogout] = React.useState(true)
+  const handleLogout = () => {
+    setshowLogout(true)
+  }
+
   const [show, setShow] = React.useState(true)
 
   return (
@@ -86,7 +91,17 @@ const Navbar: React.FC = () => {
           </Hidden>
 
           <Hidden mdDown>
-            <Button> Logout</Button>
+            {showLogout ? (
+              <Button onClick={handleLogout}> Logout</Button>
+            ) : null}
+          </Hidden>
+
+          <Hidden mdDown>
+            {showLogout ? (
+              <Button>
+                <Link to="/profile"> Profile </Link>
+              </Button>
+            ) : null}
           </Hidden>
 
           <IconButton
