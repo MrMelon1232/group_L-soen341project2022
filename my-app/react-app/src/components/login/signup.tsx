@@ -26,6 +26,12 @@ const Signup: React.FC<IProps> = (props) => {
     [email]
   )
 
+  const [signedUp, setSignedUp] = React.useState<boolean>(false)
+
+  const handleSignedUp = () => {
+    setSignedUp(true)
+  }
+
   return (
     <Grid>
       <Paper style={{ padding: 20, width: 330, margin: '0 auto' }}>
@@ -80,7 +86,12 @@ const Signup: React.FC<IProps> = (props) => {
             control={<Checkbox name="checkedA" />}
             label="I accept the terms and conditions"
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={handleSignedUp}
+          >
             Sign Up
           </Button>
         </form>

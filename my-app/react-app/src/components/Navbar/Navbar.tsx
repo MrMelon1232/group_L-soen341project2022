@@ -43,8 +43,6 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
     setAnchorEl(event.currentTarget)
   }
 
-  const [showForm, setForm] = React.useState(false)
-
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -53,6 +51,11 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
 
   const handleCloseDialog = () => {
     setOpen(false)
+  }
+
+  const [showLogout, setshowLogout] = React.useState(false)
+  const handleLogout = () => {
+    setshowLogout(false)
   }
 
   return (
@@ -93,9 +96,26 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
             </Box>
 
             <Button onClick={handleClickOpen}>Log In</Button>
+            {!showLogout ? (
+              <Button onClick={handleClickOpen}>Log In</Button>
+            ) : null}
             <Dialog open={open} onClose={handleCloseDialog}>
-              <SignInOutContainer />
+              <SignInOutContainer stateChanger={setshowLogout} />
             </Dialog>
+          </Hidden>
+
+          <Hidden mdDown>
+            {showLogout ? (
+              <Button onClick={handleLogout}> Logout</Button>
+            ) : null}
+          </Hidden>
+
+          <Hidden mdDown>
+            {showLogout ? (
+              <Button href="/profile" onClick={handleLogout}>
+                Profile
+              </Button>
+            ) : null}
           </Hidden>
 
           <IconButton

@@ -14,7 +14,11 @@ import EmailValidator from 'email-validator'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Login: React.FC = () => {
+interface IProps {
+  stateChanger: (boolean) => void
+}
+
+const Login: React.FC<IProps> = (props) => {
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
@@ -33,14 +37,13 @@ const Login: React.FC = () => {
 
   const doSubmit = React.useCallback(() => {
     const routeChange = () => {
-      const path = `user-page`
+      const path = `/`
       navigate(path)
     }
 
     if (!wrongEmail && !(password === null || password === undefined)) {
-      if (email === 'admin@email.com' && password === '1234') {
-        routeChange()
-      }
+      routeChange()
+      props.stateChanger(true)
       console.log({ email, password })
     }
   }, [email, navigate, password, wrongEmail])
@@ -91,11 +94,7 @@ const Login: React.FC = () => {
           Sign In
         </Button>
         <Typography>
-          <Link href="/#">Forgot Password?</Link>
-        </Typography>
-        <Typography>
-          Do you have an account?
-          <Link href="/#"> Sign Up </Link>
+          <Link href="/forgotPassword">Forgot Password?</Link>
         </Typography>
       </Paper>
     </Grid>
