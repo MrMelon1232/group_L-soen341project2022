@@ -48,6 +48,8 @@ const Navbar: React.FC = () => {
     setOpen(false)
   }
 
+  const [show, setShow] = React.useState(true)
+
   return (
     <AppBar
       position="fixed"
@@ -77,10 +79,14 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
           <Hidden mdDown>
-            <Button onClick={handleClickOpen}>Log In</Button>
+            {show ? <Button onClick={handleClickOpen}>Log In</Button> : null}
             <Dialog open={open} onClose={handleCloseDialog}>
-              <SignInOutContainer />
+              <SignInOutContainer loggedInProp={show} />
             </Dialog>
+          </Hidden>
+
+          <Hidden mdDown>
+            <Button> Logout</Button>
           </Hidden>
 
           <IconButton
