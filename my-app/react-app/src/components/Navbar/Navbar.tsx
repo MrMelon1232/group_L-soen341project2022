@@ -2,6 +2,7 @@
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import AccountCircle from '@mui/icons-material/AccountCircle'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import {
   IconButton,
   Menu,
@@ -11,16 +12,22 @@ import {
   AppBar,
   Typography,
   Box,
+  Badge,
 } from '@mui/material'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import SignInOutContainer from '../../containers/SignInOutContainer'
+import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
-const Navbar: React.FC = () => {
+interface IProps {
+  setDrawerOpen: () => void
+}
+
+const Navbar: React.FC<IProps> = (props: IProps) => {
   const [clicked, setClicked] = React.useState(false)
 
   const handleClick = () => {
@@ -77,6 +84,14 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
           <Hidden mdDown>
+            <Box sx={{ textAlign: 'center', mt: 0.5, mr: 1.5 }}>
+              <IconButton onClick={props.setDrawerOpen}>
+                <Badge badgeContent={4} color="error">
+                  <AddShoppingCartIcon sx={{ color: 'white' }} />
+                </Badge>
+              </IconButton>
+            </Box>
+
             <Button onClick={handleClickOpen}>Log In</Button>
             <Dialog open={open} onClose={handleCloseDialog}>
               <SignInOutContainer />

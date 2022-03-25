@@ -1,8 +1,10 @@
 import {
+  Button,
   CardMedia,
   Divider,
   Grid,
   Table,
+  Box,
   TableBody,
   TableCell,
   TableContainer,
@@ -53,15 +55,15 @@ const ProductDetails: React.FC = () => {
             height: '480px',
             width: 'auto',
             marginLeft: '5%',
+            maxHeight: '480px',
+            maxWidth: '900px',
           }}
         />
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={4} sx={{ marginLeft: '5%' }}>
         <Typography variant="h3">{product.name}</Typography>
         <Divider sx={{ mb: 2 }} />
-        <Typography variant="h4">
-          ${(product.price / 100).toFixed(2)}
-        </Typography>
+        <Typography variant="h4">${product.price.toFixed(2)}</Typography>
         <TableContainer>
           <Table>
             <TableBody>
@@ -80,6 +82,23 @@ const ProductDetails: React.FC = () => {
               <TableRow>
                 <TableCell>Quantity</TableCell>
                 <TableCell>{product.quantity}</TableCell>
+              </TableRow>
+              <TableRow>
+                <Box>
+                  <Button
+                    size="large"
+                    variant="contained"
+                    sx={{
+                      m: '5px',
+                      flexDirection: 'row-reverse',
+                    }}
+                  >
+                    +
+                  </Button>
+                  <Button size="large" variant="contained">
+                    -
+                  </Button>
+                </Box>
               </TableRow>
             </TableBody>
           </Table>

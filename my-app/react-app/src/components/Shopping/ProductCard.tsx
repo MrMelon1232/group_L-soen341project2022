@@ -1,6 +1,5 @@
 import { ProductionQuantityLimitsSharp } from '@mui/icons-material'
 import {
-  Avatar,
   Button,
   Card,
   CardActions,
@@ -16,9 +15,10 @@ import Products from '../../pages/Products'
 
 interface IProps {
   product: Product
+  mini?: boolean
 }
 
-const ProductCard: React.FC<IProps> = ({ product }) => {
+const ProductCard: React.FC<IProps> = ({ product, mini }) => {
   const tryRequire = (path, folder) => {
     console.log(`../../images/${folder}/${path}`)
     try {
@@ -49,16 +49,15 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         image={tryRequire(product.imgUrl, 'Catalog/Laptops')}
         title={product.name}
         sx={{
-          maxHeight: '200px',
+          height: mini ? '80px' : '200px',
           width: 'auto',
           marginLeft: 'auto',
           marginRight: 'auto',
-          height: '200px',
         }}
       />
       <CardContent>
         <Typography
-          variant="h6"
+          variant={mini ? 'subtitle2' : 'h6'}
           component="div"
           overflow="hidden"
           sx={{ maxHeight: '60px' }}
@@ -69,20 +68,26 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         <Typography>{product.description}</Typography>
       </CardContent>
       <CardActions>
-        <Box sx={{ marginLeft: 'auto', marginRight: 'auto' }}>
-          <Button size="medium" onClick={addAmount}>
+        <Box
+          sx={{
+            marginLeft: mini ? '0' : 'auto',
+            marginRight: mini ? '0' : 'auto',
+          }}
+        >
+          <Button size={mini ? 'small' : 'medium'} onClick={addAmount}>
             +
           </Button>
-          <span className="quantityCounter">{amount}</span>
-          <Button size="medium" onClick={subAmount}>
+          <Button size={mini ? 'small' : 'medium'} onClick={subAmount}>
             -
           </Button>
           <Button component={Link} to={`/Products/${product.id}`} size="medium">
             View
           </Button>
-          <Button variant="contained" size="small">
-            Share
-          </Button>
+          {!mini ? (
+            <Button variant="contained" size="small">
+              Share
+            </Button>
+          ) : undefined}
         </Box>
       </CardActions>
     </Card>

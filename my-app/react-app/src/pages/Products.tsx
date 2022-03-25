@@ -24,8 +24,6 @@ const Products = () => {
     ])
   }
 
-  console.log(products)
-
   return (
     <div>
       <h1> products</h1>
