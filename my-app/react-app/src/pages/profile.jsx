@@ -20,13 +20,13 @@ const Profile = () => {
   const [billing, setBilling] = React.useState(true)
 
   const handleBilling = () => {
-    setAccount(!billing)
+    setBilling(!billing)
   }
 
   const [shipping, setShipping] = React.useState(true)
 
   const handleShipping = () => {
-    setAccount(!shipping)
+    setShipping(!shipping)
   }
 
   const [date, setDate] = React.useState('')
@@ -68,7 +68,11 @@ const Profile = () => {
             }}
             type="password"
           />
-          <Button onClick={handleAccount}>Update</Button>
+          {account ? (
+            <Button onClick={handleAccount}>Edit</Button>
+          ) : (
+            <Button onClick={handleAccount}>Update</Button>
+          )}
         </Paper>
       </Grid>
 
@@ -115,7 +119,11 @@ const Profile = () => {
               readOnly: shipping,
             }}
           />
-          <Button onClick={handleBilling}>Update</Button>
+          {shipping ? (
+            <Button onClick={handleShipping}>Edit</Button>
+          ) : (
+            <Button onClick={handleShipping}>Update</Button>
+          )}
         </Paper>
       </Grid>
 
@@ -138,7 +146,12 @@ const Profile = () => {
           />
           <div>Expiration Date</div>:
           <FormControl>
-            <Select value={date} label="Date" onChange={handleChange}>
+            <Select
+              value={date}
+              label="Date"
+              onChange={handleChange}
+              readOnly={billing}
+            >
               <MenuItem value={1}>1</MenuItem>
               <MenuItem value={2}>2</MenuItem>
               <MenuItem value={3}>3</MenuItem>
@@ -159,7 +172,11 @@ const Profile = () => {
               readOnly: billing,
             }}
           />
-          <Button onClick={handleShipping}>Update</Button>
+          {billing ? (
+            <Button onClick={handleBilling}>Edit</Button>
+          ) : (
+            <Button onClick={handleBilling}>Update</Button>
+          )}
         </Paper>
       </Grid>
     </div>
