@@ -5,7 +5,7 @@ import ProductCard from './ProductCard'
 
 interface IProps {
   products: Product[] | null
-  addProduct: () => void
+  addProduct?: () => void
 }
 
 const Catalog: React.FC<IProps> = ({ products, addProduct }) => (

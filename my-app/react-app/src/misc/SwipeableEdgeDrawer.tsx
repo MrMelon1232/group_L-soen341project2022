@@ -3,8 +3,9 @@ Source code from https://mui.com/components/drawers/
 */
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import MailIcon from '@mui/icons-material/Mail'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+import ContactMailIcon from '@mui/icons-material/ContactMail'
+import LoginIcon from '@mui/icons-material/Login'
+import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
@@ -14,18 +15,15 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
+import Cart from '../components/Shopping/Cart'
 
 interface IProps {
-  CartSideMenu?: React.ReactNode
   openCart: boolean
 }
 
-const drawerWidth = 280
+const drawerWidth = 300
 
-const SwipeableEdgeDrawer: React.FC<IProps> = ({
-  CartSideMenu,
-  openCart,
-}: IProps) => {
+const SwipeableEdgeDrawer: React.FC<IProps> = ({ openCart }: IProps) => {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
 
@@ -54,27 +52,24 @@ const SwipeableEdgeDrawer: React.FC<IProps> = ({
         {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
       </IconButton>
       <Divider />
+      <Cart />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Login', 'Sign-up', 'Admin login'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              {index % 2 === 0 ? <LoginIcon /> : <ContactMailIcon />}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
+        <ListItem button>
+          <ListItemIcon>
+            <MarkEmailUnreadIcon />
+          </ListItemIcon>
+          <ListItemText primary="Suscribe to our news letter" />
+        </ListItem>
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </Drawer>
   )
 }

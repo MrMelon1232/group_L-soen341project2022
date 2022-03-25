@@ -13,9 +13,10 @@ import { Product } from '../../models/Product'
 
 interface IProps {
   product: Product
+  mini?: boolean
 }
 
-const ProductCard: React.FC<IProps> = ({ product }) => {
+const ProductCard: React.FC<IProps> = ({ product, mini }) => {
   const tryRequire = (path, folder) => {
     console.log(`../../images/${folder}/${path}`)
     try {
@@ -34,29 +35,36 @@ const ProductCard: React.FC<IProps> = ({ product }) => {
         image={tryRequire(product.imgUrl, 'Catalog/Laptops')}
         title={product.name}
         sx={{
-          height: '200px',
+          height: mini ? '80px' : '200px',
           width: 'auto',
           marginLeft: 'auto',
           marginRight: 'auto',
         }}
       />
       <CardContent>
-        <Typography variant="h6" component="div">
+        <Typography variant={mini ? 'subtitle2' : 'h6'} component="div">
           {product.name}
         </Typography>
         <Typography component="div">{`Price: ${product.price}`}</Typography>
         <Typography>{product.description}</Typography>
       </CardContent>
       <CardActions>
-        <Box sx={{ marginLeft: 'auto', marginRight: 'auto' }}>
-          <Button size="medium">+</Button>
-          <Button size="medium">-</Button>
+        <Box
+          sx={{
+            marginLeft: mini ? '0' : 'auto',
+            marginRight: mini ? '0' : 'auto',
+          }}
+        >
+          <Button size={mini ? 'small' : 'medium'}>+</Button>
+          <Button size={mini ? 'small' : 'medium'}>-</Button>
           <Button component={Link} to={`/Products/${product.id}`} size="medium">
             View
           </Button>
-          <Button variant="contained" size="small">
-            Share
-          </Button>
+          {!mini ? (
+            <Button variant="contained" size="small">
+              Share
+            </Button>
+          ) : undefined}
         </Box>
       </CardActions>
     </Card>
