@@ -37,7 +37,7 @@ namespace API.Controllers
                     Price = item.Product.Price,
                     ImgUrl = item.Product.ImgUrl,
                     Category = item.Product.Category,
-                    Quantity = item.Product.Quantity
+                    Quantity = item.Quantity
                 }).ToList()
             };
         }
@@ -51,7 +51,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddItemToCart(int productId, int quantity)
+        public async Task<ActionResult<CartDto>> AddItemToCart(int productId, int quantity)
         {
             var cart = await RetrieveCart();
             if (cart == null) cart = CreateCart();

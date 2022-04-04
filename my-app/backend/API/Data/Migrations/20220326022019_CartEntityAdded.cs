@@ -2,7 +2,7 @@
 
 namespace API.Data.Migrations
 {
-    public partial class CartsAdded : Migration
+    public partial class CartEntityAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
