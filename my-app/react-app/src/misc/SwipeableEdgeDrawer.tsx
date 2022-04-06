@@ -15,7 +15,10 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
+import agent from '../ApiCall/agent'
 import CartComponent from '../components/Shopping/CartComponent'
+import { Cart } from '../models/CartModel'
+import { Product } from '../models/Product'
 
 interface IProps {
   openCart: boolean
@@ -26,6 +29,15 @@ const drawerWidth = 300
 const SwipeableEdgeDrawer: React.FC<IProps> = ({ openCart }: IProps) => {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
+  const [listCart, setListCart] = React.useState<Cart | undefined>(undefined)
+  const [loading, setLoading] = React.useState<boolean>(true)
+
+  React.useEffect(() => {
+    agent.Cart.get()
+      .then((list) => setListCart(list))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }, [listCart])
 
   React.useEffect(() => {
     setOpen(openCart)
@@ -52,7 +64,7 @@ const SwipeableEdgeDrawer: React.FC<IProps> = ({ openCart }: IProps) => {
         {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
       </IconButton>
       <Divider />
-      <CartComponent />
+      <CartComponent listOfProducts={listCart} />
       <List>
         {['Login', 'Sign-up', 'Admin login'].map((text, index) => (
           <ListItem button key={text}>

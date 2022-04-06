@@ -8,6 +8,7 @@ import {
   CardMedia,
   Typography,
   Box,
+  Grid,
 } from '@mui/material'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -22,12 +23,11 @@ interface IProps {
 
 const ProductCard: React.FC<IProps> = ({ product, mini }) => {
   const tryRequire = (path, folder) => {
-    console.log(`../../images/${folder}/${path}`)
     try {
       // eslint-disable-next-line import/no-dynamic-require, global-require
       return require(`../../images/${folder}/${path}`)
     } catch (err) {
-      console.log('hello')
+      console.log('error occured', err)
       return null
     }
   }
@@ -37,7 +37,7 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
 
   const addItem = (productId: number) => {
     setLoading(true)
-    agent.Cart.addItem(productId)
+    agent.Cart.addItem(productId, amount)
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }
@@ -70,7 +70,7 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
           variant={mini ? 'subtitle2' : 'h6'}
           component="div"
           overflow="hidden"
-          sx={{ maxHeight: '60px' }}
+          sx={{ height: '60px' }}
         >
           {product.name}
         </Typography>
@@ -78,34 +78,48 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
         <Typography>{product.description}</Typography>
       </CardContent>
       <CardActions>
-        <Box
-          sx={{
-            marginLeft: mini ? '0' : 'auto',
-            marginRight: mini ? '0' : 'auto',
-          }}
-        >
-          <Button size={mini ? 'small' : 'medium'} onClick={addAmount}>
-            +
-          </Button>
-          {amount}
-          <Button size={mini ? 'small' : 'medium'} onClick={subAmount}>
-            -
-          </Button>
-          <LoadingButton
-            size={mini ? 'small' : 'medium'}
-            onClick={() => addItem(product.id)}
-            loading={loading}
+        <Box sx={{ flexDirection: 'column' }}>
+          <Box
+            sx={{
+              marginLeft: mini ? '0' : 'auto',
+              marginRight: mini ? '0' : 'auto',
+              display: 'flex',
+            }}
           >
-            Add
-          </LoadingButton>
-          <Button component={Link} to={`/Products/${product.id}`} size="medium">
-            View
-          </Button>
-          {!mini ? (
-            <Button variant="contained" size="small">
-              Share
+            <Button size={mini ? 'small' : 'medium'} onClick={addAmount}>
+              +
             </Button>
-          ) : undefined}
+            {amount}
+            <Button size={mini ? 'small' : 'medium'} onClick={subAmount}>
+              -
+            </Button>
+            {mini ? undefined : (
+              <LoadingButton
+                size={mini ? 'small' : 'medium'}
+                onClick={() => addItem(product.id)}
+                loading={loading}
+              >
+                Add
+              </LoadingButton>
+            )}
+            <Button
+              component={Link}
+              to={`/Products/${product.id}`}
+              size="medium"
+            >
+              View
+            </Button>
+            {!mini ? (
+              <Button variant="contained" size="small">
+                Share
+              </Button>
+            ) : undefined}
+          </Box>
+          <Typography
+            component="div"
+            ml={3}
+            sx={{ flexDirection: 'column-reverse' }}
+          >{`Quantity: ${product.quantity}`}</Typography>
         </Box>
       </CardActions>
     </Card>
