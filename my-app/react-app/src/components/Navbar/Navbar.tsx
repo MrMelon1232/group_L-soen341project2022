@@ -18,6 +18,7 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
 import SignInOutContainer from '../../containers/SignInOutContainer'
 import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
 import MenuItems from './MenuItems'
@@ -43,7 +44,10 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
     setAnchorEl(event.currentTarget)
   }
 
+  const [showForm, setForm] = React.useState(false)
   const [open, setOpen] = React.useState(false)
+  const [openUser, setOpenUser] = React.useState(false)
+  const [openAdmin, setOpenAdmin] = React.useState(false)
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -51,6 +55,23 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
 
   const handleCloseDialog = () => {
     setOpen(false)
+  }
+  //Handler for user login/signup
+  const handleClickOpenUser = () => {
+    setOpenUser(true)
+  }
+
+  const handleCloseDialogUser = () => {
+    setOpenUser(false)
+  }
+
+  //Handler for admin login
+  const handleClickOpenAdmin = () => {
+    setOpenAdmin(true)
+  }
+
+  const handleCloseDialogAdmin = () => {
+    setOpenAdmin(false)
   }
 
   const [showLogout, setshowLogout] = React.useState(false)
@@ -144,7 +165,14 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Admin Login</MenuItem>
+            <Hidden mdDown>
+              <MenuItem>
+                <Button onClick={handleClickOpenAdmin}>Admin Login</Button>
+              </MenuItem>
+              <Dialog open={openAdmin} onClose={handleCloseDialogAdmin}>
+                <AdminSignInOutContainer />
+              </Dialog>
+            </Hidden>
             <MenuItem onClick={handleClose}>Account Settings</MenuItem>
           </Menu>
         </Grid>

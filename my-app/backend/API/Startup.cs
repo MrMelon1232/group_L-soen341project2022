@@ -1,6 +1,9 @@
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using API.Models;
 
 namespace API
 {
@@ -34,6 +37,11 @@ namespace API
                         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
+            services.AddIdentityCore<User>()
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ECommerceContext>();
+            services.AddAuthentication();
+            services.AddAuthorization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
