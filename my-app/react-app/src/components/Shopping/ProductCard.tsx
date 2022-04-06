@@ -119,7 +119,11 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
             component="div"
             ml={3}
             sx={{ flexDirection: 'column-reverse' }}
-          >{`Quantity: ${product.quantity}`}</Typography>
+          >
+            {mini
+              ? `Quantity: ${product.quantity}`
+              : `Quantity left: ${product.quantity}`}
+          </Typography>
         </Box>
       </CardActions>
     </Card>

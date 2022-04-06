@@ -6,6 +6,7 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import ForgotPassword from './components/login/forgotPassword'
 import SwipeableEdgeDrawer from './misc/SwipeableEdgeDrawer'
+import CartPage from './pages/CartPage'
 import ContactPage from './pages/ContactPage'
 import ExplorePage from './pages/ExplorePage'
 import Home from './pages/HomePage'
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/user-page" element={<LoginPage />} />
           <Route path="/Products/:id" element={<ProductDetailsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/Cart" element={<CartPage />} />
         </Routes>
       </div>
     </Router>
