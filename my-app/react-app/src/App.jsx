@@ -6,14 +6,14 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import ForgotPassword from './components/login/forgotPassword'
 import SwipeableEdgeDrawer from './misc/SwipeableEdgeDrawer'
-import Contact from './pages/Contact'
-import Explore from './pages/Explore'
-import Home from './pages/Home'
+import ContactPage from './pages/ContactPage'
+import ExplorePage from './pages/ExplorePage'
+import Home from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
-import OurBrand from './pages/OurBrand'
-import ProductDetails from './pages/ProductDetails'
-import Products from './pages/Products'
-import Profile from './pages/profile'
+import OurBrandPage from './pages/OurBrandPage'
+import ProductDetailsPage from './pages/ProductDetailsPage'
+import ProductsPage from './pages/ProductsPage'
+import ProfilePage from './pages/ProfilePage'
 
 const App = () => {
   const [open, setOpen] = React.useState(false)
@@ -30,13 +30,13 @@ const App = () => {
         <Box mt="75px" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/ourbrand" element={<OurBrand />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/ourbrand" element={<OurBrandPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/user-page" element={<LoginPage />} />
-          <Route path="/Products/:id" element={<ProductDetails />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/Products/:id" element={<ProductDetailsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
     </Router>

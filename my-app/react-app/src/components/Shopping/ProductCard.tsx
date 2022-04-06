@@ -14,7 +14,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import agent from '../../ApiCall/agent'
 import { Product } from '../../models/Product'
-import Products from '../../pages/Products'
+import ProductsPage from '../../pages/ProductsPage'
 
 interface IProps {
   product: Product

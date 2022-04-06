@@ -16,7 +16,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Product } from '../models/Product'
 
-const ProductDetails: React.FC = () => {
+const ProductDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const [product, setProduct] = React.useState<Product | null>(null)
   const [loading, setLoading] = React.useState(true)
@@ -108,4 +108,4 @@ const ProductDetails: React.FC = () => {
   )
 }
 
-export default ProductDetails
+export default ProductDetailsPage

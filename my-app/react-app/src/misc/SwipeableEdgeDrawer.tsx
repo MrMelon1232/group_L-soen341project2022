@@ -37,7 +37,7 @@ const SwipeableEdgeDrawer: React.FC<IProps> = ({ openCart }: IProps) => {
       .then((list) => setListCart(list))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-  }, [listCart])
+  }, [loading])
 
   React.useEffect(() => {
     setOpen(openCart)

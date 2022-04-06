@@ -3,7 +3,7 @@ import agent from '../ApiCall/agent'
 import Catalog from '../components/Shopping/Catalog'
 import { Product } from '../models/Product'
 
-const Products = () => {
+const ProductsPage = () => {
   const [products, setProducts] = React.useState<Product[]>([])
   const [loading, setLoading] = React.useState<boolean>()
 
@@ -35,4 +35,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default ProductsPage
