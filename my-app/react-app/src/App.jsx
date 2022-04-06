@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage'
 import OurBrand from './pages/OurBrand'
 import ProductDetails from './pages/ProductDetails'
 import Products from './pages/Products'
+import Seller from './pages/Seller'
 
 const App = () => (
   <Router>
