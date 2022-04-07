@@ -1,6 +1,8 @@
 import {
+  Button,
   CircularProgress,
   Grid,
+  Link,
   Paper,
   Table,
   TableBody,
@@ -30,6 +32,7 @@ const CartComponent: React.FC<IProps> = (props) => {
       .reduce((prev, curr) => prev + curr, 0) ?? 0
 
   const subtotalStr = `Subtotal: ${subtotal.toFixed(2)}`
+  const cartRedirectStr = 'Proceed to checkout'
 
   return (
     <TableContainer component={Paper}>
@@ -65,6 +68,13 @@ const CartComponent: React.FC<IProps> = (props) => {
             <Typography textAlign="left" variant="subtitle1">
               {subtotalStr}
             </Typography>
+          </TableRow>
+          <TableRow>
+            <Link href="/Cart">
+              <Button variant="contained" size="small">
+                {cartRedirectStr}
+              </Button>
+            </Link>
           </TableRow>
         </TableBody>
       </Table>
