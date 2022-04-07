@@ -13,6 +13,7 @@ import {
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import agent from '../../ApiCall/agent'
+import { useECommerceContext } from '../../Context/ECommerceContext'
 import { Product } from '../../models/Product'
 import ProductsPage from '../../pages/ProductsPage'
 
@@ -34,10 +35,12 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
 
   const [amount, setAmount] = useState(1)
   const [loading, setLoading] = React.useState(false)
+  const { setCart } = useECommerceContext()
 
   const addItem = (productId: number) => {
     setLoading(true)
     agent.Cart.addItem(productId, amount)
+      .then((cart) => setCart(cart))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }

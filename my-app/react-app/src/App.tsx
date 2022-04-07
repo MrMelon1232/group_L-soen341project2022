@@ -1,8 +1,11 @@
-import { Box } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
+import { Box, CircularProgress, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import agent from './ApiCall/agent'
 import './App.css'
+import { useECommerceContext } from './Context/ECommerceContext'
 import Navbar from './components/Navbar/Navbar'
 import ForgotPassword from './components/login/forgotPassword'
 import SwipeableEdgeDrawer from './misc/SwipeableEdgeDrawer'
@@ -15,13 +18,34 @@ import OurBrandPage from './pages/OurBrandPage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
 import ProductsPage from './pages/ProductsPage'
 import ProfilePage from './pages/ProfilePage'
+import getCookie from './utils/getCookie'
 
 const App = () => {
   const [open, setOpen] = React.useState(false)
+  const { setCart } = useECommerceContext()
+  const [loading, setLoading] = React.useState(true)
 
   const toggleDrawer = () => {
     setOpen(!open)
   }
+
+  React.useEffect(() => {
+    const customerId = getCookie('customerId')
+    if (customerId) {
+      agent.Cart.get()
+        .then((cart) => setCart(cart))
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false))
+    }
+  }, [setCart])
+
+  if (loading)
+    return (
+      <>
+        <Typography component="div">App loading...</Typography>
+        <CircularProgress />
+      </>
+    )
 
   return (
     <Router>

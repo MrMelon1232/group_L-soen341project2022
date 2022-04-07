@@ -1,4 +1,5 @@
-import { Delete } from '@mui/icons-material'
+import { Add, Delete, Remove } from '@mui/icons-material'
+import { LoadingButton } from '@mui/lab'
 import {
   Box,
   Button,
@@ -12,16 +13,34 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material'
 import React from 'react'
 import agent from '../ApiCall/agent'
+import { useECommerceContext } from '../Context/ECommerceContext'
 import CartComponent from '../components/Shopping/CartComponent'
 import ProductCard from '../components/Shopping/ProductCard'
 import { Cart } from '../models/CartModel'
 
 const BasketPage = () => {
-  const [listCart, setListCart] = React.useState<Cart | undefined>(undefined)
-  const [loading, setLoading] = React.useState<boolean>(true)
+  const { cart, setCart, removeItem } = useECommerceContext()
+  const [loading, setLoading] = React.useState<boolean>(false)
+
+  function handleAddItem(productId: number) {
+    setLoading(true)
+    agent.Cart.addItem(productId, 1)
+      .then((basket) => setCart(basket))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }
+
+  function handleRemoveItem(productId: number, quantity = 1) {
+    setLoading(true)
+    agent.Cart.removeItem(productId, quantity)
+      .then(() => removeItem(productId, quantity))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }
 
   const tryRequire = (path, folder) => {
     try {
@@ -32,15 +51,6 @@ const BasketPage = () => {
       return null
     }
   }
-
-  React.useEffect(() => {
-    agent.Cart.get()
-      .then((list) => setListCart(list))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
-  }, [loading])
-
-  const [amount, setAmount] = React.useState(1)
 
   return (
     <TableContainer component={Paper}>
@@ -55,10 +65,8 @@ const BasketPage = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {loading ? (
-            <CircularProgress />
-          ) : listCart ? (
-            listCart?.items?.map((item) => (
+          {cart ? (
+            cart?.items?.map((item) => (
               <TableRow
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
@@ -79,18 +87,44 @@ const BasketPage = () => {
                   {item.name}
                 </TableCell>
                 <TableCell align="right">{item.price}</TableCell>
-                <TableCell align="right">{item.quantity}</TableCell>
+                <TableCell align="right">
+                  <LoadingButton
+                    loading={loading}
+                    onClick={() => handleAddItem(item.productId)}
+                    color="secondary"
+                  >
+                    <Add />
+                  </LoadingButton>
+                  {item.quantity}
+                  <LoadingButton
+                    loading={loading}
+                    onClick={() => handleRemoveItem(item.productId)}
+                    color="secondary"
+                  >
+                    <Remove />
+                  </LoadingButton>
+                </TableCell>
                 <TableCell align="right">
                   {(item.quantity * item.price).toFixed(2)}
                 </TableCell>
                 <TableCell align="right">
                   <IconButton color="error">
-                    <Delete />
+                    <LoadingButton
+                      loading={loading}
+                      onClick={() =>
+                        handleRemoveItem(item.productId, item.quantity)
+                      }
+                      color="secondary"
+                    >
+                      <Delete />
+                    </LoadingButton>
                   </IconButton>
                 </TableCell>
               </TableRow>
             ))
-          ) : undefined}
+          ) : (
+            <Typography>Your Cart is empty</Typography>
+          )}
         </TableBody>
       </Table>
     </TableContainer>
