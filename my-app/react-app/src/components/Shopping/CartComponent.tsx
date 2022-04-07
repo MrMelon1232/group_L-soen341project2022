@@ -23,8 +23,6 @@ interface IProps {
 const CartComponent: React.FC<IProps> = (props) => {
   const { cart, setCart, removeItem } = useECommerceContext()
 
-  console.log('listCart', cart)
-
   return (
     <TableContainer component={Paper}>
       <Table sx={{ maxWidth: 300 }} aria-label="simple table">
