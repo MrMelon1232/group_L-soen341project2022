@@ -37,6 +37,7 @@ export function ECommerceProvider({ children }: PropsWithChildren<any>) {
   }
 
   return (
+    //May create possible problems
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <ECommerceContext.Provider value={{ cart, setCart, removeItem }}>
       {children}

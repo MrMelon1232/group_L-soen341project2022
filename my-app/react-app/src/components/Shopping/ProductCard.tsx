@@ -35,12 +35,28 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
 
   const [amount, setAmount] = useState(1)
   const [loading, setLoading] = React.useState(false)
-  const { setCart } = useECommerceContext()
+  const { setCart, removeItem } = useECommerceContext()
 
   const addItem = (productId: number) => {
     setLoading(true)
     agent.Cart.addItem(productId, amount)
       .then((cart) => setCart(cart))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }
+
+  const addOneItem = (productId: number) => {
+    setLoading(true)
+    agent.Cart.addItem(productId, 1)
+      .then((cart) => setCart(cart))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }
+
+  function subOneItem(productId: number, quantity = 1) {
+    setLoading(true)
+    agent.Cart.removeItem(productId, quantity)
+      .then(() => removeItem(productId, quantity))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }
@@ -89,11 +105,17 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
               display: 'flex',
             }}
           >
-            <Button size={mini ? 'small' : 'medium'} onClick={addAmount}>
+            <Button
+              size={mini ? 'small' : 'medium'}
+              onClick={() => (mini ? addOneItem(product.id) : addAmount())}
+            >
               +
             </Button>
-            {amount}
-            <Button size={mini ? 'small' : 'medium'} onClick={subAmount}>
+            {mini ? product.quantity : amount}
+            <Button
+              size={mini ? 'small' : 'medium'}
+              onClick={() => (mini ? subOneItem(product.id) : subAmount())}
+            >
               -
             </Button>
             {mini ? undefined : (
@@ -118,15 +140,15 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
               </Button>
             ) : undefined}
           </Box>
-          <Typography
-            component="div"
-            ml={3}
-            sx={{ flexDirection: 'column-reverse' }}
-          >
-            {mini
-              ? `Quantity: ${product.quantity}`
-              : `Quantity left: ${product.quantity}`}
-          </Typography>
+          {!mini ? (
+            <Typography
+              component="div"
+              ml={3}
+              sx={{ flexDirection: 'column-reverse' }}
+            >
+              {`Quantity left: ${product.quantity}`}
+            </Typography>
+          ) : undefined}
         </Box>
       </CardActions>
     </Card>
