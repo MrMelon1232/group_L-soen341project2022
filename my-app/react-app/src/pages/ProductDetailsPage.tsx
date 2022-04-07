@@ -66,8 +66,6 @@ const ProductDetailsPage: React.FC = () => {
     (item) => item.productId === product?.id
   )?.quantity
 
-  if (loading) return <h3>Loading...</h3>
-
   if (!product) return <h3>Product not found</h3>
 
   return (
@@ -110,7 +108,7 @@ const ProductDetailsPage: React.FC = () => {
                 <TableCell>{product.quantity}</TableCell>
               </TableRow>
               <TableRow>
-                <Box>
+                <Box display="flex">
                   <Button size="medium" onClick={addOneItem}>
                     +
                   </Button>
