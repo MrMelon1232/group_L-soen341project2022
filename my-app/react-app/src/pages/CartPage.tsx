@@ -52,6 +52,20 @@ const BasketPage = () => {
     }
   }
 
+  function ccyFormat(num: number) {
+    return `${num.toFixed(2)}`
+  }
+
+  const TAX_RATE = 0.07
+
+  const subtotal =
+    cart?.items
+      .map((item) => item.quantity * item.price)
+      .reduce((prev, curr) => prev + curr, 0) ?? 0
+
+  const invoiceTaxes = TAX_RATE * subtotal
+  const invoiceTotal = invoiceTaxes + subtotal
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -125,6 +139,22 @@ const BasketPage = () => {
           ) : (
             <Typography>Your Cart is empty</Typography>
           )}
+          <TableRow>
+            <TableCell rowSpan={3} />
+            <TableCell colSpan={1}>Subtotal</TableCell>
+            <TableCell align="right">{ccyFormat(subtotal)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Tax</TableCell>
+            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
+              0
+            )} %`}</TableCell>
+            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell colSpan={2}>Total</TableCell>
+            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
