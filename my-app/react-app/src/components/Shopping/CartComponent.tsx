@@ -8,6 +8,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material'
 import React from 'react'
 import agent from '../../ApiCall/agent'
@@ -22,6 +23,13 @@ interface IProps {
 
 const CartComponent: React.FC<IProps> = (props) => {
   const { cart, setCart, removeItem } = useECommerceContext()
+
+  const subtotal =
+    cart?.items
+      .map((item) => item.quantity * item.price)
+      .reduce((prev, curr) => prev + curr, 0) ?? 0
+
+  const subtotalStr = `Subtotal: ${subtotal.toFixed(2)}`
 
   return (
     <TableContainer component={Paper}>
@@ -53,6 +61,11 @@ const CartComponent: React.FC<IProps> = (props) => {
                 </TableRow>
               ))
             : undefined}
+          <TableRow>
+            <Typography textAlign="left" variant="subtitle1">
+              {subtotalStr}
+            </Typography>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
