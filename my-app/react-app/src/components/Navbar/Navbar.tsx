@@ -2,6 +2,7 @@
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import AccountCircle from '@mui/icons-material/AccountCircle'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import {
   IconButton,
   Menu,
@@ -11,17 +12,26 @@ import {
   AppBar,
   Typography,
   Box,
+  Badge,
 } from '@mui/material'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useECommerceContext } from '../../Context/ECommerceContext'
 import SignInOutContainer from '../../containers/SignInOutContainer'
+import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
-const Navbar: React.FC = () => {
+interface IProps {
+  setDrawerOpen: () => void
+}
+
+const Navbar: React.FC<IProps> = (props: IProps) => {
   const [clicked, setClicked] = React.useState(false)
+  const { cart } = useECommerceContext()
+  const count = cart?.items.reduce((sum, item) => sum + item.quantity, 0)
 
   const handleClick = () => {
     setClicked(!clicked)
@@ -36,8 +46,6 @@ const Navbar: React.FC = () => {
     setAnchorEl(event.currentTarget)
   }
 
-  const [showForm, setForm] = React.useState(false)
-
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -46,6 +54,11 @@ const Navbar: React.FC = () => {
 
   const handleCloseDialog = () => {
     setOpen(false)
+  }
+
+  const [showLogout, setshowLogout] = React.useState(false)
+  const handleLogout = () => {
+    setshowLogout(false)
   }
 
   return (
@@ -77,10 +90,35 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
           <Hidden mdDown>
+            <Box sx={{ textAlign: 'center', mt: 0.5, mr: 1.5 }}>
+              <IconButton onClick={props.setDrawerOpen}>
+                <Badge badgeContent={count} color="error">
+                  <AddShoppingCartIcon sx={{ color: 'white' }} />
+                </Badge>
+              </IconButton>
+            </Box>
+
             <Button onClick={handleClickOpen}>Log In</Button>
+            {!showLogout ? (
+              <Button onClick={handleClickOpen}>Log In</Button>
+            ) : null}
             <Dialog open={open} onClose={handleCloseDialog}>
-              <SignInOutContainer />
+              <SignInOutContainer stateChanger={setshowLogout} />
             </Dialog>
+          </Hidden>
+
+          <Hidden mdDown>
+            {showLogout ? (
+              <Button onClick={handleLogout}> Logout</Button>
+            ) : null}
+          </Hidden>
+
+          <Hidden mdDown>
+            {showLogout ? (
+              <Button>
+                <Link to="/profile"> Profile </Link>
+              </Button>
+            ) : null}
           </Hidden>
 
           <IconButton

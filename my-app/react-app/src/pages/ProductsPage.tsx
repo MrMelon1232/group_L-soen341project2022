@@ -1,21 +1,24 @@
 import React from 'react'
+import agent from '../ApiCall/agent'
 import Catalog from '../components/Shopping/Catalog'
 import { Product } from '../models/Product'
 
-const Products = () => {
+const ProductsPage = () => {
   const [products, setProducts] = React.useState<Product[]>([])
+  const [loading, setLoading] = React.useState<boolean>()
 
   React.useEffect(() => {
-    fetch('http://localhost:5000/api/products')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
+    agent.Catalog.list()
+      .then((listOfProducts) => setProducts(listOfProducts))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
   }, [])
 
   const addProducts = () => {
     setProducts((prevState) => [
       ...prevState,
       {
-        id: prevState.length + 10,
+        id: prevState.length + 1,
         price: 15,
         name: 'a name',
         description: 'desc',
@@ -23,8 +26,6 @@ const Products = () => {
       },
     ])
   }
-
-  console.log(products)
 
   return (
     <div>
@@ -34,4 +35,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default ProductsPage
