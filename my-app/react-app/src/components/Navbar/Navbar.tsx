@@ -18,7 +18,11 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
 import { Link } from 'react-router-dom'
+<<<<<<< HEAD
 import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
+=======
+import { useECommerceContext } from '../../Context/ECommerceContext'
+>>>>>>> 46c7817e97ec558d9771e70906e236e0ae7dc993
 import SignInOutContainer from '../../containers/SignInOutContainer'
 import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
 import MenuItems from './MenuItems'
@@ -30,6 +34,8 @@ interface IProps {
 
 const Navbar: React.FC<IProps> = (props: IProps) => {
   const [clicked, setClicked] = React.useState(false)
+  const { cart } = useECommerceContext()
+  const count = cart?.items.reduce((sum, item) => sum + item.quantity, 0)
 
   const handleClick = () => {
     setClicked(!clicked)
@@ -110,7 +116,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
           <Hidden mdDown>
             <Box sx={{ textAlign: 'center', mt: 0.5, mr: 1.5 }}>
               <IconButton onClick={props.setDrawerOpen}>
-                <Badge badgeContent={4} color="error">
+                <Badge badgeContent={count} color="error">
                   <AddShoppingCartIcon sx={{ color: 'white' }} />
                 </Badge>
               </IconButton>

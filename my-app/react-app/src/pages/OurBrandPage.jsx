@@ -1,9 +1,9 @@
 import React from 'react'
 
-const OurBrand = () => (
+const OurBrandPage = () => (
   <div>
     <h1> OurBrand </h1>
   </div>
 )
 
-export default OurBrand
+export default OurBrandPage

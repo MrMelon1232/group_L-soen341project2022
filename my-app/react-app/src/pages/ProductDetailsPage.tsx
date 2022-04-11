@@ -14,33 +14,57 @@ import {
 import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import agent from '../ApiCall/agent'
+import { useECommerceContext } from '../Context/ECommerceContext'
 import { Product } from '../models/Product'
 
-const ProductDetails: React.FC = () => {
+const ProductDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const [product, setProduct] = React.useState<Product | null>(null)
   const [loading, setLoading] = React.useState(true)
+  const { cart, setCart, removeItem } = useECommerceContext()
+
+  React.useEffect(() => {
+    if (id)
+      agent.Catalog.details(parseInt(id, 10))
+        .then((response) => setProduct(response))
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false))
+  }, [id])
+
+  const addOneItem = () => {
+    setLoading(true)
+    if (product) {
+      agent.Cart.addItem(product?.id, 1)
+        .then((item) => setCart(item))
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false))
+    }
+  }
+
+  const subOneItem = () => {
+    setLoading(true)
+    if (product) {
+      agent.Cart.removeItem(product?.id, 1)
+        .then(() => removeItem(product?.id, 1))
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false))
+    }
+  }
 
   const tryRequire = (path, folder) => {
-    console.log(`../images${folder}/${path}`)
     try {
       // eslint-disable-next-line import/no-dynamic-require, global-require
       return require(`../images/${folder}/${path}`)
     } catch (err) {
-      console.log('hello')
+      console.log('error importing image', err)
       return null
     }
   }
 
-  React.useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/products/${id}`)
-      .then((response) => setProduct(response.data))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
-  }, [id])
-
-  if (loading) return <h3>Loading...</h3>
+  const quantity = cart?.items.find(
+    (item) => item.productId === product?.id
+  )?.quantity
 
   if (!product) return <h3>Product not found</h3>
 
@@ -84,18 +108,12 @@ const ProductDetails: React.FC = () => {
                 <TableCell>{product.quantity}</TableCell>
               </TableRow>
               <TableRow>
-                <Box>
-                  <Button
-                    size="large"
-                    variant="contained"
-                    sx={{
-                      m: '5px',
-                      flexDirection: 'row-reverse',
-                    }}
-                  >
+                <Box display="flex">
+                  <Button size="medium" onClick={addOneItem}>
                     +
                   </Button>
-                  <Button size="large" variant="contained">
+                  {quantity}
+                  <Button size="medium" onClick={subOneItem}>
                     -
                   </Button>
                 </Box>
@@ -108,4 +126,4 @@ const ProductDetails: React.FC = () => {
   )
 }
 
-export default ProductDetails
+export default ProductDetailsPage

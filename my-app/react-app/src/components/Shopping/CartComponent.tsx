@@ -1,5 +1,8 @@
 import {
+  Button,
+  CircularProgress,
   Grid,
+  Link,
   Paper,
   Table,
   TableBody,
@@ -7,35 +10,29 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material'
 import React from 'react'
 import agent from '../../ApiCall/agent'
+import { useECommerceContext } from '../../Context/ECommerceContext'
 import { Cart } from '../../models/CartModel'
 import { Product } from '../../models/Product'
 import ProductCard from './ProductCard'
 
 interface IProps {
-  listOfProducts?: React.ReactNode
+  updateCart?: React.ReactNode
 }
 
 const CartComponent: React.FC<IProps> = (props) => {
-  const [listCart, setListCart] = React.useState<Cart | null>(null)
-  const [loading, setLoading] = React.useState<boolean>(true)
+  const { cart, setCart, removeItem } = useECommerceContext()
 
-  React.useEffect(() => {
-    agent.Cart.get()
-      .then((list) => setListCart(list))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
-  }, [])
+  const subtotal =
+    cart?.items
+      .map((item) => item.quantity * item.price)
+      .reduce((prev, curr) => prev + curr, 0) ?? 0
 
-  const [products, setProducts] = React.useState<Product[]>([])
-
-  React.useEffect(() => {
-    fetch('http://localhost:5000/api/products')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-  }, [])
+  const subtotalStr = `Subtotal: ${subtotal.toFixed(2)}`
+  const cartRedirectStr = 'Proceed to checkout'
 
   return (
     <TableContainer component={Paper}>
@@ -46,25 +43,39 @@ const CartComponent: React.FC<IProps> = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {listCart?.items?.map((item) => (
-            <TableRow>
-              <TableCell>
-                <ProductCard
-                  product={{
-                    id: item.productId,
-                    name: item.name,
-                    price: item.price,
-                    description: '',
-                    category: '',
-                    quantity: item.quantity,
-                    imgUrl: item.imgUrl,
-                  }}
-                  key={item.productId}
-                  mini
-                />
-              </TableCell>
-            </TableRow>
-          ))}
+          {cart
+            ? cart?.items?.map((item) => (
+                <TableRow>
+                  <TableCell>
+                    <ProductCard
+                      product={{
+                        id: item.productId,
+                        name: item.name,
+                        price: item.price,
+                        description: '',
+                        category: '',
+                        quantity: item.quantity,
+                        imgUrl: item.imgUrl,
+                      }}
+                      key={item.productId}
+                      mini
+                    />
+                  </TableCell>
+                </TableRow>
+              ))
+            : undefined}
+          <TableRow>
+            <Typography textAlign="left" variant="subtitle1">
+              {subtotalStr}
+            </Typography>
+          </TableRow>
+          <TableRow>
+            <Link href="/Cart">
+              <Button variant="contained" size="small">
+                {cartRedirectStr}
+              </Button>
+            </Link>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

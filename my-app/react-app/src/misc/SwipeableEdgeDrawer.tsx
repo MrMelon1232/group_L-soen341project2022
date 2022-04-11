@@ -15,7 +15,10 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { useTheme } from '@mui/material/styles'
 import * as React from 'react'
+import agent from '../ApiCall/agent'
 import CartComponent from '../components/Shopping/CartComponent'
+import { Cart } from '../models/CartModel'
+import { Product } from '../models/Product'
 
 interface IProps {
   openCart: boolean

@@ -47,7 +47,7 @@ const itemData = [
   },
 ]
 
-const Home = () => (
+const HomePage = () => (
   <div>
     <Typography textAlign="center" variant="h2">
       Welcome to Amabay
@@ -77,4 +77,4 @@ const Home = () => (
   </div>
 )
 
-export default Home
+export default HomePage
