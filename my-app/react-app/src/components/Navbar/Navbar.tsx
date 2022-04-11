@@ -18,11 +18,8 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
-import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
-=======
 import { useECommerceContext } from '../../Context/ECommerceContext'
->>>>>>> 46c7817e97ec558d9771e70906e236e0ae7dc993
+import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
 import SignInOutContainer from '../../containers/SignInOutContainer'
 import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
 import MenuItems from './MenuItems'
