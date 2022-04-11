@@ -37,7 +37,10 @@ namespace API
                         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
-            services.AddIdentityCore<User>()
+            services.AddIdentityCore<User>(opt => 
+            {
+                opt.User.RequireUniqueEmail = true;
+            })
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ECommerceContext>();
             services.AddAuthentication();
