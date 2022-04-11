@@ -4,7 +4,6 @@ using System.Text;
 using API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-
 namespace API.Services
 {
     public class TokenService
