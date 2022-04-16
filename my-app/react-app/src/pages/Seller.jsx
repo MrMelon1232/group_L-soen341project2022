@@ -18,6 +18,7 @@ const Seller = () => {
   const fileUploadHandler = (event) => {
     console.log(event.target.files[0])
   }
+
   return (
     <div
       style={{
@@ -74,6 +75,19 @@ const Seller = () => {
         >
           <Input type="text" required>
             Description
+          </Input>
+        </TextField>
+        <TextField
+          required
+          label="Enter product price"
+          type="number"
+          style={{
+            width: '100%',
+            margin: '10px auto',
+          }}
+        >
+          <Input type="number" required>
+            Price
           </Input>
         </TextField>
         <Input type="file" required onChange={fileSelectHandler} />
