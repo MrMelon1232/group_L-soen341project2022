@@ -20,6 +20,11 @@ const MenuItems = [
     cName: 'nav-links',
   },
   {
+    title: 'Seller Page',
+    url: '/seller',
+    cName: 'nav-links',
+  },
+  {
     title: 'Contact',
     url: '/contact',
     cName: 'nav-links',
