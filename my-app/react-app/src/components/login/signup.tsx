@@ -65,7 +65,7 @@ const Signup: React.FC<IProps> = (props) => {
             placeholder="Enter your email"
             variant="standard"
             required
-            onBlur={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             error={hasError}
             value={email}
           />

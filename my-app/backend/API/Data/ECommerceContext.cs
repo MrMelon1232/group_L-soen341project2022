@@ -21,7 +21,8 @@ namespace API.Data
             builder.Entity<IdentityRole>()
             .HasData(
                 new IdentityRole{Name = "Member", NormalizedName = "MEMBER"},
-                new IdentityRole{Name = "Admin", NormalizedName = "ADMIN"}
+                new IdentityRole{Name = "Admin", NormalizedName = "ADMIN"},
+                new IdentityRole{Name = "Seller", NormalizedName ="MEMBER" }
             );
         }
     }

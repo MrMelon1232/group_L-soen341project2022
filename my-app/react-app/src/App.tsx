@@ -1,3 +1,4 @@
+import { Login } from '@mui/icons-material'
 import { LoadingButton } from '@mui/lab'
 import { Box, CircularProgress, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
@@ -7,7 +8,9 @@ import agent from './ApiCall/agent'
 import './App.css'
 import { useECommerceContext } from './Context/ECommerceContext'
 import Navbar from './components/Navbar/Navbar'
+import AdminLogin from './components/login/AdminLogin'
 import ForgotPassword from './components/login/forgotPassword'
+import Signup from './components/login/signup'
 import SwipeableEdgeDrawer from './misc/SwipeableEdgeDrawer'
 import CartPage from './pages/CartPage'
 import ContactPage from './pages/ContactPage'
@@ -60,8 +63,11 @@ const App = () => {
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/user-page" element={<LoginPage />} />
+          <Route path="/admin-page" element={<AdminLogin />} />
           <Route path="/Products/:id" element={<ProductDetailsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup emailProp="" password="" />} />
           <Route path="/Cart" element={<CartPage />} />
         </Routes>
       </div>

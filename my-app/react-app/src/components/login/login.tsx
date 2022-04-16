@@ -11,8 +11,10 @@ import {
   Link,
 } from '@mui/material'
 import EmailValidator from 'email-validator'
-import React from 'react'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import agent from '../../ApiCall/agent'
 
 interface IProps {
   stateChanger: (boolean) => void
@@ -20,6 +22,7 @@ interface IProps {
 
 const Login: React.FC<IProps> = (props) => {
   const [email, setEmail] = React.useState<string>('')
+  const [username, setUsername] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
   const [wrongPass, setWrongPass] = React.useState<boolean>(false)
@@ -60,12 +63,12 @@ const Login: React.FC<IProps> = (props) => {
           <h2>Sign In</h2>
         </Grid>
         <TextField
-          label="Email"
-          placeholder="Enter Email"
+          label="Username"
+          placeholder="Username"
           fullWidth
           required
           variant="standard"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
           error={wrongEmail}
           value={wrongEmail ? email : undefined}
           onBlur={validateEmail}
