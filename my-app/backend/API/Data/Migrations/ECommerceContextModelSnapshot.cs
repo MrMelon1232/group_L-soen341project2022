@@ -179,17 +179,24 @@ namespace API.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b2e61aa4-c8da-469d-a5cc-aa1b446d5b84",
-                            ConcurrencyStamp = "470668b8-b708-4190-a30c-b898ac2aeca2",
+                            Id = "3939126c-9ab4-408f-a60b-21bb941b5a77",
+                            ConcurrencyStamp = "afa120cd-a291-46e0-a59f-f8ca9b551617",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "5dfd5bda-8f92-44a4-9e45-ed13c9f2f672",
-                            ConcurrencyStamp = "e080e9f0-9bd3-4a04-895e-b66288d0c09d",
+                            Id = "0e0e14df-9518-4ad1-92f4-113663995ef9",
+                            ConcurrencyStamp = "e025c874-6b4e-4c76-9396-a7eeb383ba19",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "8d813b66-aec5-4413-b50d-642ff1d976d8",
+                            ConcurrencyStamp = "29539dcf-2b08-4d06-a44a-a6d5d0105f04",
+                            Name = "Seller",
+                            NormalizedName = "SELLER"
                         });
                 });
 
