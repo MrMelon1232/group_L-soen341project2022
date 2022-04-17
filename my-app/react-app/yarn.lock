@@ -3713,6 +3713,11 @@
   "resolved" "https://registry.npmjs.org/commondir/-/commondir-1.0.1.tgz"
   "version" "1.0.1"
 
+"components@^0.1.0":
+  "integrity" "sha1-IFfAjpx78mYv7slcSeX/Kpq4XtU="
+  "resolved" "https://registry.npmjs.org/components/-/components-0.1.0.tgz"
+  "version" "0.1.0"
+
 "compressible@~2.0.16":
   "integrity" "sha512-AF3r7P5dWxL8MxyITRMlORQNaOA2IkAFaTr4k7BUumjPtRpGDTZpl0Pb1XCO6JeDCBdp126Cgs9sMxqSjgYyRg=="
   "resolved" "https://registry.npmjs.org/compressible/-/compressible-2.0.18.tgz"
@@ -9791,6 +9796,11 @@
   "integrity" "sha512-GPcQ+LDJbrcxHORTRes6Jy2sfvK2kS6hpSfI/fXhPt+spVzxF6LJ1dHLN9zIGmVaaP044YKaIatFaufENRiDoQ=="
   "resolved" "https://registry.npmjs.org/style-loader/-/style-loader-3.3.1.tgz"
   "version" "3.3.1"
+
+"styled@^1.0.0":
+  "integrity" "sha1-S0/ztd8GEBaHCr/XF3/2kW6u3GA="
+  "resolved" "https://registry.npmjs.org/styled/-/styled-1.0.0.tgz"
+  "version" "1.0.0"
 
 "stylehacks@^5.0.3":
   "integrity" "sha512-ENcUdpf4yO0E1rubu8rkxI+JGQk4CgjchynZ4bDBJDfqdy+uhTRSWb8/F3Jtu+Bw5MW45Po3/aQGeIyyxgQtxg=="

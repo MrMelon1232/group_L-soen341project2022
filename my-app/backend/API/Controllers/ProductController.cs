@@ -2,14 +2,20 @@ using API.Data;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using API.DTOs;
+using AutoMapper;
 
 namespace API.Controllers
 {
     public class ProductsController : BaseApiController
     {
         private readonly ECommerceContext _context;
-        public ProductsController(ECommerceContext context)
+        private readonly IMapper _mapper;
+        public ProductsController(ECommerceContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
             this._context = context;
         }
@@ -22,7 +28,7 @@ namespace API.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetProduct")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
@@ -30,6 +36,25 @@ namespace API.Controllers
             if (product == null) return NotFound();
 
             return product;
+        }
+        [HttpGet("filters")]
+        public async Task<ActionResult> GetFilters()
+        {
+            //var brands = await _context.Products.Select(p =>p.Brand).Distinct().ToListAsync();
+            var types = await _context.Products.Select(p => p.Type).Distinct().ToListAsync();
+            return Ok(new { types });
+
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<ActionResult<Product>> CreateProduct(CreateProductDto productDto)
+        {
+             var product = _mapper.Map<Product>(productDto);
+            _context.Products.Add(product);
+
+            var result = await _context.SaveChangesAsync() > 0;
+            if (result) return CreatedAtRoute("GetProduct", new { Id = product.Id }, product);
+            return BadRequest(new ProblemDetails { Title = "Problem creating new product" });
         }
     }
 }
