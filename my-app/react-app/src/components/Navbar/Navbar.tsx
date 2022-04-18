@@ -48,24 +48,25 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
   }
 
   const [showForm, setForm] = React.useState(false)
-  const [open, setOpen] = React.useState(false)
+  const [openLogin, setOpenLogin] = React.useState(false)
+  const [openSignUp, setOpenSignUp] = React.useState(false)
   const [openUser, setOpenUser] = React.useState(false)
   const [openAdmin, setOpenAdmin] = React.useState(false)
 
-  const handleClickOpen = () => {
-    setOpen(true)
+  const handleOpenLogin = () => {
+    setOpenLogin(true)
   }
 
-  const handleCloseDialog = () => {
-    setOpen(false)
-  }
-  //Handler for user login/signup
-  const handleClickOpenUser = () => {
-    setOpenUser(true)
+  const handleCloseLogin = () => {
+    setOpenLogin(false)
   }
 
-  const handleCloseDialogUser = () => {
-    setOpenUser(false)
+  const handleOpenSignUp = () => {
+    setOpenSignUp(true)
+  }
+
+  const handleCloseSignUp = () => {
+    setOpenSignUp(false)
   }
 
   //Handler for admin login
@@ -119,12 +120,18 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
               </IconButton>
             </Box>
 
-            <Button onClick={handleClickOpen}>Log In</Button>
+            <Button onClick={handleOpenLogin}>Log In</Button>
             {!showLogout ? (
-              <Button onClick={handleClickOpen}>Log In</Button>
+              <Button onClick={handleOpenSignUp}>Sign Up</Button>
             ) : null}
-            <Dialog open={open} onClose={handleCloseDialog}>
-              <SignInOutContainer stateChanger={setshowLogout} />
+            <Dialog
+              open={openLogin || openSignUp}
+              onClose={openLogin ? handleCloseLogin : handleCloseSignUp}
+            >
+              <SignInOutContainer
+                stateChanger={setshowLogout}
+                initialState={openLogin ? 0 : 1}
+              />
             </Dialog>
           </Hidden>
 

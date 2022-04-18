@@ -20,9 +20,12 @@ interface IProps {
 const Signup: React.FC<IProps> = (props) => {
   const { emailProp, password } = props
   const [email, setEmail] = React.useState<string>(emailProp)
-  const hasError = React.useMemo(
+  const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
+  const validateEmail = React.useCallback(
     () =>
-      !EmailValidator.validate(email) && email !== undefined && email !== '',
+      setWrongEmail(
+        !EmailValidator.validate(email) && email !== undefined && email !== ''
+      ),
     [email]
   )
 
@@ -66,8 +69,9 @@ const Signup: React.FC<IProps> = (props) => {
             variant="standard"
             required
             onChange={(e) => setEmail(e.target.value)}
-            error={hasError}
-            value={email}
+            error={wrongEmail}
+            value={wrongEmail ? email : undefined}
+            onBlur={validateEmail}
           />
           <TextField
             fullWidth
