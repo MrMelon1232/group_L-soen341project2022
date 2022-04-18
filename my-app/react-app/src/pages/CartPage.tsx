@@ -33,7 +33,7 @@ const CartPage = () => {
     setLoading(true)
     agent.Cart.addItem(productId, 1)
       .then((e) => dispatch(setCart(e)))
-      .catch((error) => console.log(error))
+      .catch((error) => console.log('cart page', error))
       .finally(() => setLoading(false))
   }
 
@@ -41,7 +41,7 @@ const CartPage = () => {
     setLoading(true)
     agent.Cart.removeItem(productId, quantity)
       .then(() => dispatch(removeItem({ productId, quantity })))
-      .catch((error) => console.log(error))
+      .catch((error) => console.log('cart page', error))
       .finally(() => setLoading(false))
   }
 

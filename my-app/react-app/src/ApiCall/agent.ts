@@ -1,9 +1,18 @@
+/* eslint-disable no-param-reassign */
 import axios, { AxiosResponse } from 'axios'
+import { store } from '../store/configureStore'
 
 axios.defaults.baseURL = 'http://localhost:5000/api/'
 axios.defaults.withCredentials = true
 
 const responseBody = (response: AxiosResponse) => response.data
+
+axios.interceptors.request.use((config) => {
+  const token = store.getState().account.user?.token
+  if (config.headers === undefined) config.headers = {}
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
+})
 
 const requests = {
   get: (url: string) => axios.get(url).then(responseBody),

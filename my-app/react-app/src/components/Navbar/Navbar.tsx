@@ -13,6 +13,7 @@ import {
   Typography,
   Box,
   Badge,
+  Link as MuiLink,
 } from '@mui/material'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -22,7 +23,8 @@ import { useECommerceContext } from '../../Context/ECommerceContext'
 import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
 import SignInOutContainer from '../../containers/SignInOutContainer'
 import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
-import { useAppSelector } from '../../store/configureStore'
+import { useAppDispatch, useAppSelector } from '../../store/configureStore'
+import { signOut } from '../login/accountSlice'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
@@ -33,6 +35,9 @@ interface IProps {
 const Navbar: React.FC<IProps> = (props: IProps) => {
   const [clicked, setClicked] = React.useState(false)
   const { cart } = useAppSelector((state) => state.cart)
+  const { user } = useAppSelector((state) => state.account)
+  const dispatch = useAppDispatch()
+
   const count = cart?.items.reduce((sum, item) => sum + item.quantity, 0)
 
   const handleClick = () => {
@@ -82,6 +87,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
   const [showLogout, setshowLogout] = React.useState(false)
   const handleLogout = () => {
     setshowLogout(false)
+    dispatch(signOut())
   }
 
   return (
@@ -121,9 +127,12 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
               </IconButton>
             </Box>
 
-            <Button onClick={handleOpenLogin}>Log In</Button>
             {!showLogout ? (
-              <Button onClick={handleOpenSignUp}>Sign Up</Button>
+              <>
+                <Button onClick={handleOpenLogin}>Log In</Button>
+
+                <Button onClick={handleOpenSignUp}>Sign Up</Button>
+              </>
             ) : null}
             <Dialog
               open={openLogin || openSignUp}
@@ -136,20 +145,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
             </Dialog>
           </Hidden>
 
-          <Hidden mdDown>
-            {showLogout ? (
-              <Button onClick={handleLogout}> Logout</Button>
-            ) : null}
-          </Hidden>
-
-          <Hidden mdDown>
-            {showLogout ? (
-              <Button>
-                <Link to="/profile"> Profile </Link>
-              </Button>
-            ) : null}
-          </Hidden>
-
+          {showLogout ? user?.email : undefined}
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -178,13 +174,22 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
           >
             <Hidden mdDown>
               <MenuItem>
-                <Button onClick={handleClickOpenAdmin}>Admin Login</Button>
+                {showLogout ? (
+                  <MuiLink href="/profile" underline="none">
+                    Profile
+                  </MuiLink>
+                ) : (
+                  <Button onClick={handleClickOpenAdmin}>Admin Login</Button>
+                )}
               </MenuItem>
               <Dialog open={openAdmin} onClose={handleCloseDialogAdmin}>
                 <AdminSignInOutContainer />
               </Dialog>
             </Hidden>
             <MenuItem onClick={handleClose}>Account Settings</MenuItem>
+            {showLogout ? (
+              <MenuItem onClick={handleLogout}> Logout</MenuItem>
+            ) : null}
           </Menu>
         </Grid>
       </Box>

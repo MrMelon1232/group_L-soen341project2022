@@ -16,27 +16,33 @@ import React from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import agent from '../../ApiCall/agent'
+import { useAppDispatch, useAppSelector } from '../../store/configureStore'
+import { signInUser } from './accountSlice'
 
 interface IProps {
   stateChanger: (boolean) => void
 }
 
 const Login: React.FC<IProps> = ({ stateChanger }: IProps) => {
-  const [email, setEmail] = React.useState<string>('')
-  const [username, setUsername] = React.useState<string>('')
-  const [password, setPassword] = React.useState<string>('')
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const { user } = useAppSelector((state) => state.account)
 
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors, isValid },
-  } = useForm({ mode: 'onTouched' })
+  } = useForm({ mode: 'all' })
 
   async function submitForm(data: FieldValues) {
     try {
-      await agent.Account.login(data)
+      await dispatch(signInUser(data))
+      if (user) {
+        stateChanger(true)
+        navigate('/Cart')
+      }
     } catch (error) {
-      console.log(error)
+      console.log('login component', error)
     }
   }
 
