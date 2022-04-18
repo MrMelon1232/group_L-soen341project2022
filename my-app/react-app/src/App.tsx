@@ -8,12 +8,13 @@ import agent from './ApiCall/agent'
 import './App.css'
 import { useECommerceContext } from './Context/ECommerceContext'
 import Navbar from './components/Navbar/Navbar'
+import { setCart } from './components/Shopping/cartSlice'
 import AdminLogin from './components/login/AdminLogin'
 import ForgotPassword from './components/login/forgotPassword'
 import Signup from './components/login/signup'
 import SwipeableEdgeDrawer from './misc/SwipeableEdgeDrawer'
 import CartPage from './pages/CartPage'
-import ContactPage from './pages/ContactPage'
+import ContactPage from './pages/Contact/ContactPage'
 import ExplorePage from './pages/ExplorePage'
 import Home from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -21,11 +22,12 @@ import OurBrandPage from './pages/OurBrandPage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
 import ProductsPage from './pages/ProductsPage'
 import ProfilePage from './pages/ProfilePage'
+import { useAppDispatch } from './store/configureStore'
 import getCookie from './utils/getCookie'
 
 const App = () => {
   const [open, setOpen] = React.useState(false)
-  const { setCart } = useECommerceContext()
+  const dispatch = useAppDispatch()
   const [loading, setLoading] = React.useState(true)
 
   const toggleDrawer = () => {
@@ -36,11 +38,11 @@ const App = () => {
     const customerId = getCookie('customerId')
     if (customerId) {
       agent.Cart.get()
-        .then((cart) => setCart(cart))
+        .then((cart) => dispatch(setCart(cart)))
         .catch((error) => console.log(error))
         .finally(() => setLoading(false))
     }
-  }, [setCart])
+  }, [dispatch])
 
   if (loading)
     return (

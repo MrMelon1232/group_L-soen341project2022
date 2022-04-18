@@ -17,19 +17,22 @@ import {
 } from '@mui/material'
 import React from 'react'
 import agent from '../ApiCall/agent'
-import { useECommerceContext } from '../Context/ECommerceContext'
 import CartComponent from '../components/Shopping/CartComponent'
 import ProductCard from '../components/Shopping/ProductCard'
+import { setCart, removeItem } from '../components/Shopping/cartSlice'
 import { Cart } from '../models/CartModel'
+import { useAppDispatch, useAppSelector } from '../store/configureStore'
 
-const BasketPage = () => {
-  const { cart, setCart, removeItem } = useECommerceContext()
+const CartPage = () => {
+  const dispatch = useAppDispatch()
+  const { cart } = useAppSelector((state) => state.cart)
+
   const [loading, setLoading] = React.useState<boolean>(false)
 
   function handleAddItem(productId: number) {
     setLoading(true)
     agent.Cart.addItem(productId, 1)
-      .then((basket) => setCart(basket))
+      .then((e) => dispatch(setCart(e)))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }
@@ -37,7 +40,7 @@ const BasketPage = () => {
   function handleRemoveItem(productId: number, quantity = 1) {
     setLoading(true)
     agent.Cart.removeItem(productId, quantity)
-      .then(() => removeItem(productId, quantity))
+      .then(() => dispatch(removeItem({ productId, quantity })))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }
@@ -161,4 +164,4 @@ const BasketPage = () => {
   )
 }
 
-export default BasketPage
+export default CartPage

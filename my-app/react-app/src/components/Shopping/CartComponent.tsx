@@ -17,6 +17,7 @@ import agent from '../../ApiCall/agent'
 import { useECommerceContext } from '../../Context/ECommerceContext'
 import { Cart } from '../../models/CartModel'
 import { Product } from '../../models/Product'
+import { useAppSelector } from '../../store/configureStore'
 import ProductCard from './ProductCard'
 
 interface IProps {
@@ -24,7 +25,7 @@ interface IProps {
 }
 
 const CartComponent: React.FC<IProps> = (props) => {
-  const { cart, setCart, removeItem } = useECommerceContext()
+  const { cart } = useAppSelector((state) => state.cart)
 
   const subtotal =
     cart?.items

@@ -16,6 +16,8 @@ import agent from '../../ApiCall/agent'
 import { useECommerceContext } from '../../Context/ECommerceContext'
 import { Product } from '../../models/Product'
 import ProductsPage from '../../pages/ProductsPage'
+import { useAppDispatch } from '../../store/configureStore'
+import { setCart, removeItem } from './cartSlice'
 
 interface IProps {
   product: Product
@@ -35,12 +37,12 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
 
   const [amount, setAmount] = useState(1)
   const [loading, setLoading] = React.useState(false)
-  const { setCart, removeItem } = useECommerceContext()
+  const dispatch = useAppDispatch()
 
   const addItem = (productId: number) => {
     setLoading(true)
     agent.Cart.addItem(productId, amount)
-      .then((cart) => setCart(cart))
+      .then((cart) => dispatch(setCart(cart)))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }
@@ -48,7 +50,7 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
   const addOneItem = (productId: number) => {
     setLoading(true)
     agent.Cart.addItem(productId, 1)
-      .then((cart) => setCart(cart))
+      .then((cart) => dispatch(setCart(cart)))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }
@@ -56,7 +58,7 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
   function subOneItem(productId: number, quantity = 1) {
     setLoading(true)
     agent.Cart.removeItem(productId, quantity)
-      .then(() => removeItem(productId, quantity))
+      .then(() => dispatch(removeItem({ productId, quantity })))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }

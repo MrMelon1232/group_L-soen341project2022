@@ -22,6 +22,7 @@ import { useECommerceContext } from '../../Context/ECommerceContext'
 import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
 import SignInOutContainer from '../../containers/SignInOutContainer'
 import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
+import { useAppSelector } from '../../store/configureStore'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
@@ -31,7 +32,7 @@ interface IProps {
 
 const Navbar: React.FC<IProps> = (props: IProps) => {
   const [clicked, setClicked] = React.useState(false)
-  const { cart } = useECommerceContext()
+  const { cart } = useAppSelector((state) => state.cart)
   const count = cart?.items.reduce((sum, item) => sum + item.quantity, 0)
 
   const handleClick = () => {
