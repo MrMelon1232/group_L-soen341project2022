@@ -84,7 +84,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
     setOpenAdmin(false)
   }
 
-  const [showLogout, setshowLogout] = React.useState(false)
+  const [showLogout, setshowLogout] = React.useState(!!user?.email)
   const handleLogout = () => {
     setshowLogout(false)
     dispatch(signOut())

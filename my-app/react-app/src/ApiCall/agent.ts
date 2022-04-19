@@ -38,7 +38,7 @@ const Cart = {
 const Account = {
   login: (values: any) => requests.post('Account/login', values),
   signup: (values: any) => requests.post('Account/signup', values),
-  currentUser: () => requests.get('accounts/currentUser'),
+  currentUser: () => requests.get('Account/currentUser'),
 }
 
 const agent = {
