@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
+import { toast } from 'react-toastify'
 import { store } from '../store/configureStore'
 
 axios.defaults.baseURL = 'http://localhost:5000/api/'
@@ -23,6 +24,37 @@ const requests = {
   delete: (url: string) => axios.delete(url).then(responseBody),
 }
 
+axios.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError) => {
+    const { data, status } = error.response!
+    switch (status) {
+      case 400:
+        if (data.errors) {
+          const modelStateErrors: string[] = []
+          // eslint-disable-next-line no-restricted-syntax
+          for (const key in data.errors) {
+            if (data.errors[key]) {
+              modelStateErrors.push(data.errors[key])
+            }
+          }
+          throw modelStateErrors.flat()
+        }
+        toast.error(data.title)
+        break
+      case 401:
+        toast.error(data.title)
+        break
+      case 500:
+        toast.error(data.title)
+        break
+      default:
+        break
+    }
+    return Promise.reject(error.response)
+  }
+)
+
 const Catalog = {
   list: () => requests.get('products'),
   details: (id: number) => requests.get(`products/${id}`),
@@ -37,7 +69,7 @@ const Cart = {
 }
 const Account = {
   login: (values: any) => requests.post('Account/login', values),
-  signup: (values: any) => requests.post('Account/signup', values),
+  signup: (values: any) => requests.post('Account/register', values),
   currentUser: () => requests.get('Account/currentUser'),
 }
 

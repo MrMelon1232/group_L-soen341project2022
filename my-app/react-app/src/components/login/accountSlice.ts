@@ -19,7 +19,9 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
   'account/signInUser',
   async (data, thunkAPI) => {
     try {
-      const user = await agent.Account.login(data)
+      const userDto = await agent.Account.login(data)
+      const { cart, ...user } = userDto
+      if (cart) thunkAPI.dispatch(setCart(cart))
       localStorage.setItem('user', JSON.stringify(user))
       return user
     } catch (error: any) {
@@ -34,7 +36,9 @@ export const fetchCurrentUser = createAsyncThunk<User>(
     // eslint-disable-next-line no-use-before-define
     thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)))
     try {
-      const user = await agent.Account.currentUser()
+      const userDto = await agent.Account.currentUser()
+      const { cart, ...user } = userDto
+      if (cart) thunkAPI.dispatch(setCart(cart))
       localStorage.setItem('user', JSON.stringify(user))
       return user
     } catch (error: any) {

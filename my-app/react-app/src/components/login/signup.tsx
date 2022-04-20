@@ -8,9 +8,20 @@ import {
   Typography,
   Paper,
   Checkbox,
+  Box,
+  Alert,
+  AlertTitle,
+  List,
+  ListItem,
+  ListItemText,
 } from '@mui/material'
 import EmailValidator from 'email-validator'
 import React from 'react'
+import { FieldValues, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import agent from '../../ApiCall/agent'
+import { useAppDispatch, useAppSelector } from '../../store/configureStore'
 
 interface IProps {
   emailProp: string
@@ -18,22 +29,26 @@ interface IProps {
 }
 
 const Signup: React.FC<IProps> = (props) => {
-  const { emailProp, password } = props
-  const [email, setEmail] = React.useState<string>(emailProp)
-  const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
+  const [validationErrors, setValidationErrors] = React.useState<string[]>([])
+  const [email, setEmail] = React.useState<string>('')
+  const [isWrongEmail, setIsWrongEmail] = React.useState<boolean>(false)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const { user } = useAppSelector((state) => state.account)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, errors, isValid },
+  } = useForm({ mode: 'all' })
+
   const validateEmail = React.useCallback(
     () =>
-      setWrongEmail(
+      setIsWrongEmail(
         !EmailValidator.validate(email) && email !== undefined && email !== ''
       ),
     [email]
   )
-
-  const [signedUp, setSignedUp] = React.useState<boolean>(false)
-
-  const handleSignedUp = () => {
-    setSignedUp(true)
-  }
 
   return (
     <Grid>
@@ -47,8 +62,18 @@ const Signup: React.FC<IProps> = (props) => {
             Please fill this form to create an account !
           </Typography>
         </Grid>
-        <form>
-          <TextField
+        <Box
+          component="form"
+          onSubmit={handleSubmit((data) => {
+            agent.Account.signup(data)
+              .then(() => {
+                toast.success('Registration successful! You may login')
+                navigate('/')
+              })
+              .catch((error) => setValidationErrors(error))
+          })}
+        >
+          {/*<TextField
             fullWidth
             label="Name"
             placeholder="Enter your name"
@@ -61,44 +86,86 @@ const Signup: React.FC<IProps> = (props) => {
             placeholder="Enter your last name"
             variant="standard"
             required
-          />
+  />*/}
           <TextField
+            label="Username"
+            placeholder="Username"
             fullWidth
-            label="Email"
-            placeholder="Enter your email"
-            variant="standard"
             required
-            onChange={(e) => setEmail(e.target.value)}
-            error={wrongEmail}
-            value={wrongEmail ? email : undefined}
-            onBlur={validateEmail}
+            error={!!errors.username}
+            helperText={errors?.username?.message}
+            variant="standard"
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...register('username', { required: 'A username is required' })}
           />
           <TextField
+            label="email"
+            placeholder="Enter an email"
             fullWidth
+            required
+            error={isWrongEmail}
+            helperText={isWrongEmail ? 'Please enter a valid email' : undefined}
+            variant="standard"
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...register('email', {
+              required: 'Email is required',
+              pattern: {
+                value: /^\w+[\w-.]*@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/,
+                message: 'Wrong email format',
+              },
+            })}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+          />
+          {console.log('isWrong', isWrongEmail)}
+          {console.log('email', email)}
+
+          <TextField
             label="Password"
             placeholder="Enter your password"
-            variant="standard"
-            required
-          />
-          <TextField
+            type="password"
             fullWidth
-            label="Confirm Password"
-            variant="standard"
             required
+            variant="standard"
+            error={!!errors.password}
+            helperText={errors?.password?.message}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...register('password', {
+              required: 'Password is required',
+              pattern: {
+                value:
+                  /(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/,
+                message:
+                  'password must be at least 6 characters with at least one capital letter, one digit, one special character',
+              },
+            })}
           />
           <FormControlLabel
             control={<Checkbox name="checkedA" />}
             label="I accept the terms and conditions"
           />
           <Button
+            disabled={!isValid || isWrongEmail}
             type="submit"
             variant="contained"
             color="primary"
-            onClick={handleSignedUp}
+            fullWidth
           >
             Sign Up
           </Button>
-        </form>
+          {console.log('validation', validationErrors)}
+          {validationErrors.length > 0 && (
+            <Alert severity="error">
+              <AlertTitle>Validation Errors</AlertTitle>
+              <List>
+                {validationErrors.map((error) => (
+                  <ListItem key={error}>
+                    <ListItemText>{error}</ListItemText>
+                  </ListItem>
+                ))}
+              </List>
+            </Alert>
+          )}
+        </Box>
       </Paper>
     </Grid>
   )

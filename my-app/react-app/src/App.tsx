@@ -10,6 +10,8 @@ import {
   Route,
   useNavigate,
 } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import agent from './ApiCall/agent'
 import './App.css'
 import { useECommerceContext } from './Context/ECommerceContext'
@@ -76,6 +78,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
+        <ToastContainer position="bottom-right" hideProgressBar />
         <Navbar setDrawerOpen={toggleDrawer} />
         <SwipeableEdgeDrawer openCart={open} />
         <Box mt="75px" />

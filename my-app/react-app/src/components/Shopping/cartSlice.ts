@@ -62,6 +62,9 @@ export const cartSlice = createSlice({
     setCart: (state, action) => {
       state.cart = action.payload
     },
+    clearCart: (state) => {
+      state.cart = null
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(addCartItemAsync.pending, (state, action) => {

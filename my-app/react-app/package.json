@@ -26,6 +26,7 @@
     "react-redux": "^8.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
+    "react-toastify": "^8.2.0",
     "redux": "^4.1.2",
     "use-query-params": "^1.2.3",
     "web-vitals": "^2.1.4",

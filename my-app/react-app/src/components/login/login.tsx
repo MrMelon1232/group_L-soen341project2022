@@ -39,7 +39,7 @@ const Login: React.FC<IProps> = ({ stateChanger }: IProps) => {
       await dispatch(signInUser(data))
       if (user) {
         stateChanger(true)
-        navigate('/Cart')
+        navigate('/user-page')
       }
     } catch (error) {
       console.log('login component', error)

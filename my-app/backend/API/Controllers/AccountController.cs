@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using API.Services;
+using API.Data;
+using API.Extensions;
 
 namespace API.Controllers
 {
@@ -12,7 +14,9 @@ namespace API.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly TokenService _tokenService;
-        public AccountController (UserManager<User> userManager, TokenService tokenService)
+        private readonly ECommerceContext _context;
+
+        public AccountController(UserManager<User> userManager, TokenService tokenService, ECommerceContext context)
         {
             _tokenService = tokenService;
             _userManager = userManager;
@@ -28,10 +32,22 @@ namespace API.Controllers
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
                 return Unauthorized();
 
+            var userCart = await RetrieveCart(loginDto.Username);
+            var anonymousCart = await RetrieveCart(Request.Cookies["customerId"]);
+
+            if (anonymousCart != null)
+            {
+                if (userCart != null) _context.Carts.Remove(userCart);
+                anonymousCart.CustomerId = user.UserName;
+                Response.Cookies.Delete("customerId");
+                await _context.SaveChangesAsync();
+            }
+
             return new UserDto
             {
                 Email = user.Email,
-                Token = await _tokenService.GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user),
+                Cart = anonymousCart != null ? anonymousCart.MapCartToDto() : userCart.MapCartToDto()
             };
         }
 
@@ -66,6 +82,20 @@ namespace API.Controllers
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user)
             };
+        }
+
+        private async Task<Cart> RetrieveCart(string customerId)
+        {
+            if (string.IsNullOrEmpty(customerId))
+            {
+                Response.Cookies.Delete("customerId");
+                return null;
+            }
+
+            return await _context.Carts
+                        .Include(i => i.Items)
+                        .ThenInclude(p => p.Product)
+                        .FirstOrDefaultAsync(x => x.CustomerId == Request.Cookies["customerId"]);
         }
     }
 }
