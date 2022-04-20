@@ -16,6 +16,7 @@ import {
   Typography,
 } from '@mui/material'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import agent from '../ApiCall/agent'
 import CartComponent from '../components/Shopping/CartComponent'
 import ProductCard from '../components/Shopping/ProductCard'
@@ -30,6 +31,8 @@ import { useAppDispatch, useAppSelector } from '../store/configureStore'
 const CartPage = () => {
   const dispatch = useAppDispatch()
   const { cart } = useAppSelector((state) => state.cart)
+  const navigate = useNavigate()
+  const { user } = useAppSelector((state) => state.account)
 
   const [loading, setLoading] = React.useState<boolean>(false)
 
@@ -64,6 +67,11 @@ const CartPage = () => {
 
   const invoiceTaxes = TAX_RATE * subtotal
   const invoiceTotal = invoiceTaxes + subtotal
+
+  const handleFinalizeOrder = () => {
+    const redirectLink = user ? '/profile' : '/'
+    navigate(redirectLink)
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -153,6 +161,11 @@ const CartPage = () => {
           <TableRow>
             <TableCell colSpan={2}>Total</TableCell>
             <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <Button variant="contained" onClick={handleFinalizeOrder}>
+              {user ? 'Finalize Order' : 'Login to proceed'}
+            </Button>
           </TableRow>
         </TableBody>
       </Table>

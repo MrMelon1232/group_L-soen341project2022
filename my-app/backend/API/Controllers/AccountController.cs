@@ -20,6 +20,7 @@ namespace API.Controllers
         {
             _tokenService = tokenService;
             _userManager = userManager;
+            _context = context;
 
         }
 
@@ -77,10 +78,13 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
+            var userCart = await RetrieveCart(User.Identity.Name);
+
             return new UserDto
             {
                 Email = user.Email,
-                Token = await _tokenService.GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user),
+                Cart = userCart?.MapCartToDto()
             };
         }
 
