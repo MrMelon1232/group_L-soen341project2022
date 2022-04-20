@@ -18,7 +18,7 @@ import {
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useECommerceContext } from '../../Context/ECommerceContext'
 import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
 import SignInOutContainer from '../../containers/SignInOutContainer'
@@ -38,6 +38,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
   const { cart } = useAppSelector((state) => state.cart)
   const { user } = useAppSelector((state) => state.account)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const count = cart?.items.reduce((sum, item) => sum + item.quantity, 0)
 
@@ -83,6 +84,10 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
 
   const handleCloseDialogAdmin = () => {
     setOpenAdmin(false)
+  }
+
+  const handleClickOpenProfile = () => {
+    navigate('/profile')
   }
 
   const [showLogout, setshowLogout] = React.useState(!!user?.email)
@@ -147,7 +152,11 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
             </Dialog>
           </Hidden>
 
-          {showLogout ? user?.email : undefined}
+          {showLogout && (
+            <Typography variant="subtitle1" sx={{ marginTop: 1 }}>
+              {user?.email}
+            </Typography>
+          )}
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -175,14 +184,12 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
             onClose={handleClose}
           >
             <Hidden mdDown>
-              <MenuItem>
-                {showLogout ? (
-                  <MuiLink href="/profile" underline="none">
-                    Profile
-                  </MuiLink>
-                ) : (
-                  <Button onClick={handleClickOpenAdmin}>Admin Login</Button>
-                )}
+              <MenuItem
+                onClick={
+                  showLogout ? handleClickOpenProfile : handleClickOpenAdmin
+                }
+              >
+                {showLogout ? 'Profile' : 'Admin Login'}
               </MenuItem>
               <Dialog open={openAdmin} onClose={handleCloseDialogAdmin}>
                 <AdminSignInOutContainer />

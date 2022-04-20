@@ -30,11 +30,11 @@ namespace API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                   Description = "Jwt auth header",
-                   Name = "Authorization",
-                   In = ParameterLocation.Header,
-                   Type = SecuritySchemeType.ApiKey,
-                   Scheme = "Bearer"
+                    Description = "Jwt auth header",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
@@ -67,11 +67,11 @@ namespace API
                         builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
-            services.AddIdentityCore<User>(opt => 
+            services.AddIdentityCore<User>(opt =>
             {
                 opt.User.RequireUniqueEmail = true;
             })
-            .AddRoles<IdentityRole>()
+            .AddRoles<Role>()
             .AddEntityFrameworkStores<ECommerceContext>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opt =>

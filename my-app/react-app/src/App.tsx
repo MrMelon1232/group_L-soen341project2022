@@ -1,4 +1,3 @@
-import { Login } from '@mui/icons-material'
 import { LoadingButton } from '@mui/lab'
 import { Box, CircularProgress, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
@@ -20,6 +19,7 @@ import { setCart } from './components/Shopping/cartSlice'
 import AdminLogin from './components/login/AdminLogin'
 import { fetchCurrentUser } from './components/login/accountSlice'
 import ForgotPassword from './components/login/forgotPassword'
+import Login from './components/login/login'
 import Signup from './components/login/signup'
 import SwipeableEdgeDrawer from './misc/SwipeableEdgeDrawer'
 import CartPage from './pages/CartPage'
@@ -42,6 +42,7 @@ const App = () => {
   const dispatch = useAppDispatch()
   const [loading, setLoading] = React.useState(true)
   const { user } = useAppSelector((state) => state.account)
+  const [showLogout, setLogout] = React.useState(false)
 
   const toggleDrawer = () => {
     setOpen(!open)
@@ -101,7 +102,9 @@ const App = () => {
           <Route path="/admin-page" element={<AdminLogin />} />
           <Route path="/Products/:id" element={<ProductDetailsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/login" element={<Login />} />
+          {!user && (
+            <Route path="/login" element={<Login stateChanger={setLogout} />} />
+          )}
           <Route path="/signup" element={<Signup emailProp="" password="" />} />
           <Route path="/Cart" element={<CartPage />} />
         </Routes>

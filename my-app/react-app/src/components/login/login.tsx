@@ -37,10 +37,8 @@ const Login: React.FC<IProps> = ({ stateChanger }: IProps) => {
   async function submitForm(data: FieldValues) {
     try {
       await dispatch(signInUser(data))
-      if (user) {
-        stateChanger(true)
-        navigate('/user-page')
-      }
+      stateChanger(true)
+      navigate('/user-page')
     } catch (error) {
       console.log('login component', error)
     }
@@ -103,17 +101,16 @@ const Login: React.FC<IProps> = ({ stateChanger }: IProps) => {
           control={<Checkbox name="checkedB" color="primary" />}
           label="Remember me"
         />
-        <LoadingButton
+        <Button
           type="submit"
           color="primary"
           variant="contained"
           fullWidth
           onClick={handleSubmit(submitForm)}
-          loading={isSubmitting}
           disabled={!isValid}
         >
           Sign In
-        </LoadingButton>
+        </Button>
         <Typography>
           <Link href="/forgotPassword">Forgot Password?</Link>
         </Typography>

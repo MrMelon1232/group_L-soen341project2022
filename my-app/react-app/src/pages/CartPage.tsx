@@ -69,7 +69,7 @@ const CartPage = () => {
   const invoiceTotal = invoiceTaxes + subtotal
 
   const handleFinalizeOrder = () => {
-    const redirectLink = user ? '/profile' : '/'
+    const redirectLink = user ? '/checkout' : '/login'
     navigate(redirectLink)
   }
 
