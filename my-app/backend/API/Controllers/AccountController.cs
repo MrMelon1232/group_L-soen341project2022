@@ -18,10 +18,9 @@ namespace API.Controllers
 
         public AccountController(UserManager<User> userManager, TokenService tokenService, ECommerceContext context)
         {
+            _context = context;
             _tokenService = tokenService;
             _userManager = userManager;
-            _context = context;
-
         }
 
         //  public IEnumerable<string> Member { get; private set; }
@@ -48,7 +47,7 @@ namespace API.Controllers
             {
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
-                Cart = anonymousCart != null ? anonymousCart.MapCartToDto() : userCart.MapCartToDto()
+                Cart = anonymousCart != null ? anonymousCart.MapCartToDto() : userCart?.MapCartToDto()
             };
         }
 
@@ -99,7 +98,7 @@ namespace API.Controllers
             return await _context.Carts
                         .Include(i => i.Items)
                         .ThenInclude(p => p.Product)
-                        .FirstOrDefaultAsync(x => x.CustomerId == Request.Cookies["customerId"]);
+                        .FirstOrDefaultAsync(x => x.CustomerId == customerId);
         }
     }
 }

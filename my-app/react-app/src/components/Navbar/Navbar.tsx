@@ -24,6 +24,7 @@ import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
 import SignInOutContainer from '../../containers/SignInOutContainer'
 import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
 import { useAppDispatch, useAppSelector } from '../../store/configureStore'
+import { clearCart } from '../Shopping/cartSlice'
 import { signOut } from '../login/accountSlice'
 import MenuItems from './MenuItems'
 import './Navbar.css'
@@ -88,6 +89,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
   const handleLogout = () => {
     setshowLogout(false)
     dispatch(signOut())
+    //dispatch(clearCart())
   }
 
   return (

@@ -98,7 +98,9 @@ const App = () => {
               </ProtectedRoute>
             }
           />*/}
-          <Route path="" element={<LoginPage />} />
+          {
+            //<Route path="" element={<LoginPage />} />
+          }
           <Route path="/admin-page" element={<AdminLogin />} />
           <Route path="/Products/:id" element={<ProductDetailsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
