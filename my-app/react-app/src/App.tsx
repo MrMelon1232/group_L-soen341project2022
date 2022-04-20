@@ -90,17 +90,14 @@ const App = () => {
           <Route path="/ourbrand" element={<OurBrandPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/contact" element={<ContactPage />} />
-          {/*<Route
+          <Route
             path="/user-page"
             element={
               <ProtectedRoute isAllowed={!!user}>
                 <LoginPage />
               </ProtectedRoute>
             }
-          />*/}
-          {
-            //<Route path="" element={<LoginPage />} />
-          }
+          />
           <Route path="/admin-page" element={<AdminLogin />} />
           <Route path="/Products/:id" element={<ProductDetailsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
