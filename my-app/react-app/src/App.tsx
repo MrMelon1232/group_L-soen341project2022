@@ -31,7 +31,8 @@ import OurBrandPage from './pages/OurBrandPage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
 import ProductsPage from './pages/ProductsPage'
 import ProfilePage from './pages/ProfilePage'
-import { useAppDispatch } from './store/configureStore'
+import { useAppDispatch, useAppSelector } from './store/configureStore'
+import ProtectedRoute from './utils/ProtectedRoute'
 import getCookie from './utils/getCookie'
 
 export const history = createBrowserHistory()
@@ -40,6 +41,7 @@ const App = () => {
   const [open, setOpen] = React.useState(false)
   const dispatch = useAppDispatch()
   const [loading, setLoading] = React.useState(true)
+  const { user } = useAppSelector((state) => state.account)
 
   const toggleDrawer = () => {
     setOpen(!open)
@@ -88,7 +90,15 @@ const App = () => {
           <Route path="/ourbrand" element={<OurBrandPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/user-page" element={<LoginPage />} />
+          {/*<Route
+            path="/user-page"
+            element={
+              <ProtectedRoute isAllowed={!!user}>
+                <LoginPage />
+              </ProtectedRoute>
+            }
+          />*/}
+          <Route path="" element={<LoginPage />} />
           <Route path="/admin-page" element={<AdminLogin />} />
           <Route path="/Products/:id" element={<ProductDetailsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
