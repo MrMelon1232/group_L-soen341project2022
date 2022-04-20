@@ -46,12 +46,13 @@ export const addCartItemAsync = createAsyncThunk<
 export const removeCartItemAsync = createAsyncThunk<
   void,
   { productId: number; quantity: number }
->('cart/removeCartItemAsync', async ({ productId, quantity = 1 }) => {
+>('cart/removeCartItemAsync', async ({ productId, quantity }, thunkAPI) => {
   try {
     await agent.Cart.removeItem(productId, quantity)
-  } catch (error) {
-    console.log(error)
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue({ error: error.data })
   }
+  return undefined
 })
 
 export const cartSlice = createSlice({
@@ -75,10 +76,11 @@ export const cartSlice = createSlice({
       const itemIndex = state.cart?.items.findIndex(
         (e) => e.productId === productId
       )
-      if (itemIndex === 1 || itemIndex === undefined) return
+      if (itemIndex === -1 || itemIndex === undefined) return
       state.cart!.items[itemIndex].quantity -= quantity
       if (state.cart?.items[itemIndex].quantity === 0)
         state.cart.items.splice(itemIndex, 1)
+      state.status = 'idle'
     })
     builder.addCase(removeCartItemAsync.rejected, (state) => {
       state.status = 'idle'

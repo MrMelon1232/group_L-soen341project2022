@@ -61,6 +61,7 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
       setAmount((count) => count - 1)
     }
   }
+  console.log('Hello')
 
   return (
     <Card sx={{ minHeight: mini ? '0px' : '400px' }}>
