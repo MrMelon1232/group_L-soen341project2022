@@ -3,7 +3,7 @@ using API.Models.DTOs;
 
 namespace API.Extensions
 {
-    public static class CartExtensiosn
+    public static class CartExtensions
     {
         public static CartDto MapCartToDto(this Cart cart)
         {
