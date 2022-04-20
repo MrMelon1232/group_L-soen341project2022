@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 //From MUI templates
 //https://github.com/mui/material-ui/blob/v5.6.2/docs/data/material/getting-started/templates/checkout/Checkout.tsx
+import { yupResolver } from '@hookform/resolvers/yup'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -19,6 +20,7 @@ import { FieldValues, FormProvider, useForm } from 'react-hook-form'
 import AddressForm from './AddressForm'
 import PaymentForm from './PaymentForm'
 import Review from './Review'
+import validationSchema from './checkoutValidation'
 
 const Copyright = () => (
   <Typography variant="body2" color="text.secondary" align="center">
@@ -49,7 +51,10 @@ const theme = createTheme()
 
 const CheckoutPage = () => {
   const [activeStep, setActiveStep] = React.useState(0)
-  const methods = useForm()
+  const methods = useForm({
+    mode: 'all',
+    resolver: yupResolver(validationSchema),
+  })
 
   const handleNext = (data: FieldValues) => {
     if (activeStep === 0) {
@@ -102,6 +107,7 @@ const CheckoutPage = () => {
                     </Button>
                   )}
                   <Button
+                    disabled={!methods.formState.isValid}
                     variant="contained"
                     type="submit"
                     sx={{ mt: 3, ml: 1 }}
