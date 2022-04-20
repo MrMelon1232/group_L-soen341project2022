@@ -42,7 +42,8 @@ const ProductDetailsPage: React.FC = () => {
   }
 
   const subOneItem = () => {
-    if (product?.id) dispatch(removeCartItemAsync({ productId: product.id }))
+    if (product?.id)
+      dispatch(removeCartItemAsync({ productId: product.id, quantity: 1 }))
   }
 
   const tryRequire = (path, folder) => {

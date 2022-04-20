@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit'
 import agent from '../../ApiCall/agent'
 import { Cart } from '../../models/CartModel'
+import getCookie from '../../utils/getCookie'
 
 interface CartState {
   cart: Cart | null
@@ -12,6 +13,23 @@ const initialState: CartState = {
   cart: null,
   status: 'idle',
 }
+
+export const fetchCartAsync = createAsyncThunk<Cart>(
+  'cart/fetchCartAsync',
+  async (_, thunkAPI) => {
+    try {
+      return await agent.Cart.get()
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.data })
+    }
+  },
+  {
+    condition: () => {
+      if (!getCookie('customerId')) return false
+      return undefined
+    },
+  }
+)
 
 export const addCartItemAsync = createAsyncThunk<
   Cart,
@@ -27,7 +45,7 @@ export const addCartItemAsync = createAsyncThunk<
 
 export const removeCartItemAsync = createAsyncThunk<
   void,
-  { productId: number; quantity?: number }
+  { productId: number; quantity: number }
 >('cart/removeCartItemAsync', async ({ productId, quantity = 1 }) => {
   try {
     await agent.Cart.removeItem(productId, quantity)
@@ -49,13 +67,6 @@ export const cartSlice = createSlice({
       console.log(action)
       state.status = 'pendingAddItem'
     })
-    builder.addCase(addCartItemAsync.fulfilled, (state, action) => {
-      state.cart = action.payload
-      state.status = 'idle'
-    })
-    builder.addCase(addCartItemAsync.rejected, (state) => {
-      state.status = 'idle'
-    })
     builder.addCase(removeCartItemAsync.pending, (state, action) => {
       state.status = `pendingRemoveItem${action.meta.arg.productId}`
     })
@@ -65,13 +76,27 @@ export const cartSlice = createSlice({
         (e) => e.productId === productId
       )
       if (itemIndex === 1 || itemIndex === undefined) return
-      state.cart!.items[itemIndex].quantity -= quantity!
+      state.cart!.items[itemIndex].quantity -= quantity
       if (state.cart?.items[itemIndex].quantity === 0)
         state.cart.items.splice(itemIndex, 1)
     })
     builder.addCase(removeCartItemAsync.rejected, (state) => {
       state.status = 'idle'
     })
+    builder.addMatcher(
+      isAnyOf(addCartItemAsync.fulfilled, fetchCartAsync.fulfilled),
+      (state, action) => {
+        state.cart = action.payload
+        state.status = 'idle'
+      }
+    )
+    builder.addMatcher(
+      isAnyOf(addCartItemAsync.rejected, fetchCartAsync.rejected),
+      (state, action) => {
+        state.status = 'idle'
+        console.log(action.payload)
+      }
+    )
   },
 })
 

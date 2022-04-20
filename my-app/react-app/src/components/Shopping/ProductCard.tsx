@@ -48,7 +48,7 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
     dispatch(addCartItemAsync({ productId: product.id }))
   }
 
-  function subOneItem() {
+  const subOneItem = () => {
     dispatch(removeCartItemAsync({ productId: product.id, quantity: 1 }))
   }
 
