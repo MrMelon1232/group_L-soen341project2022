@@ -15,7 +15,10 @@ import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import agent from '../ApiCall/agent'
-import { removeItem, setCart } from '../components/Shopping/cartSlice'
+import {
+  removeCartItemAsync,
+  addCartItemAsync,
+} from '../components/Shopping/cartSlice'
 import { Product } from '../models/Product'
 import { useAppDispatch, useAppSelector } from '../store/configureStore'
 
@@ -35,25 +38,11 @@ const ProductDetailsPage: React.FC = () => {
   }, [id])
 
   const addOneItem = () => {
-    setLoading(true)
-    if (product) {
-      agent.Cart.addItem(product?.id, 1)
-        .then((item) => dispatch(setCart(item)))
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false))
-    }
+    if (product?.id) dispatch(addCartItemAsync({ productId: product.id }))
   }
 
   const subOneItem = () => {
-    setLoading(true)
-    if (product) {
-      agent.Cart.removeItem(product?.id, 1)
-        .then(() =>
-          dispatch(removeItem({ productId: product?.id, quantity: 1 }))
-        )
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false))
-    }
+    if (product?.id) dispatch(removeCartItemAsync({ productId: product.id }))
   }
 
   const tryRequire = (path, folder) => {

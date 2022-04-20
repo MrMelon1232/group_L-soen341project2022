@@ -16,8 +16,8 @@ import agent from '../../ApiCall/agent'
 import { useECommerceContext } from '../../Context/ECommerceContext'
 import { Product } from '../../models/Product'
 import ProductsPage from '../../pages/ProductsPage'
-import { useAppDispatch } from '../../store/configureStore'
-import { setCart, removeItem } from './cartSlice'
+import { useAppDispatch, useAppSelector } from '../../store/configureStore'
+import { setCart, addCartItemAsync, removeCartItemAsync } from './cartSlice'
 
 interface IProps {
   product: Product
@@ -38,29 +38,18 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
   const [amount, setAmount] = useState(1)
   const [loading, setLoading] = React.useState(false)
   const dispatch = useAppDispatch()
+  const { status } = useAppSelector((state) => state.cart)
 
-  const addItem = (productId: number) => {
-    setLoading(true)
-    agent.Cart.addItem(productId, amount)
-      .then((cart) => dispatch(setCart(cart)))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
+  const addItem = () => {
+    dispatch(addCartItemAsync({ productId: product.id, quantity: amount }))
   }
 
-  const addOneItem = (productId: number) => {
-    setLoading(true)
-    agent.Cart.addItem(productId, 1)
-      .then((cart) => dispatch(setCart(cart)))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
+  const addOneItem = () => {
+    dispatch(addCartItemAsync({ productId: product.id }))
   }
 
-  function subOneItem(productId: number, quantity = 1) {
-    setLoading(true)
-    agent.Cart.removeItem(productId, quantity)
-      .then(() => dispatch(removeItem({ productId, quantity })))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
+  function subOneItem() {
+    dispatch(removeCartItemAsync({ productId: product.id, quantity: 1 }))
   }
 
   const addAmount = () => {
@@ -109,22 +98,21 @@ const ProductCard: React.FC<IProps> = ({ product, mini }) => {
           >
             <Button
               size={mini ? 'small' : 'medium'}
-              onClick={() => (mini ? addOneItem(product.id) : addAmount())}
+              onClick={() => (mini ? addOneItem() : addAmount())}
             >
               +
             </Button>
             {mini ? product.quantity : amount}
             <Button
               size={mini ? 'small' : 'medium'}
-              onClick={() => (mini ? subOneItem(product.id) : subAmount())}
+              onClick={() => (mini ? subOneItem() : subAmount())}
             >
               -
             </Button>
             {mini ? undefined : (
               <LoadingButton
                 size={mini ? 'small' : 'medium'}
-                onClick={() => addItem(product.id)}
-                loading={loading}
+                onClick={() => addItem()}
               >
                 Add
               </LoadingButton>

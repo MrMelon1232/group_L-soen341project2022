@@ -19,7 +19,11 @@ import React from 'react'
 import agent from '../ApiCall/agent'
 import CartComponent from '../components/Shopping/CartComponent'
 import ProductCard from '../components/Shopping/ProductCard'
-import { setCart, removeItem } from '../components/Shopping/cartSlice'
+import {
+  addCartItemAsync,
+  removeCartItemAsync,
+  setCart,
+} from '../components/Shopping/cartSlice'
 import { Cart } from '../models/CartModel'
 import { useAppDispatch, useAppSelector } from '../store/configureStore'
 
@@ -30,19 +34,11 @@ const CartPage = () => {
   const [loading, setLoading] = React.useState<boolean>(false)
 
   function handleAddItem(productId: number) {
-    setLoading(true)
-    agent.Cart.addItem(productId, 1)
-      .then((e) => dispatch(setCart(e)))
-      .catch((error) => console.log('cart page', error))
-      .finally(() => setLoading(false))
+    dispatch(addCartItemAsync({ productId }))
   }
 
   function handleRemoveItem(productId: number, quantity = 1) {
-    setLoading(true)
-    agent.Cart.removeItem(productId, quantity)
-      .then(() => dispatch(removeItem({ productId, quantity })))
-      .catch((error) => console.log('cart page', error))
-      .finally(() => setLoading(false))
+    dispatch(removeCartItemAsync({ productId, quantity }))
   }
 
   const tryRequire = (path, folder) => {
