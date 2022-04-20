@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@hookform/resolvers": "^2.8.8",
     "@mui/icons-material": "^5.4.2",
     "@mui/lab": "^5.0.0-alpha.74",
     "@mui/material": "^5.4.3",
@@ -31,7 +32,8 @@
     "redux": "^4.1.2",
     "use-query-params": "^1.2.3",
     "web-vitals": "^2.1.4",
-    "webpack": "^5.70.0"
+    "webpack": "^5.70.0",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

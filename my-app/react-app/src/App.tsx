@@ -23,6 +23,7 @@ import Login from './components/login/login'
 import Signup from './components/login/signup'
 import SwipeableEdgeDrawer from './misc/SwipeableEdgeDrawer'
 import CartPage from './pages/CartPage'
+import CheckoutPage from './pages/Checkout/CheckoutPage'
 import ContactPage from './pages/Contact/ContactPage'
 import ExplorePage from './pages/ExplorePage'
 import Home from './pages/HomePage'
@@ -107,6 +108,15 @@ const App = () => {
           )}
           <Route path="/signup" element={<Signup emailProp="" password="" />} />
           <Route path="/Cart" element={<CartPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute isAllowed={!!user}>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>
