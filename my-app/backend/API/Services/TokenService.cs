@@ -24,7 +24,7 @@ namespace API.Services
             };
 
             var roles = await _userManager.GetRolesAsync(user);
-            foreach (var role in roles )
+            foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }

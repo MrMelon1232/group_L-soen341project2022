@@ -5,11 +5,12 @@ import Signup from '../components/login/signup'
 import TabPanel from '../misc/TabPanel'
 
 interface IProps {
-  stateChanger: (boolean) => void
+  stateChanger: (state: boolean) => void
+  initialState: number
 }
 
 const SignInOutContainer: React.FC<IProps> = (props) => {
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = React.useState(props.initialState)
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }

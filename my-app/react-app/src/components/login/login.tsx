@@ -1,4 +1,5 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import { LoadingButton } from '@mui/lab'
 import {
   Avatar,
   Button,
@@ -11,45 +12,58 @@ import {
   Link,
 } from '@mui/material'
 import EmailValidator from 'email-validator'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import React from 'react'
+import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import agent from '../../ApiCall/agent'
+import { useAppDispatch, useAppSelector } from '../../store/configureStore'
+import { signInUser } from './accountSlice'
 
 interface IProps {
   stateChanger: (boolean) => void
 }
 
-const Login: React.FC<IProps> = (props) => {
-  const [email, setEmail] = React.useState<string>('')
-  const [username, setUsername] = React.useState<string>('')
-  const [password, setPassword] = React.useState<string>('')
-  const [wrongEmail, setWrongEmail] = React.useState<boolean>(false)
-  const [wrongPass, setWrongPass] = React.useState<boolean>(false)
-  const [redirect, setRedirect] = React.useState<boolean>(false)
-
+const Login: React.FC<IProps> = ({ stateChanger }: IProps) => {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { user } = useAppSelector((state) => state.account)
 
-  const validateEmail = React.useCallback(
-    () =>
-      setWrongEmail(
-        !EmailValidator.validate(email) && email !== undefined && email !== ''
-      ),
-    [email]
-  )
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, errors, isValid },
+  } = useForm({ mode: 'all' })
 
-  const doSubmit = React.useCallback(() => {
-    const routeChange = () => {
-      const path = `/`
+  async function submitForm(data: FieldValues) {
+    try {
+      await dispatch(signInUser(data))
+      stateChanger(true)
+      navigate('/user-page')
+    } catch (error) {
+      console.log('login component', error)
+    }
+  }
+
+  //  const navigate = useNavigate()
+
+  /*const handleSubmit = React.useCallback(
+    (event: any) => {
+       const routeChange = () => {
+      const path = `/user-page`
       navigate(path)
     }
 
     if (!wrongEmail && !(password === null || password === undefined)) {
       routeChange()
-      props.stateChanger(true)
+      stateChanger(true)
       console.log({ email, password })
     }
-  }, [email, navigate, password, wrongEmail])
+    
+      event.preventDefault()
+      agent.Account.login({ username, password })
+    },
+    [email, navigate, password, stateChanger]
+  )*/
 
   return (
     <Grid>
@@ -66,22 +80,22 @@ const Login: React.FC<IProps> = (props) => {
           label="Username"
           placeholder="Username"
           fullWidth
-          required
+          error={!!errors.username}
+          helperText={errors?.username?.message}
           variant="standard"
-          onChange={(e) => setUsername(e.target.value)}
-          error={wrongEmail}
-          value={wrongEmail ? email : undefined}
-          onBlur={validateEmail}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('username', { required: 'Username is required' })}
         />
         <TextField
           label="Password"
           placeholder="Enter Password"
           type="password"
           fullWidth
-          required
           variant="standard"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
+          error={!!errors.password}
+          helperText={errors?.password?.message}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('password', { required: 'Password is required' })}
         />
         <FormControlLabel
           control={<Checkbox name="checkedB" color="primary" />}
@@ -92,7 +106,8 @@ const Login: React.FC<IProps> = (props) => {
           color="primary"
           variant="contained"
           fullWidth
-          onClick={doSubmit}
+          onClick={handleSubmit(submitForm)}
+          disabled={!isValid}
         >
           Sign In
         </Button>

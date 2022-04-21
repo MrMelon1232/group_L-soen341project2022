@@ -15,14 +15,19 @@ import axios from 'axios'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import agent from '../ApiCall/agent'
-import { useECommerceContext } from '../Context/ECommerceContext'
+import {
+  removeCartItemAsync,
+  addCartItemAsync,
+} from '../components/Shopping/cartSlice'
 import { Product } from '../models/Product'
+import { useAppDispatch, useAppSelector } from '../store/configureStore'
 
 const ProductDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const [product, setProduct] = React.useState<Product | null>(null)
   const [loading, setLoading] = React.useState(true)
-  const { cart, setCart, removeItem } = useECommerceContext()
+  const dispatch = useAppDispatch()
+  const { cart } = useAppSelector((state) => state.cart)
 
   React.useEffect(() => {
     if (id)
@@ -33,23 +38,12 @@ const ProductDetailsPage: React.FC = () => {
   }, [id])
 
   const addOneItem = () => {
-    setLoading(true)
-    if (product) {
-      agent.Cart.addItem(product?.id, 1)
-        .then((item) => setCart(item))
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false))
-    }
+    if (product?.id) dispatch(addCartItemAsync({ productId: product.id }))
   }
 
   const subOneItem = () => {
-    setLoading(true)
-    if (product) {
-      agent.Cart.removeItem(product?.id, 1)
-        .then(() => removeItem(product?.id, 1))
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false))
-    }
+    if (product?.id)
+      dispatch(removeCartItemAsync({ productId: product.id, quantity: 1 }))
   }
 
   const tryRequire = (path, folder) => {

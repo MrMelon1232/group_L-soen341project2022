@@ -6,7 +6,7 @@ The objective of this project is to create an online shopping application (Amazo
 
 # Description:
 
-This project consists of building an online shopping website where users can be buyers and have the opportunity to search for products and place them into a shopping cart. Items in the cart will then be able to be purchased. A user can also be a seller and be able post item to sell. Both type of users will be able to create an account, login, and view their profile which will display their shopping cart. An admin user will be able to view both the buyers' and sellers' history. 
+This project consists of building an online shopping website where users can be buyers and have the opportunity to search for products and place them into a shopping cart. Items in the cart will then be able to be purchased. A user can also be a seller and be able post item to sell. Both type of users will be able to create an account, login, and view their profile which will display their shopping cart. An admin user will be able to view both the buyers' and sellers' history. This project has taken inspiration from Neil Cummings' tutorial on Udemy named "Learn to build an e-commerce store with .Net, React & Redux".
 
 # Core Features:
  
@@ -30,7 +30,7 @@ This project consists of building an online shopping website where users can be 
 |   Julien Phan          |  40133814  |  MrMelon1232   | C/HTML                    |
 |   Natheshan Rasaiah    |  40080680  |  NateTheL8     | C++/Java/HTML             |
 |   Zeineb Ben Mami      |  40024877  |  zeinebbenmami | Java/Scrum                |
-|   Mohammed Oharb       |  40157277  |  MohammedJava  | Java/JavaScript/React/.NET|
+|   Mohammed Oharb (Team Leader)       |  40157277  |  MohammedJava  | Java/JavaScript/React/.NET|
 |   Joshua Onazi         |  40083099  | Jonazi         | Java/C++                  |
 | Shaneth Dehipitiya   |40154926  | Shaneth549  | Java/C/C++    |
 | Abdullah Shaban        | 40109911   | abdullahishaban|   Java/C++   |

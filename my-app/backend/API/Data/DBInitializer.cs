@@ -10,36 +10,36 @@ namespace API.Data
     {
         public static async Task Initialize(ECommerceContext context, UserManager<User> userManager)
         {
-            if(!userManager.Users.Any())
+            if (!userManager.Users.Any())
+            {
+                var user = new User
                 {
-                    var user = new User
-                    {
-                        UserName = "bob",
-                        Email = "bob@test.com"
-                    };
+                    UserName = "bob",
+                    Email = "bob@test.com"
+                };
 
-                    await userManager.CreateAsync(user, "Pa$$w0rd");
-                    await userManager.AddToRoleAsync(user, " ");
-                    
-                     var admin = new User
-                    {
-                        UserName = "admin",
-                        Email = "admin@test.com"
-                    };
+                await userManager.CreateAsync(user, "Password_1");
+                await userManager.AddToRoleAsync(user, "Member");
 
-                     await userManager.CreateAsync(user, "Pa$$w0rd");
-                     await userManager.AddToRolesAsync(admin,new[]{"Member","Admin"});
+                var admin = new User
+                {
+                    UserName = "admin",
+                    Email = "admin@test.com"
+                };
 
-                     var seller = new User
-                    {
-                        UserName = "seller",
-                        Email = "seller@test.com"
-                    };
+                await userManager.CreateAsync(admin, "Password_1");
+                await userManager.AddToRolesAsync(admin, new[] { "Member", "Admin" });
 
-                     await userManager.CreateAsync(seller, "Pa$$w0rd");
-                     await userManager.AddToRolesAsync(seller,new[]{"Member","Seller"});
-                    
-                }
+                var seller = new User
+                {
+                    UserName = "seller",
+                    Email = "seller@test.com"
+                };
+
+                await userManager.CreateAsync(seller, "Password_1");
+                await userManager.AddToRolesAsync(seller, new[] { "Member", "User" });
+
+            }
             context.Database.EnsureCreated();
 
             if (context.Products.Any())
@@ -210,7 +210,7 @@ namespace API.Data
                     Type = "Clothing",
                     ImgUrl = "Calvin Klein Pocket Shirt.webp"
                 },
-                
+
 
 
 
