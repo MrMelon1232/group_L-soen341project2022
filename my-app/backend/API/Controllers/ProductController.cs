@@ -40,7 +40,7 @@ namespace API.Controllers
 
         [Authorize(Roles = "Admin, Seller ")]
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct(CreateProductDto productDto)
+        public async Task<ActionResult<Product>> CreateProduct([FromForm] CreateProductDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
             _context.Products.Add(product);
@@ -51,7 +51,7 @@ namespace API.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPut]
-        public async Task<ActionResult> UpdateProduct(UpdateProductDto productDto)
+        public async Task<ActionResult> UpdateProduct([FromForm] UpdateProductDto productDto)
         {
             var product = await _context.Products.FindAsync(productDto.Id);
             if (product == null) return NotFound();

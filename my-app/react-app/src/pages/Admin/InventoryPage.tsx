@@ -18,6 +18,7 @@ import agent from '../../ApiCall/agent'
 import { Product } from '../../models/Product'
 import { useAppDispatch } from '../../store/configureStore'
 import currencyFormat from '../../utils/currencyFormat'
+import { removeProduct } from '../Products/catalogSlice'
 import ProductForm from './ProductForm'
 
 const InventoryPage = () => {
@@ -28,6 +29,7 @@ const InventoryPage = () => {
   const [selectedProduct, setSelectedProduct] = React.useState<
     Product | undefined
   >(undefined)
+  const [target, setTarget] = React.useState(0)
 
   React.useEffect(() => {
     agent.Catalog.list()
@@ -35,6 +37,15 @@ const InventoryPage = () => {
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }, [])
+
+  function handleDeleteProduct(id: number) {
+    setLoading(true)
+    setTarget(id)
+    agent.Admin.deleteProduct(id)
+      .then(() => dispatch(removeProduct(id)))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }
 
   function handleSelectProduct(product: Product) {
     setSelectedProduct(product)
@@ -122,7 +133,11 @@ const InventoryPage = () => {
                     onClick={() => handleSelectProduct(product)}
                     startIcon={<Edit />}
                   />
-                  <Button startIcon={<Delete />} color="error" />
+                  <Button
+                    startIcon={<Delete />}
+                    onClick={() => handleDeleteProduct(product.id)}
+                    color="error"
+                  />
                 </TableCell>
               </TableRow>
             ))}

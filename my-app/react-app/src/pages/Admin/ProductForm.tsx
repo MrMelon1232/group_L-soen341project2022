@@ -1,4 +1,5 @@
 //From Learn to build an e-commerce store with .Net, React & Redux's tutorial
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Typography, Grid, Paper, Box, Button } from '@mui/material'
 import React from 'react'
 import { useForm, FieldValues } from 'react-hook-form'
@@ -6,7 +7,9 @@ import agent from '../../ApiCall/agent'
 import HookFormTextInput from '../../misc/HookFormTextInput'
 import { Product } from '../../models/Product'
 import { useAppDispatch } from '../../store/configureStore'
+import { setProduct } from '../Products/catalogSlice'
 import Dropzone from './Dropzone'
+import validationSchema from './productValidation'
 
 interface IProps {
   product?: Product
@@ -14,23 +17,36 @@ interface IProps {
 }
 
 const ProductForm = ({ product, cancelEdit }: IProps) => {
-  const { control, reset, handleSubmit, watch } = useForm()
+  const {
+    control,
+    reset,
+    handleSubmit,
+    watch,
+    formState: { isDirty, isSubmitting },
+  } = useForm({
+    mode: 'all',
+    resolver: yupResolver(validationSchema),
+  })
   const watchFile = watch('file', null)
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
-    if (product) reset(product)
-  }, [product, reset])
+    if (product && !watchFile && !isDirty) reset(product)
+    return () => {
+      if (watchFile) URL.revokeObjectURL(watchFile.preview)
+    }
+  }, [product, reset, watchFile, isDirty])
 
   async function handleSubmitData(data: FieldValues) {
     try {
-      let response: any
+      let response: Product
       if (product) {
         response = await agent.Admin.updateProduct(data)
       } else {
         response = await agent.Admin.createProduct(data)
       }
-      //dispatch(setProduct(response))
+      dispatch(setProduct(response))
+      cancelEdit()
     } catch (error) {
       console.log(error)
     }
@@ -86,12 +102,8 @@ const ProductForm = ({ product, cancelEdit }: IProps) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Dropzone control={control} name="file" />
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
+            <Box display="flex" justifyContent="-between" alignItems="center">
+              <Dropzone control={control} name="file" />
               {watchFile ? (
                 <img
                   src={watchFile.preview}
