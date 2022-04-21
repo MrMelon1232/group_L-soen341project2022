@@ -1,11 +1,10 @@
 using API.Data;
+using API.DTOs;
 using API.Models;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
-using API.DTOs;
-using AutoMapper;
 
 namespace API.Controllers
 {
@@ -13,6 +12,7 @@ namespace API.Controllers
     {
         private readonly ECommerceContext _context;
         private readonly IMapper _mapper;
+
         public ProductsController(ECommerceContext context, IMapper mapper)
         {
             _mapper = mapper;
@@ -37,15 +37,8 @@ namespace API.Controllers
 
             return product;
         }
-        [HttpGet("filters")]
-        public async Task<ActionResult> GetFilters()
-        {
-            //var brands = await _context.Products.Select(p =>p.Brand).Distinct().ToListAsync();
-            var types = await _context.Products.Select(p => p.Type).Distinct().ToListAsync();
-            return Ok(new { types });
 
-        }
-        [Authorize(Roles = "Seller")]
+        [Authorize(Roles = "Admin, Seller ")]
         [HttpPost]
         public async Task<ActionResult<Product>> CreateProduct(CreateProductDto productDto)
         {
@@ -56,7 +49,6 @@ namespace API.Controllers
             if (result) return CreatedAtRoute("GetProduct", new { Id = product.Id }, product);
             return BadRequest(new ProblemDetails { Title = "Problem creating new product" });
         }
-
         [Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<ActionResult> UpdateProduct(UpdateProductDto productDto)
