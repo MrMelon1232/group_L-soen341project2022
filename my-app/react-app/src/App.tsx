@@ -105,11 +105,18 @@ const App = () => {
           <Route
             path="/inventory"
             element={
-              <ProtectedRoute isAllowed={!!user}>
+              <ProtectedRoute
+                isAllowed={
+                  !!user &&
+                  ((user.roles?.includes('Admin') ?? false) ||
+                    (user.roles?.includes('Seller') ?? false))
+                }
+              >
                 <InventoryPage />
               </ProtectedRoute>
             }
           />
+          {console.log('roles', user?.roles)}
           <Route
             path="/orders"
             element={

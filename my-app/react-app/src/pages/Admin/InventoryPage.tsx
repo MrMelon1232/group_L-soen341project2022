@@ -36,7 +36,7 @@ const InventoryPage = () => {
       .then((listOfProducts) => setProducts(listOfProducts))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [editMode, target])
 
   function handleDeleteProduct(id: number) {
     setLoading(true)
