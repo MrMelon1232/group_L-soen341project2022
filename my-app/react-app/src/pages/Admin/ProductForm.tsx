@@ -86,7 +86,7 @@ const ProductForm = ({ product, cancelEdit }: IProps) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Dropzone control={control} name="imgUrl" />
+            <Dropzone control={control} name="file" />
             <Box
               display="flex"
               justifyContent="space-between"
