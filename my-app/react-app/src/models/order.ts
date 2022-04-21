@@ -15,7 +15,7 @@ export interface OrderItem {
   quantity: number
 }
 
-export interface RootObject {
+export interface Order {
   id: number
   customerId: string
   shippingAddress: ShippingAddress

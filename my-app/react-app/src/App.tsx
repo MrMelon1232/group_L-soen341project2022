@@ -28,6 +28,7 @@ import ContactPage from './pages/Contact/ContactPage'
 import ExplorePage from './pages/ExplorePage'
 import Home from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import OrdersPage from './pages/Orders/OrderPage'
 import OurBrandPage from './pages/OurBrandPage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
 import ProductsPage from './pages/ProductsPage'
@@ -97,6 +98,14 @@ const App = () => {
             element={
               <ProtectedRoute isAllowed={!!user}>
                 <LoginPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute isAllowed={!!user}>
+                <OrdersPage />
               </ProtectedRoute>
             }
           />

@@ -90,6 +90,10 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
     navigate('/profile')
   }
 
+  const handleClickOpenOrders = () => {
+    navigate('/orders')
+  }
+
   const [showLogout, setshowLogout] = React.useState(!!user?.email)
   const handleLogout = () => {
     setshowLogout(false)
@@ -195,7 +199,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
                 <AdminSignInOutContainer />
               </Dialog>
             </Hidden>
-            <MenuItem onClick={handleClose}>Account Settings</MenuItem>
+            {showLogout && <MenuItem onClick={handleClose}>Orders</MenuItem>}
             {showLogout ? (
               <MenuItem onClick={handleLogout}> Logout</MenuItem>
             ) : null}
