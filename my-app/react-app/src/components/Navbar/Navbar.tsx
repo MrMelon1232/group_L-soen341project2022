@@ -146,7 +146,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
               </>
             ) : null}
             <Dialog
-              open={openLogin || openSignUp}
+              open={(openLogin || openSignUp) && !showLogout}
               onClose={openLogin ? handleCloseLogin : handleCloseSignUp}
             >
               <SignInOutContainer

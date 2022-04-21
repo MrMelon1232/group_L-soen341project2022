@@ -22,6 +22,33 @@ const requests = {
   // eslint-disable-next-line @typescript-eslint/ban-types
   put: (url: string, body: {}) => axios.put(url, body).then(responseBody),
   delete: (url: string) => axios.delete(url).then(responseBody),
+  postForm: (url: string, data: FormData) =>
+    axios.post(url, data, {
+      headers: { 'Content-type': 'multipart/form-data' },
+    }),
+  putForm: (url: string, data: FormData) =>
+    axios.post(url, data, {
+      headers: { 'Content-type': 'multipart/form-data' },
+    }),
+}
+
+const createFormData = (item: any) => {
+  const formData = new FormData()
+  // eslint-disable-next-line guard-for-in, no-restricted-syntax
+  for (const key in item) {
+    formData.append(key, item[key])
+  }
+
+  return formData
+}
+
+const Admin = {
+  createProduct: (product: any) =>
+    requests.postForm('products', createFormData(product)),
+  updateProduct: (product: any) =>
+    requests.postForm('products', createFormData(product)),
+  deleteProduct: (id: number) =>
+    requests.postForm(`products/${id}`, createFormData(id)),
 }
 
 axios.interceptors.response.use(
@@ -87,6 +114,7 @@ const agent = {
   Cart,
   Account,
   Orders,
+  Admin,
 }
 
 export default agent

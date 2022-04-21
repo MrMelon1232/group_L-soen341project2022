@@ -12,10 +12,7 @@ import {
 import React from 'react'
 import agent from '../../ApiCall/agent'
 import { Order } from '../../models/order'
-
-export function currencyFormat(amount: number) {
-  return `$${(amount / 100).toFixed(2)}`
-}
+import currencyFormat from '../../utils/currencyFormat'
 
 const OrderPage = () => {
   const [orders, setOrders] = React.useState<Order[] | null>(null)
