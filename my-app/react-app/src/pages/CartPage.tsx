@@ -16,30 +16,32 @@ import {
   Typography,
 } from '@mui/material'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import agent from '../ApiCall/agent'
-import { useECommerceContext } from '../Context/ECommerceContext'
 import CartComponent from '../components/Shopping/CartComponent'
 import ProductCard from '../components/Shopping/ProductCard'
+import {
+  addCartItemAsync,
+  removeCartItemAsync,
+  setCart,
+} from '../components/Shopping/cartSlice'
 import { Cart } from '../models/CartModel'
+import { useAppDispatch, useAppSelector } from '../store/configureStore'
 
-const BasketPage = () => {
-  const { cart, setCart, removeItem } = useECommerceContext()
+const CartPage = () => {
+  const dispatch = useAppDispatch()
+  const { cart } = useAppSelector((state) => state.cart)
+  const navigate = useNavigate()
+  const { user } = useAppSelector((state) => state.account)
+
   const [loading, setLoading] = React.useState<boolean>(false)
 
   function handleAddItem(productId: number) {
-    setLoading(true)
-    agent.Cart.addItem(productId, 1)
-      .then((basket) => setCart(basket))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
+    dispatch(addCartItemAsync({ productId }))
   }
 
   function handleRemoveItem(productId: number, quantity = 1) {
-    setLoading(true)
-    agent.Cart.removeItem(productId, quantity)
-      .then(() => removeItem(productId, quantity))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
+    dispatch(removeCartItemAsync({ productId, quantity }))
   }
 
   const tryRequire = (path, folder) => {
@@ -65,6 +67,11 @@ const BasketPage = () => {
 
   const invoiceTaxes = TAX_RATE * subtotal
   const invoiceTotal = invoiceTaxes + subtotal
+
+  const handleFinalizeOrder = () => {
+    const redirectLink = user ? '/checkout' : '/login'
+    navigate(redirectLink)
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -155,10 +162,15 @@ const BasketPage = () => {
             <TableCell colSpan={2}>Total</TableCell>
             <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
           </TableRow>
+          <TableRow>
+            <Button variant="contained" onClick={handleFinalizeOrder}>
+              {user ? 'Finalize Order' : 'Login to proceed'}
+            </Button>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
   )
 }
 
-export default BasketPage
+export default CartPage

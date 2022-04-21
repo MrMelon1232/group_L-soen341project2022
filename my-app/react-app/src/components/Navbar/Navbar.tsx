@@ -13,14 +13,19 @@ import {
   Typography,
   Box,
   Badge,
+  Link as MuiLink,
 } from '@mui/material'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useECommerceContext } from '../../Context/ECommerceContext'
+import AdminSignInOutContainer from '../../containers/AdminSignInOutContainer'
 import SignInOutContainer from '../../containers/SignInOutContainer'
 import SwipeableEdgeDrawer from '../../misc/SwipeableEdgeDrawer'
+import { useAppDispatch, useAppSelector } from '../../store/configureStore'
+import { clearCart } from '../Shopping/cartSlice'
+import { signOut } from '../login/accountSlice'
 import MenuItems from './MenuItems'
 import './Navbar.css'
 
@@ -30,7 +35,11 @@ interface IProps {
 
 const Navbar: React.FC<IProps> = (props: IProps) => {
   const [clicked, setClicked] = React.useState(false)
-  const { cart } = useECommerceContext()
+  const { cart } = useAppSelector((state) => state.cart)
+  const { user } = useAppSelector((state) => state.account)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   const count = cart?.items.reduce((sum, item) => sum + item.quantity, 0)
 
   const handleClick = () => {
@@ -46,19 +55,50 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
     setAnchorEl(event.currentTarget)
   }
 
-  const [open, setOpen] = React.useState(false)
+  const [showForm, setForm] = React.useState(false)
+  const [openLogin, setOpenLogin] = React.useState(false)
+  const [openSignUp, setOpenSignUp] = React.useState(false)
+  const [openUser, setOpenUser] = React.useState(false)
+  const [openAdmin, setOpenAdmin] = React.useState(false)
 
-  const handleClickOpen = () => {
-    setOpen(true)
+  const handleOpenLogin = () => {
+    setOpenLogin(true)
   }
 
-  const handleCloseDialog = () => {
-    setOpen(false)
+  const handleCloseLogin = () => {
+    setOpenLogin(false)
   }
 
-  const [showLogout, setshowLogout] = React.useState(false)
+  const handleOpenSignUp = () => {
+    setOpenSignUp(true)
+  }
+
+  const handleCloseSignUp = () => {
+    setOpenSignUp(false)
+  }
+
+  //Handler for admin login
+  const handleClickOpenAdmin = () => {
+    setOpenAdmin(true)
+  }
+
+  const handleCloseDialogAdmin = () => {
+    setOpenAdmin(false)
+  }
+
+  const handleClickOpenProfile = () => {
+    navigate('/profile')
+  }
+
+  const handleClickOpenOrders = () => {
+    navigate('/orders')
+  }
+
+  const [showLogout, setshowLogout] = React.useState(!!user?.email)
   const handleLogout = () => {
     setshowLogout(false)
+    dispatch(signOut())
+    //dispatch(clearCart())
   }
 
   return (
@@ -98,29 +138,29 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
               </IconButton>
             </Box>
 
-            <Button onClick={handleClickOpen}>Log In</Button>
             {!showLogout ? (
-              <Button onClick={handleClickOpen}>Log In</Button>
+              <>
+                <Button onClick={handleOpenLogin}>Log In</Button>
+
+                <Button onClick={handleOpenSignUp}>Sign Up</Button>
+              </>
             ) : null}
-            <Dialog open={open} onClose={handleCloseDialog}>
-              <SignInOutContainer stateChanger={setshowLogout} />
+            <Dialog
+              open={openLogin || openSignUp}
+              onClose={openLogin ? handleCloseLogin : handleCloseSignUp}
+            >
+              <SignInOutContainer
+                stateChanger={setshowLogout}
+                initialState={openLogin ? 0 : 1}
+              />
             </Dialog>
           </Hidden>
 
-          <Hidden mdDown>
-            {showLogout ? (
-              <Button onClick={handleLogout}> Logout</Button>
-            ) : null}
-          </Hidden>
-
-          <Hidden mdDown>
-            {showLogout ? (
-              <Button>
-                <Link to="/profile"> Profile </Link>
-              </Button>
-            ) : null}
-          </Hidden>
-
+          {showLogout && (
+            <Typography variant="subtitle1" sx={{ marginTop: 1 }}>
+              {user?.email}
+            </Typography>
+          )}
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -147,8 +187,24 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Admin Login</MenuItem>
-            <MenuItem onClick={handleClose}>Account Settings</MenuItem>
+            <Hidden mdDown>
+              <MenuItem
+                onClick={
+                  showLogout ? handleClickOpenProfile : handleClickOpenAdmin
+                }
+              >
+                {showLogout ? 'Profile' : 'Admin Login'}
+              </MenuItem>
+              <Dialog open={openAdmin} onClose={handleCloseDialogAdmin}>
+                <AdminSignInOutContainer />
+              </Dialog>
+            </Hidden>
+            {showLogout && (
+              <MenuItem onClick={handleClickOpenOrders}>Orders</MenuItem>
+            )}
+            {showLogout ? (
+              <MenuItem onClick={handleLogout}> Logout</MenuItem>
+            ) : null}
           </Menu>
         </Grid>
       </Box>
