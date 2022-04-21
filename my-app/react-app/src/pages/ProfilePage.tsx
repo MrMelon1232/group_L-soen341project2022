@@ -10,10 +10,15 @@ import {
   Typography,
 } from '@mui/material'
 import React, { Component } from 'react'
+import agent from '../ApiCall/agent'
+import { ShippingAddress } from '../models/order'
+import { useAppSelector } from '../store/configureStore'
 
 // eslint-disable-next-line react/function-component-definition
 const ProfilePage = () => {
   const [account, setAccount] = React.useState(true)
+  const [address, setAddress] = React.useState<ShippingAddress>()
+  const { user } = useAppSelector((state) => state.account)
 
   const handleAccount = () => {
     setAccount(!account)
@@ -36,6 +41,16 @@ const ProfilePage = () => {
   const handleChange = (event) => {
     setDate(event.target.value)
   }
+
+  React.useEffect(() => {
+    agent.Account.fetchAddress().then((response) => {
+      if (response) {
+        setAddress(response)
+      }
+    })
+  }, [])
+
+  console.log('address', address)
 
   return (
     <>
@@ -60,6 +75,7 @@ const ProfilePage = () => {
                   label="Email"
                   placeholder="Change Email"
                   fullWidth
+                  value={user?.email}
                   InputProps={{
                     readOnly: account,
                   }}
@@ -75,8 +91,10 @@ const ProfilePage = () => {
             <TextField
               sx={{ marginBottom: 2 }}
               label="Full name"
+              defaultValue={address?.fullName}
               placeholder="Change name"
               fullWidth
+              value={address?.fullName}
               InputProps={{
                 readOnly: shipping,
               }}
@@ -86,6 +104,8 @@ const ProfilePage = () => {
               label="Country"
               placeholder="Change Country"
               fullWidth
+              value={address?.country}
+              defaultValue={address?.country}
               InputProps={{
                 readOnly: shipping,
               }}
@@ -94,7 +114,9 @@ const ProfilePage = () => {
               sx={{ marginBottom: 2 }}
               label="Address"
               placeholder="Change Address"
+              defaultValue={address?.detailedAddress}
               fullWidth
+              value={address}
               InputProps={{
                 readOnly: shipping,
               }}
@@ -102,26 +124,32 @@ const ProfilePage = () => {
             <TextField
               sx={{ marginBottom: 2 }}
               label="City"
+              value={address?.city}
               placeholder="Change City"
+              defaultValue={address?.city}
               fullWidth
               InputProps={{
                 readOnly: shipping,
               }}
             />
             <TextField
+              defaultValue={address?.province}
               sx={{ marginBottom: 2 }}
               label="Province/Territory"
               placeholder="Change Province/Territory"
               fullWidth
+              value={address?.province}
               InputProps={{
                 readOnly: shipping,
               }}
             />
             <TextField
               sx={{ marginBottom: 2 }}
+              defaultValue={address?.postalCode}
               label="Postal Code"
               placeholder="Change Postal Code"
               fullWidth
+              value={address?.postalCode}
               InputProps={{
                 readOnly: shipping,
               }}

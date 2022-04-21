@@ -2,6 +2,7 @@
 //From MUI templates
 //https://github.com/mui/material-ui/blob/v5.6.2/docs/data/material/getting-started/templates/checkout/Checkout.tsx
 import { yupResolver } from '@hookform/resolvers/yup'
+import { LoadingButton } from '@mui/lab'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -17,6 +18,9 @@ import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import * as React from 'react'
 import { FieldValues, FormProvider, useForm } from 'react-hook-form'
+import agent from '../../ApiCall/agent'
+import { clearCart } from '../../components/Shopping/cartSlice'
+import { useAppDispatch } from '../../store/configureStore'
 import AddressForm from './AddressForm'
 import PaymentForm from './PaymentForm'
 import Review from './Review'
@@ -56,8 +60,28 @@ const CheckoutPage = () => {
     resolver: yupResolver(validationSchema),
   })
 
-  const handleNext = (data: FieldValues) => {
-    if (activeStep === 0) {
+  const [orderNumber, setOrderNumber] = React.useState(0)
+  const [loading, setLoading] = React.useState(false)
+  const dispatch = useAppDispatch()
+
+  const handleNext = async (data: FieldValues) => {
+    const { nameOnCard, saveAddress, ...shippingAddress } = data
+
+    if (activeStep === steps.length - 1) {
+      setLoading(true)
+      try {
+        const anOrderNumber = await agent.Orders.create({
+          saveAddress,
+          shippingAddress,
+        })
+        setOrderNumber(anOrderNumber)
+        setActiveStep(activeStep + 1)
+        dispatch(clearCart())
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+        setLoading(false)
+      }
       console.log(data)
     }
     setActiveStep(activeStep + 1)
@@ -66,6 +90,18 @@ const CheckoutPage = () => {
   const handleBack = () => {
     setActiveStep(activeStep - 1)
   }
+
+  React.useEffect(() => {
+    agent.Account.fetchAddress().then((response) => {
+      if (response) {
+        methods.reset({
+          ...methods.getValues(),
+          ...response,
+          savedAddress: false,
+        })
+      }
+    })
+  }, [methods])
 
   return (
     <ThemeProvider theme={theme}>
@@ -92,9 +128,9 @@ const CheckoutPage = () => {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
+                  Your order number is #{orderNumber}. We have emailed your
+                  order confirmation, and will send you an update when your
+                  order has shipped.
                 </Typography>
               </>
             ) : (
@@ -106,14 +142,15 @@ const CheckoutPage = () => {
                       Back
                     </Button>
                   )}
-                  <Button
+                  <LoadingButton
+                    loading={loading}
                     disabled={!methods.formState.isValid}
                     variant="contained"
                     type="submit"
                     sx={{ mt: 3, ml: 1 }}
                   >
                     {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                  </Button>
+                  </LoadingButton>
                 </Box>
               </form>
             )}

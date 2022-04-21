@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import React from 'react'
 import { useController, UseControllerProps } from 'react-hook-form'
 
@@ -8,15 +8,15 @@ interface IProps extends UseControllerProps {
   disabled: boolean
 }
 
-const HookFormCheckBox = (props: IProps) => {
+const HookFormButton = (props: IProps) => {
   const { field } = useController({ ...props, defaultValue: false })
   return (
     <FormControlLabel
-      control={<Checkbox {...field} checked={field.value} color="secondary" />}
+      control={<Button {...field} disabled={field.value} color="secondary" />}
       label={props.label}
       disabled={props.disabled}
     />
   )
 }
 
-export default HookFormCheckBox
+export default HookFormButton

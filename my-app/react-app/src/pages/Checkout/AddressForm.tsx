@@ -11,7 +11,7 @@ import HookFormCheckBox from '../../misc/HookFormCheckBox'
 import HookFormTextInput from '../../misc/HookFormTextInput'
 
 const AddressForm = () => {
-  const { control } = useFormContext()
+  const { control, formState } = useFormContext()
 
   return (
     <>
@@ -55,6 +55,7 @@ const AddressForm = () => {
         </Grid>
         <Grid item xs={12}>
           <HookFormCheckBox
+            disabled={!formState.isDirty}
             name="saveAddress"
             label="Save this as default address"
             control={control}
