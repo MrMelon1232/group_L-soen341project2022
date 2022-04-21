@@ -45,11 +45,11 @@ namespace API.Controllers
             return Ok(new { types });
 
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Seller")]
         [HttpPost]
         public async Task<ActionResult<Product>> CreateProduct(CreateProductDto productDto)
         {
-             var product = _mapper.Map<Product>(productDto);
+            var product = _mapper.Map<Product>(productDto);
             _context.Products.Add(product);
 
             var result = await _context.SaveChangesAsync() > 0;
@@ -59,18 +59,18 @@ namespace API.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut]
-        public async Task<ActionResult>UpdateProduct(UpdateProductDto productDto)
+        public async Task<ActionResult> UpdateProduct(UpdateProductDto productDto)
         {
             var product = await _context.Products.FindAsync(productDto.Id);
-            if (product ==null) return NotFound();
+            if (product == null) return NotFound();
 
             _mapper.Map(productDto, product);
 
             var result = await _context.SaveChangesAsync() > 0;
             if (result) return NoContent();
-             
-             return BadRequest(new ProblemDetails{Title = "Problem updating product"});
-        
+
+            return BadRequest(new ProblemDetails { Title = "Problem updating product" });
+
         }
     }
 }

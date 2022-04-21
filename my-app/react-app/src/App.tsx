@@ -26,7 +26,7 @@ import getCookie from './utils/getCookie'
 const App = () => {
   const [open, setOpen] = React.useState(false)
   const { setCart } = useECommerceContext()
-  const [loading, setLoading] = React.useState(true)
+  const [loading, setLoading] = React.useState(false)
 
   const toggleDrawer = () => {
     setOpen(!open)
