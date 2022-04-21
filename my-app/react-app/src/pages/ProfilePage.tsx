@@ -73,7 +73,7 @@ const ProfilePage = () => {
                 />
                 <TextField
                   label="Email"
-                  placeholder="Change Email"
+                  placeholder={user ? undefined : 'Change Email'}
                   fullWidth
                   value={user?.email}
                   InputProps={{
@@ -92,12 +92,13 @@ const ProfilePage = () => {
               sx={{ marginBottom: 2 }}
               label="Full name"
               defaultValue={address?.fullName}
-              placeholder="Change name"
+              placeholder={user ? undefined : 'Change name'}
               fullWidth
               value={address?.fullName}
               InputProps={{
                 readOnly: shipping,
               }}
+              variant="filled"
             />
             <TextField
               sx={{ marginBottom: 2 }}
@@ -109,50 +110,55 @@ const ProfilePage = () => {
               InputProps={{
                 readOnly: shipping,
               }}
+              variant="filled"
             />
             <TextField
               sx={{ marginBottom: 2 }}
               label="Address"
-              placeholder="Change Address"
+              placeholder={user ? undefined : 'Change Address'}
               defaultValue={address?.detailedAddress}
               fullWidth
-              value={address}
+              value={address?.detailedAddress}
               InputProps={{
                 readOnly: shipping,
               }}
+              variant="filled"
             />
             <TextField
               sx={{ marginBottom: 2 }}
               label="City"
               value={address?.city}
-              placeholder="Change City"
+              placeholder={user ? undefined : 'Change City'}
               defaultValue={address?.city}
               fullWidth
               InputProps={{
                 readOnly: shipping,
               }}
+              variant="filled"
             />
             <TextField
               defaultValue={address?.province}
               sx={{ marginBottom: 2 }}
               label="Province/Territory"
-              placeholder="Change Province/Territory"
+              placeholder={user ? undefined : 'Change Province/Territory'}
               fullWidth
               value={address?.province}
               InputProps={{
                 readOnly: shipping,
               }}
+              variant="filled"
             />
             <TextField
               sx={{ marginBottom: 2 }}
               defaultValue={address?.postalCode}
               label="Postal Code"
-              placeholder="Change Postal Code"
+              placeholder={user ? undefined : 'Change Postal Code'}
               fullWidth
               value={address?.postalCode}
               InputProps={{
                 readOnly: shipping,
               }}
+              variant="filled"
             />
             {shipping ? (
               <Button onClick={handleShipping}>Edit</Button>

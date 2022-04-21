@@ -199,7 +199,9 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
                 <AdminSignInOutContainer />
               </Dialog>
             </Hidden>
-            {showLogout && <MenuItem onClick={handleClose}>Orders</MenuItem>}
+            {showLogout && (
+              <MenuItem onClick={handleClickOpenOrders}>Orders</MenuItem>
+            )}
             {showLogout ? (
               <MenuItem onClick={handleLogout}> Logout</MenuItem>
             ) : null}

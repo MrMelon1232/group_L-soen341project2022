@@ -13,6 +13,10 @@ import React from 'react'
 import agent from '../../ApiCall/agent'
 import { Order } from '../../models/order'
 
+export function currencyFormat(amount: number) {
+  return `$${(amount / 100).toFixed(2)}`
+}
+
 const OrderPage = () => {
   const [orders, setOrders] = React.useState<Order[] | null>(null)
   const [loading, setLoading] = React.useState(true)
@@ -35,7 +39,6 @@ const OrderPage = () => {
             <TableCell align="right">Total</TableCell>
             <TableCell align="right">Order Date</TableCell>
             <TableCell align="right">Order Status</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -46,9 +49,14 @@ const OrderPage = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {order.total}
+                  {order.id}
                 </TableCell>
-                <TableCell align="right">{order.orderDate}</TableCell>
+                <TableCell align="right">
+                  {currencyFormat(order.total)}
+                </TableCell>
+                <TableCell align="right">
+                  {order.orderDate.toString().split('T')[0]}
+                </TableCell>
                 <TableCell align="right">{order.orderStatus}</TableCell>
               </TableRow>
             ))}
