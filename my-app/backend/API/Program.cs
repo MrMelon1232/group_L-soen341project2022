@@ -15,13 +15,13 @@ namespace API
             var context = scope.ServiceProvider.GetRequiredService<ECommerceContext>();
             var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
-           try
+            try
             {
                 await context.Database.MigrateAsync();
-                await DBInitializer.Initialize(context, userManager);
+                await DbInitializer.Initialize(context, userManager);
             }
 
-            
+
             catch (Exception e)
             {
                 logger.LogError(e, "error migrating database");
