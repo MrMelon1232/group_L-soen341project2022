@@ -59,7 +59,7 @@ namespace API
             });
             services.AddDbContext<ECommerceContext>(opt =>
             {
-                opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddCors(options =>
             {

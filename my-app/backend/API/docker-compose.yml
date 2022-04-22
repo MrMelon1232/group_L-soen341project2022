@@ -1,0 +1,12 @@
+version: "3.4"
+services:
+  postgres:
+    image: dev
+    environment:
+      - POSTGRES_USER=appuser
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=store
+    volumes:
+      - ./volumes/data/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
