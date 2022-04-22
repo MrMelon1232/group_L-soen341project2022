@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.20742c28.css",
+    "main.js": "/static/js/main.edcbebe8.js",
+    "static/media/clothes.jpg": "/static/media/clothes.66e9399e21c99a222daa.jpg",
+    "static/media/electronics.jpg": "/static/media/electronics.7f70cc64a07eb4b371c6.jpg",
+    "static/media/cinema.jpg": "/static/media/cinema.0142d2a441b36861ab51.jpg",
+    "static/media/kids.jpg": "/static/media/kids.373edd0e554939b6dbfc.jpg",
+    "static/media/books.jpg": "/static/media/books.27b0f2b630b6e5f8facd.jpg",
+    "static/media/sports.jpg": "/static/media/sports.709a2182d0c534df2114.jpg",
+    "static/media/LenovoYoga9iGen7.webp": "/static/media/LenovoYoga9iGen7.ad0f23ec1b81b9d4074d.webp",
+    "static/media/ASUS-X415-11th-Gen-Intel.png": "/static/media/ASUS-X415-11th-Gen-Intel.3d822ed3af373af66a9e.png",
+    "static/media/DellInspironNotebook.webp": "/static/media/DellInspironNotebook.a53b49951f894d6015ff.webp",
+    "static/media/MicrosoftSurfaceLaptop.webp": "/static/media/MicrosoftSurfaceLaptop.dd85d051cb5d252b5fca.webp",
+    "static/media/AcerPredatorHelio.webp": "/static/media/AcerPredatorHelio.8242c1e8e193331dfa59.webp",
+    "static/media/Calvin Klein Pocket Shirt.webp": "/static/media/Calvin Klein Pocket Shirt.a6eee7b315589e311bfd.webp",
+    "static/media/Logitech Wireless Keyboard (K360) - Black.jpeg": "/static/media/Logitech Wireless Keyboard (K360) - Black.3fd7cc8f47e4dd480101.jpeg",
+    "static/media/PS Paul Smith Organic Cotton Zebra Badge Tailored Shirt.webp": "/static/media/PS Paul Smith Organic Cotton Zebra Badge Tailored Shirt.73cec135f4ace6dbd8e8.webp",
+    "static/media/Corsair HARPOON RGB PRO Mouse.jpeg": "/static/media/Corsair HARPOON RGB PRO Mouse.8310b21b8207a9451d8a.jpeg",
+    "static/media/Razer Huntsman V2 TKL Backlit Mechanical Clicky Optical Ergonomic Gaming Keyboard - English.jpeg": "/static/media/Razer Huntsman V2 TKL Backlit Mechanical Clicky Optical Ergonomic Gaming Keyboard - English.f3f70727a4680f56e5fc.jpeg",
+    "static/media/River Island Elastic-Waist Pleat-Front Trousers.webp": "/static/media/River Island Elastic-Waist Pleat-Front Trousers.2f532abf4846a7e1e50f.webp",
+    "static/media/HyperX Alloy Core Membrane Gaming Keyboard - English.jpeg": "/static/media/HyperX Alloy Core Membrane Gaming Keyboard - English.1df5f7b034aebd5dceef.jpeg",
+    "static/media/Tiger of Sweden Tarek Tapered Pants.webp": "/static/media/Tiger of Sweden Tarek Tapered Pants.3ef54fddbd5eb6647b70.webp",
+    "static/media/Logitech MX Keys Wireless Backlit Keyboard.jpeg": "/static/media/Logitech MX Keys Wireless Backlit Keyboard.14ce24988b0c5cf817c7.jpeg",
+    "static/media/MacbookAir.jpg": "/static/media/MacbookAir.cf05ee8e7542c48f89bb.jpg",
+    "static/media/Logitech G502 Hero.jpeg": "/static/media/Logitech G502 Hero.0e7ec676dfc3177254b0.jpeg",
+    "static/media/Logitech MX Anywhere 3 Bluetooth Darkfield Mouse - Grey.jpeg": "/static/media/Logitech MX Anywhere 3 Bluetooth Darkfield Mouse - Grey.d8c9bfc50de50181aa57.jpeg",
+    "static/media/Microsoft Bluetooth BlueTrack Mouse - Matte Black.jpeg": "/static/media/Microsoft Bluetooth BlueTrack Mouse - Matte Black.0224bbf54142e151281c.jpeg",
+    "static/media/seed.txt": "/static/media/seed.cc5a9b90613f360b24df.txt",
+    "index.html": "/index.html",
+    "static/media/Sources.txt": "/static/media/Sources.f080b4f2fe0b36bb7a1c.txt",
+    "main.20742c28.css.map": "/static/css/main.20742c28.css.map",
+    "main.edcbebe8.js.map": "/static/js/main.edcbebe8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.20742c28.css",
+    "static/js/main.edcbebe8.js"
+  ]
+}
