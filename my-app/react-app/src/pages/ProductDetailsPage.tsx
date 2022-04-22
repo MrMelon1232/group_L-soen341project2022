@@ -1,3 +1,4 @@
+import { LoadingButton } from '@mui/lab'
 import {
   Button,
   CardMedia,
@@ -11,9 +12,10 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
+import { EntityId } from '@reduxjs/toolkit'
 import axios from 'axios'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import agent from '../ApiCall/agent'
 import {
   removeCartItemAsync,
@@ -21,21 +23,25 @@ import {
 } from '../components/Shopping/cartSlice'
 import { Product } from '../models/Product'
 import { useAppDispatch, useAppSelector } from '../store/configureStore'
+import { fetchProductAsync, productSelectors } from './Products/catalogSlice'
 
 const ProductDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
-  const [product, setProduct] = React.useState<Product | null>(null)
+  //const [product, setProduct] = React.useState<Product | null>(null)
+  const product = useAppSelector((state) =>
+    productSelectors.selectById(state, id as EntityId)
+  )
+
   const [loading, setLoading] = React.useState(true)
   const dispatch = useAppDispatch()
   const { cart } = useAppSelector((state) => state.cart)
+  const { status: productStatus } = useAppSelector((state) => state.catalog)
+
+  const arr = parseInt('5', 10)
 
   React.useEffect(() => {
-    if (id)
-      agent.Catalog.details(parseInt(id, 10))
-        .then((response) => setProduct(response))
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false))
-  }, [id])
+    if (id) if (!product) dispatch(fetchProductAsync(parseInt(id, 10)))
+  }, [dispatch, id, product])
 
   const addOneItem = () => {
     if (product?.id) dispatch(addCartItemAsync({ productId: product.id }))

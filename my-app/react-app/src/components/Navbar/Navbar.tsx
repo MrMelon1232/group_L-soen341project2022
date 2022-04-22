@@ -146,7 +146,7 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
               </>
             ) : null}
             <Dialog
-              open={openLogin || openSignUp}
+              open={(openLogin || openSignUp) && !showLogout}
               onClose={openLogin ? handleCloseLogin : handleCloseSignUp}
             >
               <SignInOutContainer
@@ -156,6 +156,19 @@ const Navbar: React.FC<IProps> = (props: IProps) => {
             </Dialog>
           </Hidden>
 
+          {!!user &&
+            (user.roles?.includes('Admin') ||
+              user.roles?.includes('Seller')) && (
+              <MuiLink
+                href="/inventory"
+                underline="none"
+                sx={{ color: 'white', marginRight: '10px' }}
+              >
+                <Typography variant="h6" sx={{ marginTop: 1 }}>
+                  Inventory
+                </Typography>
+              </MuiLink>
+            )}
           {showLogout && (
             <Typography variant="subtitle1" sx={{ marginTop: 1 }}>
               {user?.email}

@@ -1,4 +1,4 @@
-import { Box, Button, Grid, List } from '@mui/material'
+import { Box, Button, Grid } from '@mui/material'
 import React from 'react'
 import { Product } from '../../models/Product'
 import ProductCard from './ProductCard'

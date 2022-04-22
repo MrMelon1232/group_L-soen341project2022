@@ -29,27 +29,15 @@ namespace API.Data
 
                 await userManager.CreateAsync(admin, "Password_1");
                 await userManager.AddToRolesAsync(admin, new[] { "Member", "Admin" });
-
-                var seller = new User
-                {
-                    UserName = "seller",
-                    Email = "seller@test.com"
-                };
-
-                await userManager.CreateAsync(seller, "Password_1");
-                await userManager.AddToRolesAsync(seller, new[] { "Member", "User" });
-
             }
-            context.Database.EnsureCreated();
 
-            if (context.Products.Any())
+            if (context.Products.Any()) return;
+
+            var products = new List<Product>
             {
-                return; // DB has already been seeded
-            }
-
-            var products = new List<Product>{
-                new Product{
-                    Name = "Dell Inspiron Notebook",
+                new Product
+                {
+                     Name = "Dell Inspiron Notebook",
                     Description = "description...",
                     Price = 1499.99,
                     Quantity = 51,
@@ -57,7 +45,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "DellInspironNotebook.webp"
                 },
-                new Product{
+                new Product
+                {
                     Name = "Acer Predator Helios",
                     Description = "description...",
                     Price = 1849.99,
@@ -66,8 +55,9 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "AcerPredatorHelio.webp"
                 },
-                new Product{
-                    Name = "Lenovo Yoga 9i Gen7",
+                new Product
+                {
+                     Name = "Lenovo Yoga 9i Gen7",
                     Description = "description...",
                     Price = 1549.99,
                     Quantity = 15,
@@ -75,7 +65,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "LenovoYoga9iGen7.webp"
                 },
-                new Product{
+                new Product
+                {
                     Name = "ASUS X415 11th Gen Intel",
                     Description = "description...",
                     Price = 2100.49,
@@ -84,7 +75,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "ASUS-X415-11th-Gen-Intel.png"
                 },
-                new Product{
+                new Product
+                {
                     Name = "Apple Macbook Air",
                     Description = "description...",
                     Price = 1999.99,
@@ -93,7 +85,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "MacbookAir.jpg"
                 },
-                new Product{
+                new Product
+                {
                     Name = "Microsoft Surface Laptop",
                     Description = "description...",
                     Price = 1749.99,
@@ -102,7 +95,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "MicrosoftSurfaceLaptop.webp"
                 },
-                 new Product{
+                new Product
+                {
                     Name = "Logitech G502 Hero",
                     Description = "description...",
                     Price = 49.99,
@@ -111,7 +105,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "Logitech G502 Hero.jpeg"
                 },
-                 new Product{
+                new Product
+                {
                     Name = "Corsair HARPOON RGB PRO Mouse",
                     Description = "description...",
                     Price = 64.97,
@@ -120,7 +115,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "Corsair HARPOON RGB PRO Mouse.jpeg"
                 },
-                new Product{
+                new Product
+                {
                     Name = "Microsoft Bluetooth BlueTrack Mouse - Matte Black",
                     Description = "description...",
                     Price = 54.99,
@@ -129,7 +125,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "Microsoft Bluetooth BlueTrack Mouse - Matte Black.jpeg"
                 },
-                new Product{
+                new Product
+                {
                     Name = "Logitech MX Anywhere 3 Bluetooth Darkfield Mouse - Grey",
                     Description = "description...",
                     Price = 99.99,
@@ -138,7 +135,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "Logitech MX Anywhere 3 Bluetooth Darkfield Mouse - Grey.jpeg"
                 },
-                 new Product{
+                new Product
+                {
                     Name = "Logitech MX Keys Wireless Backlit Keyboard",
                     Description = "description...",
                     Price = 149.99,
@@ -147,7 +145,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "Logitech MX Keys Wireless Backlit Keyboard.jpeg"
                 },
-                new Product{
+                new Product
+                {
                     Name = "Logitech Wireless Keyboard (K360) - Black",
                     Description = "description...",
                     Price = 24.99,
@@ -156,7 +155,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "Logitech Wireless Keyboard (K360) - Black.jpeg"
                 },
-                new Product{
+                new Product
+                {
                     Name = "HyperX Alloy Core Membrane Gaming Keyboard - English",
                     Description = "description...",
                     Price = 44.99,
@@ -165,7 +165,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "HyperX Alloy Core Membrane Gaming Keyboard - English.jpeg"
                 },
-                new Product{
+                new Product
+                {
                     Name = "Razer Huntsman V2 TKL Backlit Mechanical Clicky Optical Ergonomic Gaming Keyboard - English",
                     Description = "description...",
                     Price = 169.99,
@@ -174,7 +175,8 @@ namespace API.Data
                     Type = "Electronics",
                     ImgUrl = "Razer Huntsman V2 TKL Backlit Mechanical Clicky Optical Ergonomic Gaming Keyboard - English.jpeg"
                 },
-                 new Product{
+                new Product
+                {
                     Name = "Tiger of Sweden Tarek Tapered Pants",
                     Description = "description...",
                     Price = 249.99,
@@ -183,7 +185,8 @@ namespace API.Data
                     Type = "Clothing",
                     ImgUrl = "Tiger of Sweden Tarek Tapered Pants.webp"
                 },
-                new Product{
+                new Product
+                {
                     Name = "PS Paul Smith Organic Cotton Zebra Badge Tailored Shirt",
                     Description = "description...",
                     Price = 89.99,
@@ -192,7 +195,8 @@ namespace API.Data
                     Type = "Clothing",
                     ImgUrl = "PS Paul Smith Organic Cotton Zebra Badge Tailored Shirt.webp"
                 },
-                new Product{
+                new Product
+                {
                     Name = "River Island Elastic-Waist Pleat-Front Trousers",
                     Description = "description...",
                     Price = 91.99,
@@ -201,7 +205,8 @@ namespace API.Data
                     Type = "Clothing",
                     ImgUrl = "River Island Elastic-Waist Pleat-Front Trousers.webp"
                 },
-                new Product{
+                new Product
+                {
                     Name = "Calvin Klein Pocket Shirt",
                     Description = "description...",
                     Price = 64.35,
@@ -210,14 +215,6 @@ namespace API.Data
                     Type = "Clothing",
                     ImgUrl = "Calvin Klein Pocket Shirt.webp"
                 },
-
-
-
-
-
-
-
-
             };
 
             foreach (var product in products)

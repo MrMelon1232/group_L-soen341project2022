@@ -22,6 +22,7 @@ import ForgotPassword from './components/login/forgotPassword'
 import Login from './components/login/login'
 import Signup from './components/login/signup'
 import SwipeableEdgeDrawer from './misc/SwipeableEdgeDrawer'
+import InventoryPage from './pages/Admin/InventoryPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/Checkout/CheckoutPage'
 import ContactPage from './pages/Contact/ContactPage'
@@ -101,6 +102,21 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/inventory"
+            element={
+              <ProtectedRoute
+                isAllowed={
+                  !!user &&
+                  ((user.roles?.includes('Admin') ?? false) ||
+                    (user.roles?.includes('Seller') ?? false))
+                }
+              >
+                <InventoryPage />
+              </ProtectedRoute>
+            }
+          />
+          {console.log('roles', user?.roles)}
           <Route
             path="/orders"
             element={

@@ -1,12 +1,19 @@
 import { Button, Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useAppDispatch, useAppSelector } from '../../store/configureStore'
+import {
+  store,
+  useAppDispatch,
+  useAppSelector,
+} from '../../store/configureStore'
+import { fetchProductsAsync } from '../Products/catalogSlice'
 import { decrement, increment } from './counterSlice'
 
 const ContactPage = () => {
   const dispatch = useAppDispatch()
   const { data, title } = useAppSelector((state) => state.counter)
+  store.dispatch(fetchProductsAsync())
+
   return (
     <>
       <Typography variant="h1">contact</Typography>
