@@ -6,7 +6,7 @@ using API.Models;
 using Microsoft.AspNetCore.Identity;
 namespace API.Data
 {
-    public static class DBInitializer
+    public static class DbInitializer
     {
         public static async Task Initialize(ECommerceContext context, UserManager<User> userManager)
         {
