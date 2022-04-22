@@ -134,15 +134,11 @@ namespace API
 
             //app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseRouting()
+            .UseDefaultFiles()
+            .UseStaticFiles()
+            .UseCors("CorsPolicy");
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
-            });
 
             app.UseAuthentication();
             app.UseAuthorization();
