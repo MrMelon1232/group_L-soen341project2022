@@ -29,6 +29,15 @@ namespace API.Data
 
                 await userManager.CreateAsync(admin, "Password_1");
                 await userManager.AddToRolesAsync(admin, new[] { "Member", "Admin" });
+
+                var seller = new User
+                {
+                    UserName = "seller",
+                    Email = "sellser@test.com"
+                };
+
+                await userManager.CreateAsync(seller, "Password_1");
+                await userManager.AddToRolesAsync(seller, new[] { "Member", "Seller" });
             }
 
             if (context.Products.Any()) return;
