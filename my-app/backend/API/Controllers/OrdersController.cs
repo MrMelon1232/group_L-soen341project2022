@@ -39,10 +39,10 @@ namespace API.Controllers
         public async Task<ActionResult<int>> CreateOrder(CreateOrderDto orderDto)
         {
             var cart = await _context.Carts
-            .RetrieveCartWithItems(User.Identity.Name)
-            .FirstOrDefaultAsync();
+                .RetrieveCartWithItems(User.Identity.Name)
+                .FirstOrDefaultAsync();
 
-            if (cart == null) return BadRequest(new ProblemDetails { Title = "Could not locate cart" });
+            if (cart == null) return BadRequest(new ProblemDetails { Title = "Could not locate basket" });
 
             var items = new List<OrderItem>();
 
@@ -55,6 +55,7 @@ namespace API.Controllers
                     Name = productItem.Name,
                     ImgUrl = productItem.ImgUrl
                 };
+
                 var orderItem = new OrderItem
                 {
                     ItemOrdered = itemOrdered,
@@ -72,7 +73,7 @@ namespace API.Controllers
                 OrderItems = items,
                 CustomerId = User.Identity.Name,
                 ShippingAddress = orderDto.ShippingAddress,
-                Subtotal = subtotal
+                Subtotal = subtotal,
             };
 
             _context.Orders.Add(order);
@@ -80,7 +81,10 @@ namespace API.Controllers
 
             if (orderDto.SaveAddress)
             {
-                var user = await _context.Users.FirstOrDefaultAsync(e => e.UserName == User.Identity.Name);
+                var user = await _context.Users
+                    .Include(a => a.Address)
+                    .FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
+
                 var address = new UserAddress
                 {
                     FullName = orderDto.ShippingAddress.FullName,
@@ -89,7 +93,6 @@ namespace API.Controllers
                     City = orderDto.ShippingAddress.City,
                     Province = orderDto.ShippingAddress.Province,
                     PostalCode = orderDto.ShippingAddress.PostalCode,
-
                 };
                 user.Address = address;
             }
@@ -98,8 +101,7 @@ namespace API.Controllers
 
             if (result) return CreatedAtRoute("GetOrder", new { id = order.Id }, order.Id);
 
-            return BadRequest("Problem creating the order");
-
+            return BadRequest(new ProblemDetails { Title = "Problem creating order" });
         }
     }
 }

@@ -134,10 +134,10 @@ namespace API
 
             //app.UseHttpsRedirection();
 
-            app.UseRouting()
-            .UseDefaultFiles()
-            .UseStaticFiles()
-            .UseCors("CorsPolicy");
+            app.UseRouting();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
 
 
             app.UseAuthentication();

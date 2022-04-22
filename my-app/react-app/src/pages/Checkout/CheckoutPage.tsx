@@ -54,7 +54,7 @@ function getStepContent(step: number) {
 const theme = createTheme()
 
 const CheckoutPage = () => {
-  const [activeStep, setActiveStep] = React.useState(0)
+  const [activeStep, setActiveStep] = React.useState(1)
   const methods = useForm({
     mode: 'all',
     resolver: yupResolver(validationSchema),
